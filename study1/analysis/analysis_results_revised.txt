@@ -1,0 +1,553 @@
+============================================================
+  Study 1 (REVISED): Crossed Random Effects (Participants x Reviews)
+  Multilevel Moderated Mediation with Two-Way Cluster Bootstrap
+============================================================
+
+--- Design & Coding ---
+Observations: 1860
+Participants (level-2 clusters): 93
+Reviews/Stimuli (crossed factor): 20
+Trials per participant: all 20
+Complete crossing: every participant rated every review (unique participant-review pairs = 1860)
+Detection label: binary (0/1), balanced within participant (10 labeled, 10 unlabeled per participant)
+  NOTE: label assignment was randomized per participant, so label VARIES WITHIN
+  review across participants (verified: all 20 reviews show both labels).
+Confidence in AI detection: participant-level, constant within participant (16 unique values, range 1.4-5.4),
+  measured after multiple label exposures -> conditional-heterogeneity interpretation
+functional_value / experiential_value / emotional_valence: content ratings measured
+  AFTER label presentation (post-treatment); used only in sensitivity analysis
+perceived_ai_authorship: mediator; perceived_credibility: outcome (1-7 scales)
+
+Centering: detection_label_c = detection_label - participant mean
+          (effect-coded within participant, {-0.5, +0.5});
+          functional_value_c/experiential_value_c/emotional_valence_c =
+          within-participant deviations (sensitivity only);
+          detection_confidence_c = grand-mean centered.
+
+============================================================
+  1. DESCRIPTIVE STATISTICS
+============================================================
+
+Variable                          M       SD
+-------------------------------------------- 
+detection_label               0.500    0.500
+functional_value              5.087    1.477
+experiential_value            4.980    1.553
+emotional_valence             4.277    1.992
+perceived_ai_authorship       3.707    1.822
+perceived_credibility         4.373    1.437
+detection_confidence          3.723    0.676
+
+============================================================
+  2. VARIANCE DECOMPOSITION & INTRACLASS CORRELATIONS
+     (null models with participant AND review random intercepts)
+============================================================
+
+--- perceived_ai_authorship ---
+ Groups         Name        Std.Dev.
+ participant_id (Intercept) 0.51859 
+ review_id      (Intercept) 1.28638 
+ Residual                   1.21637 
+  ICC_participant(perceived_ai_authorship) = 0.079, ICC_review = 0.486
+
+--- perceived_credibility ---
+ Groups         Name        Std.Dev.
+ participant_id (Intercept) 0.48239 
+ review_id      (Intercept) 0.89989 
+ Residual                   1.03203 
+  ICC_participant(perceived_credibility) = 0.110, ICC_review = 0.384
+
+  NOTE: the review (stimulus) component was previously ignored; it is
+  substantial (see above) and is now explicitly modelled.
+
+============================================================
+  3. PRIMARY MODELS (crossed REs; NO post-treatment covariates)
+     ML estimation; Satterthwaite df; uncorrelated random slopes
+     (correlated version reported in Section 4)
+============================================================
+
+--- M1: perceived_ai_authorship equation (first stage) ---
+  Formula: perceived_ai_authorship ~ detection_label_c
+           + detection_confidence_c + detection_label_c:detection_confidence_c
+           + (1 + detection_label_c || participant_id)
+           + (1 + detection_label_c || review_id)
+  Convergence OK: TRUE; Singular fit: FALSE
+
+Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite's method ['lmerModLmerTest']
+Formula: perceived_ai_authorship ~ detection_label_c + detection_confidence_c +  
+    detection_label_c:detection_confidence_c + (1 + detection_label_c ||  
+    participant_id) + (1 + detection_label_c || review_id)
+   Data: dat
+Control: ctl
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   6111.8    6161.6   -3046.9    6093.8      1851 
+
+Scaled residuals: 
+   Min     1Q Median     3Q    Max 
+-3.053 -0.619 -0.037  0.548  3.823 
+
+Random effects:
+ Groups           Name              Variance Std.Dev.
+ participant_id   (Intercept)       0.18960  0.4354  
+ participant_id.1 detection_label_c 0.14129  0.3759  
+ review_id        (Intercept)       1.56421  1.2507  
+ review_id.1      detection_label_c 0.03267  0.1808  
+ Residual                           1.34471  1.1596  
+Number of obs: 1860, groups:  participant_id, 93; review_id, 20
+
+Fixed effects:
+                                         Estimate Std. Error       df t value Pr(>|t|)    
+(Intercept)                               3.70601    0.28457 21.03680  13.023 1.55e-11 ***
+detection_label_c                         0.49337    0.07815 28.25016   6.313 7.61e-07 ***
+detection_confidence_c                    0.42919    0.07787 92.33510   5.511 3.21e-07 ***
+detection_label_c:detection_confidence_c  0.47809    0.09934 95.40798   4.813 5.57e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) dtctn_l_ dtctn_c_
+dtctn_lbl_c 0.000                   
+dtctn_cnfd_ 0.000  0.000            
+dtctn_l_:__ 0.000  0.002    0.000   
+
+--- M2: perceived_credibility equation (second stage) ---
+  Formula: perceived_credibility ~ perceived_ai_authorship
+           + detection_label_c + (1 | participant_id) + (1 | review_id)
+  Convergence OK: TRUE; Singular fit: FALSE
+
+Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite's method ['lmerModLmerTest']
+Formula: perceived_credibility ~ perceived_ai_authorship + detection_label_c +  
+    (1 | participant_id) + (1 | review_id)
+   Data: dat
+Control: ctl
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   4144.0    4177.2   -2066.0    4132.0      1854 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-4.4315 -0.6475  0.0282  0.5982  5.4597 
+
+Random effects:
+ Groups         Name        Variance Std.Dev.
+ participant_id (Intercept) 0.07714  0.2777  
+ review_id      (Intercept) 0.01726  0.1314  
+ Residual                   0.49552  0.7039  
+Number of obs: 1860, groups:  participant_id, 93; review_id, 20
+
+Fixed effects:
+                          Estimate Std. Error         df t value Pr(>|t|)    
+(Intercept)                6.75202    0.06330  106.15717 106.662   <2e-16 ***
+perceived_ai_authorship   -0.64173    0.01221  366.49720 -52.564   <2e-16 ***
+detection_label_c          0.01675    0.03342 1772.56116   0.501    0.616    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) prcv__
+prcvd__thrs -0.715       
+dtctn_lbl_c  0.129 -0.180
+
+--- M3: Total effect (detection label -> perceived credibility) ---
+  Formula: perceived_credibility ~ detection_label_c
+           + (1 | participant_id) + (1 | review_id)
+  Convergence OK: TRUE; Singular fit: FALSE
+
+Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite's method ['lmerModLmerTest']
+Formula: perceived_credibility ~ detection_label_c + (1 | participant_id) +      (1 | review_id)
+   Data: dat
+Control: ctl
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   5605.7    5633.4   -2797.9    5595.7      1855 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-4.5450 -0.5347  0.0366  0.6456  4.0496 
+
+Random effects:
+ Groups         Name        Variance Std.Dev.
+ participant_id (Intercept) 0.2336   0.4834  
+ review_id      (Intercept) 0.7715   0.8783  
+ Residual                   1.0415   1.0205  
+Number of obs: 1860, groups:  participant_id, 93; review_id, 20
+
+Fixed effects:
+                    Estimate Std. Error         df t value Pr(>|t|)    
+(Intercept)          4.37312    0.20407   22.61322  21.429  < 2e-16 ***
+detection_label_c   -0.30042    0.04777 1748.91120  -6.289 4.02e-10 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr)
+dtctn_lbl_c 0.000 
+
+--- Key Path Coefficients (unstandardized) ---
+  a0  (detection label -> AI authorship at mean confidence):   0.4934
+  a1  (confidence moderates label->AI authorship):             0.4781
+  b0  (AI authorship -> credibility):                         -0.6417
+  c'  (detection label -> credibility, direct):               0.0168
+  c   (detection label -> credibility, total):               -0.3004
+  SD(confidence) = 0.676
+  Simple slope of detection label -> AI authorship at confidence mean:    0.4934
+  Simple slope of detection label -> AI authorship at confidence -1 SD:   0.1702
+  Simple slope of detection label -> AI authorship at confidence +1 SD:   0.8166
+
+
+============================================================
+  4. ROBUSTNESS: CORRELATED RANDOM SLOPES
+     (original analysis had intercept-slope correlation = -1.000,
+      i.e., a boundary/singular fit; uncorrelated slopes are primary)
+============================================================
+
+--- M1 with correlated random slopes ---
+  Convergence OK: TRUE; Singular fit: FALSE
+ Groups         Name              Std.Dev. Corr   
+ participant_id (Intercept)       0.43592         
+                detection_label_c 0.37551  -0.110 
+ review_id      (Intercept)       1.25056         
+                detection_label_c 0.18043  0.226  
+ Residual                         1.15959         
+  Fixed effects:
+                                          Estimate Std. Error       df   t value     Pr(>|t|)
+(Intercept)                              3.7060066 0.28454672 21.03896 13.024246 1.543448e-11
+detection_label_c                        0.4933563 0.07809316 28.22833  6.317536 7.543127e-07
+detection_confidence_c                   0.4286805 0.07793197 92.28794  5.500701 3.357955e-07
+detection_label_c:detection_confidence_c 0.4788517 0.09930304 95.43288  4.822126 5.363246e-06
+
+--- M2 with participant random slope for AI authorship ---
+  Convergence OK: TRUE; Singular fit: FALSE
+ Groups         Name                    Std.Dev. Corr   
+ participant_id (Intercept)             0.54738         
+                perceived_ai_authorship 0.15363  -0.879 
+ review_id      (Intercept)             0.14908         
+ Residual                               0.64690         
+  Fixed effects:
+                            Estimate Std. Error        df     t value      Pr(>|t|)
+(Intercept)              6.637402326 0.08160434  109.9187  81.3363911 4.904170e-100
+perceived_ai_authorship -0.608427396 0.02017156  129.0989 -30.1626369  2.600972e-60
+detection_label_c       -0.007751933 0.03137559 1723.5758  -0.2470689  8.048843e-01
+
+  SD of detection-label slope across REVIEWS (from M1): 0.1808
+  SD of detection-label slope across PARTICIPANTS (from M1): 0.3759
+
+
+============================================================
+  5. ROBUSTNESS: REVIEW FIXED EFFECTS (reviewer's alternative)
+     review_id as dummy-coded fixed factor instead of random effect
+============================================================
+
+  Convergence OK: M1_fe TRUE, M2_fe TRUE, M3_fe TRUE
+
+                          Estimate Std. Error        df  t value Pr(>|t|)
+a0 (label->AI authorship)   0.4937     0.0666   94.2456   7.4147   0.0000
+a1 (label:confidence)       0.4777     0.0989   95.6441   4.8305   0.0000
+b0 (AI authorship->cred)   -0.6279     0.0137 1857.8350 -45.9910   0.0000
+c' (label->cred, direct)    0.0081     0.0334 1774.6244   0.2414   0.8092
+c  (label->cred, total)    -0.3005     0.0475 1767.0000  -6.3236   0.0000
+
+
+============================================================
+  6. SENSITIVITY: MODERATION BY POST-TREATMENT CONTENT RATINGS
+     (functional value / experiential value / emotional valence were
+      measured AFTER label presentation; NOT in primary models; reported
+      only as sensitivity, per reviewer guidance)
+============================================================
+
+  Formula: perceived_credibility ~ perceived_ai_authorship
+           + detection_label_c
+           + perceived_ai_authorship:functional_value_c
+           + perceived_ai_authorship:experiential_value_c
+           + perceived_ai_authorship:emotional_valence_c
+           + (1 | participant_id) + (1 | review_id)
+  Convergence OK: TRUE; Singular fit: FALSE
+
+                                                 Estimate  Std. Error        df     t value      Pr(>|t|)
+(Intercept)                                   6.724268260 0.060371283  147.7019 111.3819007 2.149143e-144
+perceived_ai_authorship                      -0.628154042 0.012329513  658.4098 -50.9471917 1.253194e-230
+detection_label_c                             0.014657747 0.033239150 1772.1849   0.4409784  6.592824e-01
+perceived_ai_authorship:functional_value_c    0.002636073 0.003781521 1687.7374   0.6970935  4.858403e-01
+perceived_ai_authorship:experiential_value_c  0.005520401 0.002823268 1690.3298   1.9553228  5.070955e-02
+perceived_ai_authorship:emotional_valence_c  -0.013293830 0.003172669  141.6974  -4.1901091  4.880868e-05
+
+
+============================================================
+  7. STANDARDIZED COEFFICIENTS (fully standardized, total SD)
+============================================================
+
+--- Standardized M1 (AI authorship equation) ---
+                                              Estimate Std. Error       df   t value     Pr(>|t|)
+(Intercept)                                  2.0343631 0.15620849 21.03679 13.023384 1.547644e-11
+detection_label_c_s                          0.1354496 0.02145601 28.25017  6.312898 7.611085e-07
+detection_confidence_c_s                     0.1592748 0.02889954 92.33512  5.511326 3.205987e-07
+detection_label_c_s:detection_confidence_c_s 0.0887363 0.01843786 95.40797  4.812723 5.571897e-06
+
+--- Standardized M2 (credibility equation) ---
+                              Estimate Std. Error        df     t value      Pr(>|t|)
+(Intercept)                4.698519673 0.04405040  106.1572 106.6623678 8.364125e-110
+perceived_ai_authorship_s -0.813506085 0.01547645  366.4972 -52.5641393 9.296587e-173
+detection_label_c_s        0.005829911 0.01163284 1772.5612   0.5011599  6.163208e-01
+
+
+============================================================
+  8. MODEL FIT
+============================================================
+
+  M1 (AI authorship): Marginal R2 = 0.050, Conditional R2 = 0.610
+  M2 (credibility):   Marginal R2 = 0.698, Conditional R2 = 0.746
+  M3 (total):         Marginal R2 = 0.011, Conditional R2 = 0.497
+
+--- LRT (null with participant+review RE vs full) ---
+M1 (AI authorship):
+Data: dat
+Models:
+null_auth: perceived_ai_authorship ~ 1 + (1 | participant_id) + (1 | review_id)
+model_auth: perceived_ai_authorship ~ detection_label_c + detection_confidence_c + detection_label_c:detection_confidence_c + (1 + detection_label_c || participant_id) + (1 + detection_label_c || review_id)
+           npar    AIC    BIC  logLik -2*log(L)  Chisq Df Pr(>Chisq)    
+null_auth     4 6248.3 6270.4 -3120.1    6240.3                         
+model_auth    9 6111.8 6161.6 -3046.9    6093.8 146.44  5  < 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+M2 (credibility):
+Data: dat
+Models:
+null_cred: perceived_credibility ~ 1 + (1 | participant_id) + (1 | review_id)
+model_cred: perceived_credibility ~ perceived_ai_authorship + detection_label_c + (1 | participant_id) + (1 | review_id)
+           npar    AIC    BIC  logLik -2*log(L)  Chisq Df Pr(>Chisq)    
+null_cred     4 5642.8 5665.0 -2817.4    5634.8                         
+model_cred    6 4144.0 4177.2 -2066.0    4132.0 1502.8  2  < 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+--- LRT: label x confidence interaction term (M1 vs M1 without interaction) ---
+Data: dat
+Models:
+m1_noi: perceived_ai_authorship ~ detection_label_c + detection_confidence_c + (1 + detection_label_c || participant_id) + (1 + detection_label_c || review_id)
+model_auth: perceived_ai_authorship ~ detection_label_c + detection_confidence_c + detection_label_c:detection_confidence_c + (1 + detection_label_c || participant_id) + (1 + detection_label_c || review_id)
+           npar    AIC    BIC  logLik -2*log(L)  Chisq Df Pr(>Chisq)    
+m1_noi        8 6130.6 6174.8 -3057.3    6114.6                         
+model_auth    9 6111.8 6161.6 -3046.9    6093.8 20.721  1  5.314e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+  -> tests the moderated-mediation first stage (H: a1 != 0).
+
+--- LRT: total effect model (M3 vs null) ---
+Data: dat
+Models:
+null_cred: perceived_credibility ~ 1 + (1 | participant_id) + (1 | review_id)
+model_total: perceived_credibility ~ detection_label_c + (1 | participant_id) + (1 | review_id)
+            npar    AIC    BIC  logLik -2*log(L)  Chisq Df Pr(>Chisq)    
+null_cred      4 5642.8 5665.0 -2817.4    5634.8                         
+model_total    5 5605.7 5633.4 -2797.9    5595.7 39.113  1  3.999e-10 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+--- Information criteria ---
+  M1 (AI authorship): AIC = 6111.85, BIC = 6161.60, LL = -3046.92
+  M1 no-interaction: AIC = 6130.57, BIC = 6174.79, LL = -3057.28
+  M2 (credibility): AIC = 4144.02, BIC = 4177.19, LL = -2066.01
+  M3 (total): AIC = 5605.73, BIC = 5633.37, LL = -2797.86
+
+--- Wald 95% CIs for fixed effects (primary models) ---
+M1 (AI authorship):
+                                             2.5 %    97.5 %
+.sig01                                          NA        NA
+.sig02                                          NA        NA
+.sig03                                          NA        NA
+.sig04                                          NA        NA
+.sigma                                          NA        NA
+(Intercept)                              3.1482746 4.2637532
+detection_label_c                        0.3401910 0.6465416
+detection_confidence_c                   0.2765564 0.5818142
+detection_label_c:detection_confidence_c 0.2833914 0.6727945
+
+M2 (credibility):
+                              2.5 %      97.5 %
+.sig01                           NA          NA
+.sig02                           NA          NA
+.sigma                           NA          NA
+(Intercept)              6.62794668  6.87608877
+perceived_ai_authorship -0.66566195 -0.61780519
+detection_label_c       -0.04876052  0.08226306
+
+M3 (total):
+                      2.5 %     97.5 %
+.sig01                   NA         NA
+.sig02                   NA         NA
+.sigma                   NA         NA
+(Intercept)        3.973140  4.7730967
+detection_label_c -0.394039 -0.2067957
+
+--- Variance components (primary models) ---
+M1 (AI authorship equation):
+ Groups           Name              Std.Dev.
+ participant_id   (Intercept)       0.43544 
+ participant_id.1 detection_label_c 0.37588 
+ review_id        (Intercept)       1.25069 
+ review_id.1      detection_label_c 0.18075 
+ Residual                           1.15962 
+
+M2 (credibility equation):
+ Groups         Name        Std.Dev.
+ participant_id (Intercept) 0.27775 
+ review_id      (Intercept) 0.13139 
+ Residual                   0.70393 
+
+
+============================================================
+  9. TWO-WAY CLUSTER BOOTSTRAP (participants AND reviews resampled)
+     Complete-grid resampling: 93 participants x 20 reviews per draw
+     Number of resamples: 5000, percentile CIs
+============================================================
+
+  bootstrap progress: 500 / 5000 (10%) [31 s]
+  bootstrap progress: 1000 / 5000 (20%) [64 s]
+  bootstrap progress: 1500 / 5000 (30%) [96 s]
+  bootstrap progress: 2000 / 5000 (40%) [127 s]
+  bootstrap progress: 2500 / 5000 (50%) [160 s]
+  bootstrap progress: 3000 / 5000 (60%) [192 s]
+  bootstrap progress: 3500 / 5000 (70%) [224 s]
+  bootstrap progress: 4000 / 5000 (80%) [256 s]
+  bootstrap progress: 4500 / 5000 (90%) [286 s]
+  bootstrap progress: 5000 / 5000 (100%) [319 s]
+
+  Elapsed: 5.3 min using 15 cores
+  Failed (non-converged/dropped) replications: 0 / 5000 (0.0%)
+  Bootstrap draws with >=1 singular fit (estimates retained): 190 / 5000 (3.8%)
+
+--- Path Coefficients with Bootstrap 95% CIs ---
+
+Parameter                             b       SE     beta        t        95% Boot CI     p       
+------------------------------------------------------------------------------------------------ 
+a0: label -> AI authorship       0.4934   0.0782   0.1354    6.313 [ 0.2752, 0.7378]  0.000 ***
+conf: confidence -> authorship   0.4292   0.0779   0.1593    5.511 [ 0.2001, 0.6753]  0.000 ***
+a1: confidence -> slope          0.4781   0.0993   0.0887    4.813 [ 0.1497, 0.8197]  0.000 ***
+b0: AI authorship -> cred       -0.6417   0.0122  -0.8135  -52.564 [-0.6947,-0.5733]  0.000 ***
+c': label -> cred (direct)       0.0168   0.0334   0.0058    0.501 [-0.0833, 0.1129]  0.616 
+c: label -> cred (total)        -0.3004   0.0478            -6.289 [-0.4628,-0.1472]  0.000 ***
+
+--- Simple Slopes of label -> AI authorship with Bootstrap 95% CIs ---
+
+Slope                             b  Boot SE        95% Boot CI    Sig     beta       95% CI(beta)    Sig
+------------------------------------------------------------------------------------------------------------ 
+slope at mean confidence     0.4934   0.1182 [ 0.2752, 0.7378]     **   0.1354 [ 0.0743, 0.2042]     **
+slope at confidence -1 SD    0.1702   0.1450 [-0.1032, 0.4736]   n.s.   0.0467 [-0.0284, 0.1287]   n.s.
+slope at confidence +1 SD    0.8166   0.1810 [ 0.4779, 1.1866]     **   0.2242 [ 0.1259, 0.3318]     **
+
+--- Conditional Indirect Effects (label -> AI authorship -> credibility) ---
+
+Effect                                    b  Boot SE        95% Boot CI    Sig     beta       95% CI(beta)    Sig
+------------------------------------------------------------------------------------------------------------ 
+Indirect (mean confidence)          -0.3166   0.0776 [-0.4778,-0.1742]     **  -0.1102 [-0.1646,-0.0593]     **
+Indirect (low confidence, -1 SD)    -0.1092   0.0926 [-0.3014, 0.0669]   n.s.  -0.0380 [-0.1040, 0.0230]   n.s.
+Indirect (high confidence, +1 SD)   -0.5240   0.1202 [-0.7766,-0.3013]     **  -0.1824 [-0.2676,-0.1019]     **
+Index of Moderated Mediation        -0.4148   0.1483 [-0.7099,-0.1201]     **  -0.1444 [-0.2421,-0.0403]     **
+
+* p < .05, ** p < .01, *** p < .001 (Satterthwaite df)
+Indirect-effect significance: bootstrap 95% CI excludes zero
+beta = fully standardized coefficient (all variables divided by total SD);
+      beta(indirect) = beta(a) x beta(b); beta CI = percentile bootstrap
+      with within-resample standardization.
+Bootstrap: 5000 two-way cluster resamples (participants AND reviews), percentile method
+
+
+============================================================
+  9b. MANUSCRIPT-READY VALUES (rounded as reported)
+============================================================
+
+  --- first stage: perceived AI authorship ---
+  detection label                        b =  0.49  SE = 0.08  t(  28.25) =    6.31  p < .001  95% CI [0.28, 0.74]     beta = 0.14
+  confidence in AI detection             b =  0.43  SE = 0.08  t(  92.34) =    5.51  p < .001  95% CI [0.20, 0.68]     beta = 0.16
+  label x confidence                     b =  0.48  SE = 0.10  t(  95.41) =    4.81  p < .001  95% CI [0.15, 0.82]     beta = 0.09
+  --- second stage: perceived credibility ---
+  perceived AI authorship                b = -0.64  SE = 0.01  t( 366.50) =  -52.56  p < .001  95% CI [-0.69, -0.57]   beta = -0.81
+  detection label (direct, c')           b =  0.02  SE = 0.03  t(1772.56) =    0.50  p = .616  95% CI [-0.08, 0.11]    beta = 0.01
+  detection label (total, c)             b = -0.30  SE = 0.05  t(1748.91) =   -6.29  p < .001  95% CI [-0.46, -0.15]   beta = NA
+
+  --- simple slopes of the label effect on AI authorship ---
+  at mean confidence                     b =  0.49  95% CI [0.28, 0.74]     beta = 0.14
+  at confidence -1 SD                    b =  0.17  95% CI [-0.10, 0.47]    beta = 0.05
+  at confidence +1 SD                    b =  0.82  95% CI [0.48, 1.19]     beta = 0.22
+
+  --- conditional indirect effects (label -> AI authorship -> credibility) ---
+  at mean confidence                     b = -0.32  Boot SE = 0.08  95% CI [-0.48, -0.17]   beta = -0.11
+  at confidence -1 SD                    b = -0.11  Boot SE = 0.09  95% CI [-0.30, 0.07]    beta = -0.04
+  at confidence +1 SD                    b = -0.52  Boot SE = 0.12  95% CI [-0.78, -0.30]   beta = -0.18
+  index of moderated mediation           b = -0.41  Boot SE = 0.15  95% CI [-0.71, -0.12]   beta = -0.14
+
+  (bootstrap SEs also in Section 9; ICCs in Section 2; R2 / LRT / AIC in Section 8)
+
+============================================================
+  10. IMPACT OF ADDING THE STIMULUS RANDOM EFFECT (reviewer check)
+============================================================
+
+                                             b     SE           df
+detection_label_c (a0) - no review RE   0.4978 0.0808 NA 1767.0000
+detection_label_c (a0) - with review RE 0.4934 0.0782 NA   28.2502
+label:confidence (a1) - no review RE    0.5542 0.1195 NA 1767.0000
+label:confidence (a1) - with review RE  0.4781 0.0993 NA   95.4080
+
+  => Accounting for stimulus variance changes SEs and dfs; results below
+     are from the crossed-RE specification.
+
+============================================================
+  11. INTERPRETATION NOTES (for the paper)
+============================================================
+
+1. The detection-label effect on perceived AI authorship is positive and
+   moderated by confidence; because confidence was measured after label
+   exposure (and is participant-level), this moderation is reported as
+   CONDITIONAL HETEROGENEITY of the treatment effect, not as evidence
+   for a causal moderator.
+2. The indirect effect label -> AI authorship -> credibility is negative
+   and significant at mean and +1 SD confidence; not significant at -1 SD;
+   index of moderated mediation excludes zero.
+3. The direct effect is not significant -> pattern consistent with
+   (full) mediation of the negative total effect.
+4. Review-level variance components are large (see Section 2); all
+   estimates are robust to the review fixed-effects specification
+   (Section 5) and to correlated random slopes (Section 4).
+5. Moderation of the AI authorship -> credibility path by functional value /
+   experiential value / emotional valence (post-treatment ratings)
+   is reported only in the sensitivity analysis (Section 6).
+6. Label was assigned randomly per participant per review (label varies
+   within review across participants), so the within-participant (group-mean
+   centered) coding and the two-way cluster bootstrap are appropriate.
+
+============================================================
+  ANALYSIS COMPLETE
+============================================================
+
+--- session info ---
+R version 4.6.1 (2026-06-24 ucrt)
+Platform: x86_64-w64-mingw32/x64
+Running under: Windows 11 x64 (build 26200)
+
+Matrix products: default
+  LAPACK version 3.12.1
+
+locale:
+[1] LC_COLLATE=Chinese (Simplified)_China.utf8  LC_CTYPE=Chinese (Simplified)_China.utf8   
+[3] LC_MONETARY=Chinese (Simplified)_China.utf8 LC_NUMERIC=C                               
+[5] LC_TIME=Chinese (Simplified)_China.utf8    
+
+time zone: Asia/Shanghai
+tzcode source: internal
+
+attached base packages:
+[1] parallel  stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] dplyr_1.2.1    lmerTest_3.2-1 lme4_2.0-6     Matrix_1.7-5  
+
+loaded via a namespace (and not attached):
+ [1] gtable_0.3.6        compiler_4.6.1      tidyselect_1.2.1    Rcpp_1.1.2          splines_4.6.1      
+ [6] scales_1.4.0        boot_1.3-32         lattice_0.22-9      ggplot2_4.0.3       R6_2.6.1           
+[11] generics_0.1.4      rbibutils_2.4.1     MASS_7.3-65         tibble_3.3.1        nloptr_2.2.1       
+[16] minqa_1.2.8         pillar_1.11.1       RColorBrewer_1.1-3  rlang_1.3.0         S7_0.2.2           
+[21] cli_3.6.6           withr_3.0.3         magrittr_2.0.5      Rdpack_2.6.6        grid_4.6.1         
+[26] lifecycle_1.0.5     nlme_3.1-169        reformulas_0.4.4    vctrs_0.7.3         glue_1.8.1         
+[31] farver_2.1.2        numDeriv_2016.8-1.1 stats4_4.6.1        tools_4.6.1         pkgconfig_2.0.3    

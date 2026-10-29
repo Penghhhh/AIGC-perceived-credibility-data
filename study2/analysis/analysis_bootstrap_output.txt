@@ -1,0 +1,487 @@
+#####################################################################
+#  STUDY 2 -- UNIFIED BOOTSTRAP ANALYSIS (version 2)                 #
+#####################################################################
+#  R 4.6.1 | lavaan 0.7.2 | lme4 2.0.6
+#  Bootstrap: B = 5000 participant-level resamples | workers = 12
+#  Seed = 20240810 (resample matrix drawn on the master process)
+#  Inference: percentile and BCa 95% bootstrap CIs only.
+#  No Wald/z tests, no delta-method SEs for any structural result.
+#####################################################################
+
+========== 1. DATA AND DESIGN ==========
+Observations N = 596 | participants = 149 | posts = 4
+Observations per participant = 4 (balanced 2 x 2 within-person)
+Participants who saw all 4 posts exactly once: 149 / 149
+-> post is a within-person factor fully crossed with participant
+   (randomised Latin-square assignment of posts to condition cells).
+
+-- Cell means (SD) by condition, order: no label / detection only /
+   disclosure only / both --
+   cred                     no_label (det0,dis0)   n=149  M=5.50  SD=0.85
+   cred                     detection_only (1,0)   n=149  M=5.03  SD=1.07
+   cred                     disclosure_only (0,1)  n=149  M=5.07  SD=1.06
+   cred                     both (1,1)             n=149  M=4.93  SD=1.19
+   auth                     no_label (det0,dis0)   n=149  M=3.22  SD=1.68
+   auth                     detection_only (1,0)   n=149  M=4.54  SD=1.62
+   auth                     disclosure_only (0,1)  n=149  M=5.51  SD=1.49
+   auth                     both (1,1)             n=149  M=5.36  SD=1.62
+   disc                     no_label (det0,dis0)   n=149  M=2.42  SD=1.40
+   disc                     detection_only (1,0)   n=149  M=3.56  SD=1.57
+   disc                     disclosure_only (0,1)  n=149  M=3.23  SD=1.59
+   disc                     both (1,1)             n=149  M=3.67  SD=1.71
+
+-- Overall M and SD --
+   auth     M = 4.658  SD = 1.840
+   disc     M = 3.220  SD = 1.640
+   cred     M = 5.131  SD = 1.069
+
+NOTE: Table 1 of the manuscript must use ONE SD convention. The SDs
+printed above are the sample SDs (divisor N-1). The manuscript-ready
+block right below is the block to copy into Table 1 (sample SDs only).
+
+-- TABLE 1 (manuscript-ready): M (SD), sample SD (divisor N-1), 2 dp --
+   Perceived credibility     detection/disclosure: Absent / Absent = 5.50 (0.85) | Present / Absent = 5.03 (1.07) | Absent / Present = 5.07 (1.06) | Present / Present = 4.93 (1.19)
+   Perceived AI authorship   detection/disclosure: Absent / Absent = 3.22 (1.68) | Present / Absent = 4.54 (1.62) | Absent / Present = 5.51 (1.49) | Present / Present = 5.36 (1.62)
+   Psychological discomfort  detection/disclosure: Absent / Absent = 2.42 (1.40) | Present / Absent = 3.56 (1.57) | Absent / Present = 3.23 (1.59) | Present / Present = 3.67 (1.71)
+   (detection/disclosure column order as in the manuscript Table 1;
+    n = 149 per cell; all values are sample SDs, divisor N-1)
+
+-- Between-participant covariance of the predictors (cluster means) --
+    dis det ix
+dis   0   0  0
+det   0   0  0
+ix    0   0  0
+   -> predictors vary ONLY within participants: all predictor effects
+      are within-person effects.
+
+========== 2. ICCs (participant / stimulus post) ==========
+   auth     ICC_participant = 0.072   ICC_post = 0.016
+   disc     ICC_participant = 0.373   ICC_post = 0.010
+   cred     ICC_participant = 0.152   ICC_post = 0.019
+
+-- Crossed random intercepts: y ~ (1|pid) + (1|post) --
+   auth     var(pid)=0.2597 var(post)=0.0570 resid=3.0839 | ICC_pid=0.076 ICC_post=0.017
+   disc     var(pid)=1.0143 var(post)=0.0333 resid=1.6552 | ICC_pid=0.375 ICC_post=0.012
+   cred     var(pid)=0.1793 var(post)=0.0229 resid=0.9469 | ICC_pid=0.156 ICC_post=0.020
+   NOTE: post ICCs rest on only 4 posts -> descriptive only.
+   post is treated as a FIXED blocking factor, not a random effect.
+
+========== 3. Descriptive Inference: rm-MANOVA, univariate 2x2 ANOVA, simple effects ==========
+(Reproduces manuscript Section 3.6.2. Exact repeated-measures computations;
+ all tests are within-subject. Condition cells (detection, disclosure):
+ no_label (0,0), detection_only (1,0), disclosure_only (0,1), both (1,1).)
+
+-- Cell means, SDs, SEs (M, SD; SE = SD/sqrt(N)) --
+  perceived_credibility: no_label M=5.50 SD=0.85 SE=0.07 | detection_only M=5.03 SD=1.07 SE=0.09 | disclosure_only M=5.07 SD=1.06 SE=0.09 | both M=4.93 SD=1.19 SE=0.10 | 
+  perceived_ai_authorship: no_label M=3.22 SD=1.68 SE=0.14 | detection_only M=4.54 SD=1.62 SE=0.13 | disclosure_only M=5.51 SD=1.49 SE=0.12 | both M=5.36 SD=1.62 SE=0.13 | 
+  psychological_discomfort: no_label M=2.42 SD=1.40 SE=0.11 | detection_only M=3.56 SD=1.57 SE=0.13 | disclosure_only M=3.23 SD=1.59 SE=0.13 | both M=3.67 SD=1.71 SE=0.14 | 
+
+-- Repeated-measures MANOVA (3 DVs) --
+             Wilks       F df1 df2 p   eta2
+detection   0.6510 26.0851   3 146 0 0.3490
+disclosure  0.4914 50.3749   3 146 0 0.5086
+interaction 0.7397 17.1297   3 146 0 0.2603
+
+-- Univariate 2x2 within-subject ANOVA (F(1, 148), eta2p = F/(F+148)) --
+  perceived_ai_authorship:
+                   F p   eta2
+detection    28.4563 0 0.1613
+disclosure  142.2771 0 0.4901
+interaction  43.3453 0 0.2265
+  psychological_discomfort:
+                  F     p   eta2
+detection   66.3805 0e+00 0.3096
+disclosure  21.6017 0e+00 0.1274
+interaction 13.8328 3e-04 0.0855
+  perceived_credibility:
+                  F      p   eta2
+detection   12.4147 0.0006 0.0774
+disclosure  12.4393 0.0006 0.0775
+interaction  5.7854 0.0174 0.0376
+
+-- Simple effects (paired t-tests, unadjusted p; Cohen's dz = Mdiff/SD_diff) --
+                                  effect   Mdiff SD_diff       t  df         p
+ Credibility: detection | disclosure = 0 -0.4765   1.373 -4.2351 148 3.996e-05
+ Credibility: detection | disclosure = 1 -0.1409   1.361 -1.2643 148 2.081e-01
+ Credibility: disclosure | detection = 0 -0.4362   1.254 -4.2472 148 3.808e-05
+ Credibility: disclosure | detection = 1 -0.1007   1.267 -0.9701 148 3.336e-01
+       dz
+ -0.34695
+ -0.10358
+ -0.34795
+ -0.07947
+                                    effect   Mdiff SD_diff      t  df         p
+ AI authorship: detection | disclosure = 0  1.3154   2.178  7.372 148 1.104e-11
+ AI authorship: detection | disclosure = 1 -0.1477   1.583 -1.139 148 2.567e-01
+ AI authorship: disclosure | detection = 0  2.2886   2.252 12.405 148 1.125e-24
+ AI authorship: disclosure | detection = 1  0.8255   1.920  5.249 148 5.219e-07
+       dz
+  0.60392
+ -0.09329
+  1.01624
+  0.43000
+                                 effect  Mdiff SD_diff      t  df         p
+ Discomfort: detection | disclosure = 0 1.1342   1.667 8.3049 148 5.813e-14
+ Discomfort: detection | disclosure = 1 0.4430   1.608 3.3621 148 9.845e-04
+ Discomfort: disclosure | detection = 0 0.8054   1.739 5.6545 148 7.812e-08
+ Discomfort: disclosure | detection = 1 0.1141   1.571 0.8868 148 3.766e-01
+      dz
+ 0.68037
+ 0.27544
+ 0.46323
+ 0.07265
+
+-- Simple effects: manuscript-ready (copy 'p_APA' and 'abs_dz_2dp') --
+                                    effect   Mdiff       t         p  p_APA
+   Credibility: detection | disclosure = 0 -0.4765 -4.2351 3.996e-05 < .001
+   Credibility: detection | disclosure = 1 -0.1409 -1.2643 2.081e-01  0.208
+   Credibility: disclosure | detection = 0 -0.4362 -4.2472 3.808e-05 < .001
+   Credibility: disclosure | detection = 1 -0.1007 -0.9701 3.336e-01  0.334
+ AI authorship: detection | disclosure = 0  1.3154  7.3718 1.104e-11 < .001
+ AI authorship: detection | disclosure = 1 -0.1477 -1.1387 2.567e-01  0.257
+ AI authorship: disclosure | detection = 0  2.2886 12.4048 1.125e-24 < .001
+ AI authorship: disclosure | detection = 1  0.8255  5.2488 5.219e-07 < .001
+    Discomfort: detection | disclosure = 0  1.1342  8.3049 5.813e-14 < .001
+    Discomfort: detection | disclosure = 1  0.4430  3.3621 9.845e-04 < .001
+    Discomfort: disclosure | detection = 0  0.8054  5.6545 7.812e-08 < .001
+    Discomfort: disclosure | detection = 1  0.1141  0.8868 3.766e-01  0.377
+       dz abs_dz_2dp
+ -0.34695       0.35
+ -0.10358       0.10
+ -0.34795       0.35
+ -0.07947       0.08
+  0.60392       0.60
+ -0.09329       0.09
+  1.01624       1.02
+  0.43000       0.43
+  0.68037       0.68
+  0.27544       0.28
+  0.46323       0.46
+  0.07265       0.07
+
+  NOTE: p values are unadjusted paired t-tests (as in the manuscript).
+  'abs_dz_2dp' is the value to report as Cohen's d (rounded to 2 dp);
+  'p_APA' is the APA-7 form (3 decimals, no leading zero).
+
+========== 4. Two-level dual-mediation SEM (lavaan, MLR, BFGS) ==========
+Converged: TRUE 
+
+-- Path coefficients (point estimates; inference in Section 6) --
+   label                     b       beta
+   a_dis_auth            2.288      0.676
+   a_det_auth            1.315      0.388
+   a_ix_auth            -1.463     -0.374
+   a_dis_disc            0.805      0.317
+   a_det_disc            1.134      0.447
+   a_ix_disc            -0.691     -0.236
+   b_auth               -0.173     -0.299
+   b_disc               -0.089     -0.115
+   c_dis                 0.030      0.015
+   c_det                -0.149     -0.076
+   c_ix                  0.022      0.010
+
+Sanity check | SEM(within) - pooled-within OLS | max = 0.000309  (PASS: the two representations are equivalent)
+
+========== 5. MODEL FIT ==========
+The full model is just-identified at the within-person level (df = 0):
+its fit indices are perfect by construction and carry no information.
+Report the nested trimmed model (three direct paths fixed to 0; df = 3).
+
+Trimmed model: chi2(3) = 3.439, p = 0.329 | scaled chi2(3) = 5.497, p = 0.139
+CFI = 0.999 (robust 0.992) | TLI = 0.994 (robust 0.959)
+RMSEA = 0.016 (robust 0.037) | SRMR_within = 0.016 | SRMR_between = 0.004
+The three direct paths jointly add no misfit.
+
+Within-person R2 (pooled-within OLS): auth = 0.350 | disc = 0.188 | cred = 0.150
+(lavaan's model-implied within-level R2 is printed by lavInspect(fit,"rsquare");
+ use the pooled-within OLS value above, as in the manuscript.)
+
+========== 6. PARTICIPANT-LEVEL CLUSTER BOOTSTRAP ==========
+Resampling the 149 participants with replacement, B = 5000.
+Indirect/total effects and path coefficients are all taken from the same
+5000 resamples, so every number in Tables 2 and 3 comes from one
+single method. Percentile and BCa intervals are both reported; BCa uses
+delete-one-participant jackknife acceleration.
+
+Running 5000 lavaan bootstrap fits on 12 workers ...
+Bootstrap finished in 23.5 min.
+Valid replications: 5000 / 5000 (100.0%)
+
+-- Standardisation check for the Table 3 beta column --
+   Rule: beta = b(effect) * SD(focal predictor) / SD(perceived credibility),
+   SD ratio from the matching direct path (c_dis / c_det / c_ix).
+   12 of 21 indirect/total-effect rows change; the rest are unchanged.
+   ie_dis_auth_1    b =   -0.142 | lavaan std.all =  -0.0903 -> corrected beta =  -0.0730
+   ie_dis_auth_m    b =   -0.269 | lavaan std.all =  -0.1463 -> corrected beta =  -0.1376
+   ie_det_auth_1    b =    0.025 | lavaan std.all =  -0.0043 -> corrected beta =   0.0130
+   ie_det_auth_m    b =   -0.101 | lavaan std.all =  -0.0603 -> corrected beta =  -0.0516
+   ie_dis_disc_1    b =   -0.010 | lavaan std.all =  -0.0094 -> corrected beta =  -0.0052
+   ie_dis_disc_m    b =   -0.041 | lavaan std.all =  -0.0229 -> corrected beta =  -0.0208
+   ie_det_disc_1    b =   -0.039 | lavaan std.all =  -0.0243 -> corrected beta =  -0.0201
+   ie_det_disc_m    b =   -0.070 | lavaan std.all =  -0.0378 -> corrected beta =  -0.0357
+   te_dis_1         b =   -0.101 | lavaan std.all =  -0.0746 -> corrected beta =  -0.0515
+   te_dis_m         b =   -0.268 | lavaan std.all =  -0.1490 -> corrected beta =  -0.1374
+   te_det_1         b =   -0.141 | lavaan std.all =  -0.0952 -> corrected beta =  -0.0722
+   te_det_m         b =   -0.309 | lavaan std.all =  -0.1696 -> corrected beta =  -0.1581
+
+Delete-one-participant jackknife for BCa ...
+Jackknife fits completed: 149 participants.
+
+Engine check on 300 shared resamples: max |lavaan - OLS| = 0.000755
+-> the lavaan SEM and its closed-form pooled-within representation are the
+   same estimator, so the OLS representation used in Section 10 for the
+   with-post comparison is consistent with the model reported here.
+
+#####################################################################
+#  TABLE 2 (ready to use): PATH COEFFICIENTS                        #
+#  Estimates: two-level dual-mediation SEM (MLR).  SE, CI and p:    #
+#  participant-level cluster bootstrap, B = 5000.                   #
+#####################################################################
+
+Path                                                              b  Boot SE 95% Boot CI (pct)     95% Boot CI (BCa)      p(boot)     beta
+----------------------------------------------------------------------------------------------------------------------------------------------------------- 
+disclosure -> perceived AI authorship                         2.288    0.185 [  1.919,  2.651] sig    [  1.899,  2.631] sig      < .001    0.676
+detection -> perceived AI authorship                          1.315    0.177 [  0.966,  1.658] sig    [  0.953,  1.644] sig      < .001    0.388
+detection x disclosure -> perceived AI authorship            -1.463    0.222 [ -1.899, -1.020] sig    [ -1.893, -1.013] sig      < .001   -0.374
+disclosure -> psychological discomfort                        0.805    0.143 [  0.517,  1.087] sig    [  0.510,  1.074] sig      < .001    0.317
+detection -> psychological discomfort                         1.134    0.137 [  0.859,  1.396] sig    [  0.852,  1.396] sig      < .001    0.447
+detection x disclosure -> psychological discomfort           -0.691    0.187 [ -1.054, -0.322] sig    [ -1.054, -0.315] sig      < .001   -0.236
+perceived AI authorship -> perceived credibility             -0.173    0.036 [ -0.243, -0.101] sig    [ -0.245, -0.104] sig      < .001   -0.299
+psychological discomfort -> perceived credibility            -0.089    0.051 [ -0.185,  0.014] n.s.   [ -0.189,  0.007] n.s.      0.084   -0.115
+disclosure -> perceived credibility (direct)                  0.030    0.131 [ -0.230,  0.290] n.s.   [ -0.215,  0.299] n.s.      0.848    0.015
+detection -> perceived credibility (direct)                  -0.149    0.115 [ -0.370,  0.078] n.s.   [ -0.369,  0.083] n.s.      0.201   -0.076
+detection x disclosure -> perceived credibility (direct)      0.022    0.150 [ -0.274,  0.310] n.s.   [ -0.271,  0.312] n.s.      0.885    0.010
+----------------------------------------------------------------------------------------------------------------------------------------------------------- 
+Residual covariance auth ~~ disc (level 1, within-person): b = 0.275, SE = 0.085, z = 3.215, p = 0.001
+Residual covariance auth ~~ disc (level 2, between-person): b = -0.010, SE = 0.119, z = -0.082, p = 0.934
+
+Beta 95% bootstrap CI
+   a_dis_auth                                                   0.676 [  0.577,   0.770]
+   a_det_auth                                                   0.388 [  0.286,   0.487]
+   a_ix_auth                                                   -0.374 [ -0.484,  -0.263]
+   a_dis_disc                                                   0.317 [  0.205,   0.423]
+   a_det_disc                                                   0.447 [  0.347,   0.542]
+   a_ix_disc                                                   -0.236 [ -0.362,  -0.109]
+   b_auth                                                      -0.299 [ -0.420,  -0.177]
+   b_disc                                                      -0.115 [ -0.242,   0.017]
+   c_dis                                                        0.015 [ -0.115,   0.147]
+   c_det                                                       -0.076 [ -0.191,   0.040]
+   c_ix                                                         0.010 [ -0.121,   0.138]
+
+-- Percentile vs BCa agreement --
+Percentile and BCa intervals gave the SAME significance decision for every
+effect listed above.
+
+NOTE. Every SE, CI and p in Table 2 now comes from the same 5,000-sample
+participant-level cluster bootstrap; the previous Wald/robust-SE column is
+removed. 'sig' = the 95% CI excludes 0. p(boot) = 2 x min(P(b*<=0),
+P(b*>=0)), reported for journals that require a p column; with B = 5000
+its resolution is 0.0004, so values printed as < .001 mean p < .001.
+
+#####################################################################
+#  TABLE 3 (ready to use): INDIRECT, TOTAL AND CONTRAST EFFECTS     #
+#  All values from the same participant-level cluster bootstrap.    #
+#####################################################################
+
+Effect                                                                b  Boot SE 95% CI (pct)         95% CI (BCa)          p(boot)     beta
+-------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+-- Indirect via perceived AI authorship --
+disclosure (detection = 0)                                       -0.395    0.087 [ -0.577, -0.230] sig    [ -0.586, -0.240] sig      < .001   -0.202
+disclosure (detection = 1)                                       -0.142    0.043 [ -0.235, -0.070] sig    [ -0.242, -0.074] sig      < .001   -0.073
+disclosure (marginal)                                            -0.269    0.061 [ -0.397, -0.155] sig    [ -0.404, -0.162] sig      < .001   -0.138
+detection (disclosure = 0)                                       -0.227    0.057 [ -0.345, -0.125] sig    [ -0.357, -0.130] sig      < .001   -0.116
+detection (disclosure = 1)                                        0.025    0.022 [ -0.019,  0.069] n.s.   [ -0.017,  0.072] n.s.      0.256    0.013
+detection (marginal)                                             -0.101    0.030 [ -0.167, -0.050] sig    [ -0.173, -0.053] sig      < .001   -0.052
+interaction                                                       0.252    0.062 [  0.141,  0.383] sig    [  0.147,  0.397] sig      < .001    0.112
+
+-- Indirect via psychological discomfort --
+disclosure (detection = 0)                                       -0.071    0.046 [ -0.167,  0.010] n.s.   [ -0.179,  0.002] n.s.      0.084   -0.037
+disclosure (detection = 1)                                       -0.010    0.014 [ -0.042,  0.015] n.s.   [ -0.053,  0.008] n.s.      0.426   -0.005
+disclosure (marginal)                                            -0.041    0.026 [ -0.097,  0.006] n.s.   [ -0.105, -0.000] sig       0.084   -0.021
+detection (disclosure = 0)                                       -0.100    0.063 [ -0.231,  0.014] n.s.   [ -0.242,  0.006] n.s.      0.084   -0.051
+detection (disclosure = 1)                                       -0.039    0.027 [ -0.099,  0.004] n.s.   [ -0.110, -0.000] sig       0.084   -0.020
+detection (marginal)                                             -0.070    0.043 [ -0.160,  0.010] n.s.   [ -0.166,  0.004] n.s.      0.084   -0.036
+interaction                                                       0.061    0.042 [ -0.008,  0.155] n.s.   [ -0.000,  0.167] n.s.      0.084    0.027
+
+-- Total effects (indirect + direct) --
+disclosure (detection = 0)                                       -0.436    0.103 [ -0.644, -0.235] sig    [ -0.638, -0.235] sig      < .001   -0.223
+disclosure (detection = 1)                                       -0.101    0.103 [ -0.309,  0.094] n.s.   [ -0.302,  0.101] n.s.      0.317   -0.052
+disclosure (marginal)                                            -0.268    0.076 [ -0.423, -0.121] sig    [ -0.423, -0.117] sig      < .001   -0.137
+detection (disclosure = 0)                                       -0.476    0.113 [ -0.698, -0.255] sig    [ -0.694, -0.248] sig      < .001   -0.244
+detection (disclosure = 1)                                       -0.141    0.110 [ -0.356,  0.074] n.s.   [ -0.362,  0.074] n.s.      0.204   -0.072
+detection (marginal)                                             -0.309    0.087 [ -0.480, -0.141] sig    [ -0.480, -0.141] sig      < .001   -0.158
+interaction                                                       0.336    0.139 [  0.060,  0.611] sig    [  0.060,  0.604] sig       0.016    0.149
+
+-- Contrasts --
+disclosure vs. detection on perceived AI authorship               0.973    0.148 [  0.691,  1.268] sig    [  0.685,  1.262] sig      < .001    0.287
+detection vs. disclosure on psychological discomfort              0.329    0.117 [  0.107,  0.570] sig    [  0.121,  0.584] sig       0.004    0.130
+perceived AI authorship vs. discomfort on credibility            -0.084    0.060 [ -0.204,  0.035] n.s.   [ -0.203,  0.036] n.s.      0.162   -0.184
+disclosure: via authorship vs. via discomfort                    -0.324    0.095 [ -0.521, -0.147] sig    [ -0.532, -0.152] sig      < .001   -0.166
+detection: via authorship vs. via discomfort                     -0.127    0.079 [ -0.281,  0.033] n.s.   [ -0.281,  0.033] n.s.      0.111   -0.065
+via authorship: disclosure vs. detection                         -0.168    0.042 [ -0.258, -0.094] sig    [ -0.269, -0.099] sig      < .001   -0.086
+via discomfort: detection vs. disclosure                         -0.029    0.022 [ -0.080,  0.003] n.s.   [ -0.092, -0.000] sig       0.086   -0.015
+total effect: disclosure vs. detection                            0.040    0.111 [ -0.181,  0.255] n.s.   [ -0.174,  0.262] n.s.      0.733    0.021
+-------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+Beta (standardized) effects with 95% percentile bootstrap CI:
+   ie_dis_auth_0                                                   -0.202 [ -0.291,  -0.119] sig
+   ie_dis_auth_1                                                   -0.073 [ -0.121,  -0.036] sig
+   ie_dis_auth_m                                                   -0.138 [ -0.202,  -0.081] sig
+   ie_det_auth_0                                                   -0.116 [ -0.176,  -0.065] sig
+   ie_det_auth_1                                                    0.013 [ -0.010,   0.036] n.s.
+   ie_det_auth_m                                                   -0.052 [ -0.085,  -0.026] sig
+   ie_ix_auth                                                       0.112 [  0.063,   0.168] sig
+   ie_dis_disc_0                                                   -0.037 [ -0.085,   0.005] n.s.
+   ie_dis_disc_1                                                   -0.005 [ -0.021,   0.008] n.s.
+   ie_dis_disc_m                                                   -0.021 [ -0.049,   0.003] n.s.
+   ie_det_disc_0                                                   -0.051 [ -0.117,   0.007] n.s.
+   ie_det_disc_1                                                   -0.020 [ -0.049,   0.002] n.s.
+   ie_det_disc_m                                                   -0.036 [ -0.081,   0.005] n.s.
+   ie_ix_disc                                                       0.027 [ -0.004,   0.069] n.s.
+   te_dis_0                                                        -0.223 [ -0.322,  -0.123] sig
+   te_dis_1                                                        -0.052 [ -0.157,   0.049] n.s.
+   te_dis_m                                                        -0.137 [ -0.214,  -0.064] sig
+   te_det_0                                                        -0.244 [ -0.354,  -0.131] sig
+   te_det_1                                                        -0.072 [ -0.181,   0.039] n.s.
+   te_det_m                                                        -0.158 [ -0.243,  -0.071] sig
+   te_ix                                                            0.149 [  0.027,   0.267] sig
+   ctr_auth_dis_minus_det                                           0.287 [  0.207,   0.369] sig
+   ctr_disc_det_minus_dis                                           0.130 [  0.043,   0.217] sig
+   ctr_b_auth_minus_disc                                           -0.184 [ -0.355,  -0.010] sig
+   ctr_path_dis_auth_vs_disc                                       -0.166 [ -0.264,  -0.075] sig
+   ctr_path_det_auth_vs_disc                                       -0.065 [ -0.144,   0.017] n.s.
+   ctr_cross_dis_vs_det_auth                                       -0.086 [ -0.132,  -0.047] sig
+   ctr_cross_det_vs_dis_disc                                       -0.015 [ -0.041,   0.002] n.s.
+   ctr_te_dis_minus_det                                             0.021 [ -0.093,   0.131] n.s.
+
+Suffixes: _0 = the other label absent, _1 = the other label present,
+_m = marginal (average over the two levels of the other label).
+All effects are CONDITIONAL on the other label unless marked marginal.
+
+-- Percentile vs BCa agreement --
+Percentile and BCa intervals DISAGREED for 3 effect(s):
+   disclosure (marginal)                        pct [ -0.097,  0.006] n.s.  |  BCa [ -0.105, -0.000] sig
+   detection (disclosure = 1)                   pct [ -0.099,  0.004] n.s.  |  BCa [ -0.110, -0.000] sig
+   via discomfort: detection vs. disclosure     pct [ -0.080,  0.003] n.s.  |  BCa [ -0.092, -0.000] sig
+   Report the percentile interval as primary (pre-specified) and state the
+   BCa discrepancy explicitly; do not call these effects significant.
+
+========== 9. DESCRIPTIVE CONDITION CONTRASTS (bootstrap CIs) ==========
+Same resamples; cell means and their differences are recomputed in every
+resample. Supplementary only: Section 3.6.2 (MANOVA/ANOVA) stays unchanged.
+
+-- cred --
+contrast                                                Mdiff 95% boot CI (pct)   
+detection | disclosure = 0 (det_only - no_label)       -0.477 [ -0.698, -0.255] sig
+detection | disclosure = 1 (both - dis_only)           -0.141 [ -0.356,  0.074] n.s.
+disclosure | detection = 0 (dis_only - no_label)       -0.436 [ -0.644, -0.235] sig
+disclosure | detection = 1 (both - det_only)           -0.101 [ -0.309,  0.094] n.s.
+detection main effect (F-test contrast)                -0.617 [ -0.960, -0.282] sig
+disclosure main effect (F-test contrast)               -0.537 [ -0.846, -0.242] sig
+interaction (F-test contrast)                           0.336 [  0.060,  0.611] sig
+
+-- auth --
+contrast                                                Mdiff 95% boot CI (pct)   
+detection | disclosure = 0 (det_only - no_label)        1.315 [  0.966,  1.658] sig
+detection | disclosure = 1 (both - dis_only)           -0.148 [ -0.396,  0.107] n.s.
+disclosure | detection = 0 (dis_only - no_label)        2.289 [  1.919,  2.651] sig
+disclosure | detection = 1 (both - det_only)            0.826 [  0.523,  1.134] sig
+detection main effect (F-test contrast)                 1.168 [  0.738,  1.584] sig
+disclosure main effect (F-test contrast)                3.114 [  2.611,  3.631] sig
+interaction (F-test contrast)                          -1.463 [ -1.899, -1.020] sig
+
+-- disc --
+contrast                                                Mdiff 95% boot CI (pct)   
+detection | disclosure = 0 (det_only - no_label)        1.134 [  0.859,  1.396] sig
+detection | disclosure = 1 (both - dis_only)            0.443 [  0.188,  0.698] sig
+disclosure | detection = 0 (dis_only - no_label)        0.805 [  0.517,  1.087] sig
+disclosure | detection = 1 (both - det_only)            0.114 [ -0.148,  0.369] n.s.
+detection main effect (F-test contrast)                 1.577 [  1.188,  1.940] sig
+disclosure main effect (F-test contrast)                0.919 [  0.517,  1.302] sig
+interaction (F-test contrast)                          -0.691 [ -1.054, -0.322] sig
+
+========== 10. ROBUSTNESS: ADDING THE POST DUMMIES ==========
+The same participants are resampled with the same seed, and both
+specifications are fitted to every resample; the CI for each difference
+is a paired cluster bootstrap over the identical resamples.
+The closed-form pooled-within estimator is used here because it is the
+exact within-level representation of the SEM and, unlike lavaan's
+two-level ML engine, it stays numerically valid once post dummies are
+added (lavaan returns wrong coefficients for that augmented model).
+
+Path                                             no post with post difference 95% boot CI of difference
+a_dis_auth                                         2.289     2.262    -0.027 [ -0.103,  0.046] n.s.
+a_det_auth                                         1.315     1.296    -0.019 [ -0.082,  0.039] n.s.
+a_ix_auth                                         -1.463    -1.398    +0.066 [ -0.016,  0.166] n.s.
+a_dis_disc                                         0.805     0.771    -0.035 [ -0.098,  0.021] n.s.
+a_det_disc                                         1.134     1.114    -0.020 [ -0.077,  0.026] n.s.
+a_ix_disc                                         -0.691    -0.673    +0.018 [ -0.048,  0.093] n.s.
+b_auth                                            -0.173    -0.167    +0.006 [ -0.006,  0.019] n.s.
+b_disc                                            -0.089    -0.079    +0.009 [ -0.006,  0.027] n.s.
+c_dis                                              0.030     0.029    -0.001 [ -0.056,  0.053] n.s.
+c_det                                             -0.149    -0.152    -0.003 [ -0.048,  0.042] n.s.
+c_ix                                               0.022     0.006    -0.016 [ -0.083,  0.045] n.s.
+
+Maximum absolute change across the 11 paths: 0.066 (largest relative
+change among the 7 paths with |b| > 0.15: 4.5%).
+No difference CI above excludes zero unless marked sig.
+
+Indirect and total effects, with and without post dummies
+(unstandardized; percentile bootstrap CI of the difference):
+effect                  no post with post  difference   95% CI of difference  decision
+ie_dis_auth_0           -0.395   -0.377   diff  +0.018 [ -0.012,  0.054] n.s.
+ie_dis_disc_0           -0.071   -0.061   diff  +0.010 [ -0.004,  0.027] n.s.
+ie_det_auth_0           -0.227   -0.216   diff  +0.011 [ -0.008,  0.033] n.s.
+ie_det_disc_0           -0.100   -0.088   diff  +0.012 [ -0.006,  0.035] n.s.
+ie_ix_auth               0.253    0.233   diff  -0.020 [ -0.048,  0.004] n.s.
+ie_ix_disc               0.061    0.053   diff  -0.008 [ -0.024,  0.006] n.s.
+ie_dis_auth_m           -0.269   -0.261   diff  +0.008 [ -0.012,  0.032] n.s.
+ie_dis_disc_m           -0.041   -0.034   diff  +0.006 [ -0.002,  0.016] n.s.
+ie_det_auth_m           -0.101   -0.100   diff  +0.001 [ -0.010,  0.012] n.s.
+ie_det_disc_m           -0.070   -0.062   diff  +0.008 [ -0.004,  0.024] n.s.
+te_dis_m                -0.268   -0.263   diff  +0.005 [ -0.033,  0.042] n.s.
+te_det_m                -0.309   -0.310   diff  -0.002 [ -0.032,  0.029] n.s.
+te_ix                    0.336    0.292   diff  -0.043 [ -0.124,  0.025] n.s.
+
+
+======================================================================
+  NOTES AND REPORTING CHECKLIST
+======================================================================
+1. Method: two-level dual-mediation SEM (lavaan 0.7.2, MLR, BFGS);
+   ALL inference is a participant-level nonparametric cluster bootstrap
+   (B = 5000, seed 20240810). No Wald/z test and no delta-method SE is
+   used for any structural result.
+2. Resampling unit = participant (the independent sampling unit); every
+   resampled participant carries all four of her/his observations, so the
+   within-person design and the crossed post assignment are preserved.
+3. Both percentile and BCa intervals are reported and their agreement is
+   checked explicitly at the end of each table block. Report the percentile
+   interval as primary (pre-specified) and disclose any disagreement.
+4. Resample indices are drawn once on the master process before the
+   parallel loop, so results are exactly reproducible and independent of
+   the number of workers (seed printed above).
+5. Point estimates come from the MLR SEM; the bootstrap only provides the
+   empirical sampling distribution. Within-level SEM coefficients equal
+   pooled-within OLS (verified above), which is the estimator used inside
+   the bootstrap and for the with-post robustness check.
+6. Multiplicity: bootstrap CIs are per-effect and unadjusted. The two
+   hypothesis-bearing contrasts are 'disclosure vs. detection on perceived
+   AI authorship' (H2b) and 'detection vs. disclosure on psychological
+   discomfort' (H1b); if the journal requires a multiplicity adjustment,
+   apply it to those two p(boot) values only. The remaining contrasts and
+   all indirect/total effects are descriptive and are not adjusted.
+7. Post (stimulus) was treated as a fixed blocking factor; only four
+   posts exist, so a post random effect is not estimable with confidence.
+8. Effect sizes to report for the mediation results are the completely
+   standardized effects (beta) with their bootstrap CIs; the total-effect
+   and indirect-effect betas are printed above. For indirect/total effects
+   beta = b x SD(focal predictor) / SD(perceived credibility) (SD ratio
+   taken from the matching direct path), because lavaan's std.all
+   standardises the interaction column on its own SD (0.433) whereas the
+   two dummies have SD = 0.5; adding those coefficients would mix two
+   denominators and could flip the sign (see the Section 6 check).
+9. The within-level residual covariance auth ~~ disc is printed with its
+   robust (MLR) SE, z and p in Section 7, so that the manuscript value
+   0.28 (SE = 0.09, p = .001) is traceable to this output file.
+======================================================================
