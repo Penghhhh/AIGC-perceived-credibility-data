@@ -145,4 +145,6 @@ The interfaces in `experiment_program/` simulate commercial platforms for resear
 
 ## License
 
-No license has been assigned to this repository yet. All rights reserved by the authors unless otherwise stated.
+This repository is released under the [MIT License](LICENSE) — Copyright (c) 2026 Penghhhh. You are free to use, modify, and redistribute the code, data, and figures, provided that the copyright notice and the license text are retained.
+
+The MIT license covers the original code, styles, scripts, and documentation in this repository. Third-party product photographs, review texts, parameter charts, and any trademarks referenced by the simulated interfaces remain the property of their respective owners, are not covered by this license, and are retained only as research stimuli (see above).
