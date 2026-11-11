@@ -1,0 +1,13 @@
+{
+  "name": "psycheshop-study1",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Study 1 的模拟电商评论测评程序（Express + EJS）",
+  "scripts": {
+    "start": "node experiment1_data.js"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.19.2"
+  }
+}

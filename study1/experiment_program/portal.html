@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>模拟购物平台（实验演示）- 送货更准时、价格更超值、上新货更快</title>
+    <meta name="keywords" content="模拟购物平台,科研实验,模拟商城,手机,笔记本,电脑,相机,数码,配件,手表"/>
+    <meta name="description" content="模拟购物平台 - 科研实验用的模拟网上商城界面，销售家电、数码通讯、电脑、家居百货等商品，用于考察在线信息的可信度。">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="source/fonts/font_4635514_sxaypx6hoh8/iconfont.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/c/font_4635514_0xdgy45x3j3.css">
+    <style>
+        @font-face {
+            font-family: 'iconfont';  /* Project id 4635514 */
+            src: url('//at.alicdn.com/t/c/font_4635514_plhp0xm7t1j.woff2?t=1729083373538') format('woff2'),
+                url('//at.alicdn.com/t/c/font_4635514_plhp0xm7t1j.woff?t=1729083373538') format('woff'),
+                url('//at.alicdn.com/t/c/font_4635514_plhp0xm7t1j.ttf?t=1729083373538') format('truetype');
+        }
+
+        html{
+            font-family: iconfont;
+        }
+    </style>
+</head>
+<body>
+    <!-- 广告-开始 
+    <section class="lk-top-banner">
+        <div class="top-banner-center w">
+            <a href="#">
+                <img src="images/top-banner.jpg" alt="" >
+            </a>
+        </div>
+         关闭按钮 
+        <a href="#" class="banner-close"></a>
+    </section>
+     广告-结束 -->
+        
+    <!-- 顶部通栏-开始 -->
+    <nav class="lk-toolbar">
+        <!-- 版心 -->
+        <div class="w clearfix">
+            <!-- 左边 -->
+            <div class="f1">
+                <ul>
+                    <li class="down">
+                        <a href="#">网站导航</a>
+                        <i><s>◇</s></i>
+                    </li>
+                    <li class="down">
+                        <a href="#">商家入驻</a>
+                        <i><s>◇</s></i>
+                    </li>
+                    <li class="down">
+                        <a href="#">客户服务</a>
+                        <i><s>◇</s></i>
+                    </li>
+                    <li class="down">
+                        <a href="#">中国大陆</a>
+                        <i><s>◇</s></i>
+                    </li>
+                </ul>
+            </div>
+            <!-- 右边 -->
+            <div class="fr">
+                <ul>
+                    <li>
+                        <a href="">已登录</a>
+                        <a href="" class="f60">测评模式</a>
+                    </li>
+                    <li class="down">
+                        <a href="#">我的订单</a>
+                        <i><s>◇</s></i>
+                    </li>
+                    <li class="down">
+                        <a href="#">我的账户</a>
+                        <i><s>◇</s></i>
+                    </li>
+                    <li class="down">
+                        <a href="#">购物车</a>
+                        <i><s>◇</s></i>
+                    </li>
+                    <li class="down">
+                        <a href="#">免费开店</a>
+                        <i><s>◇</s></i>
+                    </li>
+                    <li>
+                        <a href="#">企业采购</a>
+                    </li>
+                    <li class="down">
+                        <a href="#">帮助中心</a>
+                        <i><s>◇</s></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- 顶部通栏-结束 -->
+        
+    <!-- 顶部搜索-开始 -->
+    <section class="lk-top-search">
+        <!--版心-->
+        <div class="w">
+            <!--左边-->
+            <div class="logo-set">
+                <a href="#" class="main-logo"></a>
+            </div>
+            <!--搜索框-->
+            <form action="" class="search-input">
+                <input type="text" name="search" placeholder="参与测试赢好礼">
+                <input type="submit" value="搜 索">
+            </form>
+            <!--快捷导航-->
+            <div class="search-more-link">
+                <ul>
+                    <li><a style="color: orangered;" href="#">热销榜</a></li>
+                    <li><a href="#">智能手表</a></li>
+                    <li><a href="#">空调</a></li>
+                    <li><a href="#">投影仪</a></li>
+                    <li><a href="#">数码相机</a></li>
+                    <li><a href="#">电动车</a></li>
+                    <li><a href="#">降噪耳机</a></li>
+                    <li><a href="#">无人机</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- 顶部搜索-结束 -->
+
+    <!-- 中部导航-开始 -->
+    <section class="lk-nav">
+        <div class="w">
+            <!--左边-->
+            <div class="lk-nav-menu">
+                <div class="lk-nav-menu-all">
+                    <i class="iconfont" style="color: orangered;">&#xe618;</i>
+                    <a href="#">全部商品分类</a>
+                </div>
+            </div>
+            <!--右边-->
+            <div class="lk-nav-items">
+                <ul>
+                    <li><a href="#" class="txt-nav" style="color: rgb(255, 0, 54);">品牌商城</a></li>
+                    <li><a href="#" class="txt-nav" style="color: rgb(255, 0, 54);">
+                        <img src="https://gw.alicdn.com/imgextra/i3/O1CN01Hac6GN1NhJ3mEoPB7_!!6000000001601-1-tps-56-56.gif" alt>
+                        直播专区
+                    </a></li>
+                    <li><a href="#" class="txt-nav" style="color: rgb(255, 0, 54);">企业采购</a></li>
+                    <li><a href="#" class="txt-nav" style="color: rgb(255, 0, 54);">司法拍卖</a></li>
+                    <li><a href="#" class="txt-nav" style="color: rgb(51, 201, 0);">线上超市</a></li>
+                    <li><a href="#" class="txt-nav" style="color: black;">
+                        <img src="https://img.alicdn.com/imgextra/i2/O1CN01NO5HIG1mo3IkzekPV_!!6000000005000-1-tps-224-224.gif">
+                        闲置集市
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- 中部导航-结束 -->
+        
+    <!-- 轮播图-开始 -->
+    <section class="lk-casual">
+        <div class="w">
+            <!--中间-->
+            <div class="casual-center">
+                <div class="casual-center-w">
+                    <!--轮播图图片-->
+                    <div class="carousel">  
+                        <div class="carousel-slides">  
+                            <img src="images/Carousel.png">  
+                            <!--      
+                            -->   
+                        </div>
+                        <!--
+                        <a class="prev" onclick="changeSlides(-1)">&#10094;</a>  
+                        <a class="next" onclick="changeSlides(1)">&#10095;</a>  
+                        -->  
+                    </div>
+                    <!-- 导航点  
+                    <div class="carousel-indicators">  
+                        <span class="active"></span>  
+                        <span></span>  
+                        <span></span>  
+                        <span></span>  
+                        <span></span> 
+                    </div> 
+                    --> 
+                </div>
+            </div>
+            <!--左边-->
+            <div class="casual-left">
+                <ul class="index-list">
+                    <li class="">
+                        <i class="iconfont" style="color: orangered;">&#xe616;</i>
+                        <a target="_blank">手机</a><em>/</em>
+                        <a target="_blank">运营商</a><em>/</em>
+                        <a target="_blank">智能数码</a>
+                    </li>
+                    <li class="">
+                        <i class="iconfont" style="color: orangered;">&#xe60b;</i>
+                        <a target="_blank">电视</a><em>/</em>
+                        <a target="_blank">冰箱</a><em>/</em>
+                        <a target="_blank">空调</a><em>/</em>
+                        <a target="_blank">洗衣机</a>
+                    </li>
+                    <li class="">
+                        <i class="iconfont" style="color: orangered;">&#xe60c;</i>
+                        <a target="_blank">厨卫大电</a><em>/</em>
+                        <a target="_blank">生活家电</a><em>/</em>
+                        <a target="_blank">厨具</a>
+                    </li>
+                    <li class="">
+                        <i class="iconfont" style="color: orangered;">&#xe602;</i>
+                        <a target="_blank">电脑办公</a><em>/</em>
+                        <a target="_blank">相机</a><em>/</em>
+                        <a target="_blank">DIY</a>
+                    </li>
+                    <li class="">
+                        <i class="iconfont" style="color: orangered;">&#xe613;</i>
+                        <a target="_blank">家居</a><em>/</em>
+                        <a target="_blank">家具</a><em>/</em>
+                        <a target="_blank">家装</a><em>/</em>
+                        <a target="_blank">家纺</a>
+                    </li>
+                    <li>
+                        <i class="iconfont" style="color: orangered;">&#xe60e;</i>
+                        <a target="_blank">食品</a><em>/</em>
+                        <a target="_blank">酒水</a><em>/</em>
+                        <a target="_blank">生鲜</a><em>/</em>
+                        <a target="_blank">特产</a>
+                    </li>
+                    <li>
+                        <i class="iconfont" style="color: orangered;">&#xe60f;</i>
+                        <a target="_blank">个护化妆</a><em>/</em>
+                        <a target="_blank">纸品清洁</a><em>/</em>
+                        <a target="_blank">宠物</a>
+                    </li>
+                    <li class="">
+                        <i class="iconfont" style="color: orangered;">&#xe617;</i>
+                        <a target="_blank">母婴</a><em>/</em>
+                        <a target="_blank">玩具</a><em>/</em>
+                        <a target="_blank">车床</a><em>/</em>
+                        <a target="_blank">童装</a>
+                    </li>
+                    <li>
+                        <i class="iconfont" style="color: orangered;">&#xe610;</i>
+                        <a target="_blank">运动</a><em>/</em>
+                        <a target="_blank">户外</a><em>/</em>
+                        <a target="_blank">足球</a><em>/</em>
+                        <a target="_blank">跑步机</a>
+                    </li>
+                    <li class="">
+                        <i class="iconfont" style="color: orangered;">&#xe611;</i>
+                        <a target="_blank">男装</a><em>/</em>
+                        <a target="_blank">女装</a><em>/</em>
+                        <a target="_blank">内衣</a>
+                    </li>
+                    <li>
+                        <i class="iconfont" style="color: orangered;">&#xe61a;</i>
+                        <a target="_blank">鞋靴</a><em>/</em>
+                        <a target="_blank">箱包</a><em>/</em>
+                        <a target="_blank">钟表</a><em>/</em>
+                        <a target="_blank">珠宝</a>
+                    </li>
+                    <li class="">
+                        <i class="iconfont" style="color: orangered;">&#xe61b;</i>
+                        <a target="_blank">汽摩</a><em>/</em>
+                        <a target="_blank">二手车</a><em>/</em>
+                        <a target="_blank">汽车用品</a>
+                    </li>
+                    <li class="">
+                        <i class="iconfont" style="color: orangered;">&#xe615;</i>
+                        <a target="_blank">图书</a><em>/</em>
+                        <a target="_blank">童书</a><em>/</em>
+                        <a target="_blank">教辅教材</a>
+                    </li>
+                    <li>
+                        <i class="iconfont" style="color: orangered;">&#xe61c;</i>
+                        <a target="_blank">理财</a><em>/</em>
+                        <a target="_blank">分期</a><em>/</em>
+                        <a target="_blank">保险</a><em>/</em>
+                        <a target="_blank">房产</a>
+                    </li>
+                </ul>
+            </div>
+            <!--右边-->
+            <div class="casual-right" style="background-image: linear-gradient(rgb(255, 241, 232) 0%, rgb(252, 249, 247) 50%, rgb(252, 249, 247) 100%);">
+                <!-- 上 -->
+                <div class="user-info">
+                    <div class="user-img">
+                        <a href="#">
+                            <img src="images/user_avatar.png">
+                        </a>
+                    </div>
+                    <p class="info">Hi，欢迎</p>
+                    <div class="btn">
+                        <a href="#" class="register">测评有礼</a>
+                        <a href="#" class="superhy"></a>
+                    </div>
+                    <div class="enter">
+                        <a href=""><em></em><span>领积分<i>></i></span></a>
+                        <a href=""><em></em><span>领券<i>></i></span></a>
+                    </div>
+                </div>
+                <!-- 中 -->
+                <div class="toutiao">
+                    <ul>
+                        <li>
+                            <a href="">
+                                <i>[活动]</i>
+                                参与优质评论测评赢取大额红包
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i>[知识]</i>
+                                优质评论反映商品的真实用户体验
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 下 -->
+                <div class="kuaijie">
+                    <ul>
+                        <li><a href="#">
+                            <svg t="1729257199457" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4310" width="200" height="200"><path d="M767.104 959.936c-5.344 0-10.688-1.344-15.52-4.032l-241.312-133.856-241.824 133.024c-10.72 5.92-23.904 5.152-33.888-1.92-10.016-7.072-15.104-19.264-13.12-31.328l46.88-284.736-196.448-202.08c-8.256-8.512-11.168-20.928-7.456-32.192 3.68-11.296 13.312-19.616 25.024-21.632l155.072-26.592c17.632-2.944 33.984 8.736 36.96 26.144 2.976 17.408-8.704 33.952-26.144 36.96l-95.168 16.32 165.344 170.08c7.072 7.296 10.272 17.504 8.64 27.488l-38.816 235.68 199.616-109.824c9.632-5.312 21.344-5.312 30.944 0.064l199.168 110.464-38.016-235.776c-1.632-10.016 1.632-20.224 8.704-27.456l164.672-168.256-225.664-34.816c-10.56-1.632-19.584-8.416-24.128-18.08l-99.2-212.384-100.064 211.84c-7.552 16-26.624 22.816-42.624 15.264-15.968-7.552-22.816-26.624-15.264-42.624l129.152-273.44c5.312-11.2 16.576-18.336 28.928-18.336 0 0 0.032 0 0.064 0 12.416 0.032 23.68 7.232 28.928 18.464l120.8 258.624 270.336 41.728c11.872 1.824 21.696 10.144 25.504 21.504 3.776 11.36 0.864 23.936-7.488 32.48l-196.928 201.216 45.92 284.864c1.952 12.096-3.2 24.256-13.216 31.296C780 958.016 773.568 959.936 767.104 959.936z" p-id="4311" fill="#ff4500"></path></svg>
+                            <p>收藏</p>
+                        </a></li>
+                        <li><a href="#">
+                            <svg t="1729257232206" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4493" width="200" height="200"><path d="M934.4 288c0-16-16-28.8-32-28.8h-137.6c-25.6-108.8-124.8-188.8-240-188.8h-19.2c-115.2 0-214.4 80-240 188.8H128C108.8 256 96 268.8 96 288l-28.8 553.6v3.2C73.6 912 128 960 192 960h649.6c64 0 118.4-51.2 121.6-115.2v-3.2L934.4 288z m-96 608H192c-28.8 0-54.4-22.4-57.6-54.4L156.8 320h102.4v134.4c-19.2 9.6-32 32-32 54.4 0 35.2 28.8 64 64 64s64-28.8 64-64c0-22.4-12.8-44.8-32-54.4V313.6c0-102.4 83.2-182.4 182.4-182.4h19.2c102.4 0 182.4 83.2 182.4 182.4v144c-19.2 9.6-32 32-32 54.4 0 35.2 28.8 64 64 64s64-28.8 64-64c0-22.4-12.8-44.8-32-54.4V320h99.2l25.6 521.6c0 32-25.6 54.4-57.6 54.4z" fill="#ff4500" p-id="4494"></path><path d="M611.2 256h-192c-19.2 0-32 12.8-32 32s12.8 32 32 32h192c19.2 0 32-12.8 32-32s-12.8-32-32-32z" fill="#ff4500" p-id="4495"></path></svg>
+                            <p>买过</p>
+                        </a></li>
+                        <li><a href="#">
+                            <svg t="1729257274444" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4711" width="200" height="200"><path d="M885.76 681.536c-13.76-11.168-33.92-8.896-44.96 4.832-11.104 13.76-8.928 33.92 4.832 44.96 22.4 18.08 52.48 71.776 52.48 101.984 0 54.016-43.904 97.952-97.92 97.952-31.776 0-61.728-15.488-80.096-41.504-2.208-3.136-61.536-88.672-96.192-125.696-61.088-65.216-163.52-61.568-163.904-61.632-129.76-26.752-218.656-132.032-202.4-239.744 8.064-53.728 40.96-100.736 92.64-132.448 53.44-32.736 120.192-45.184 188-34.976 67.712 10.208 127.84 41.728 169.28 88.768 40.064 45.504 57.664 100.128 49.536 153.92-3.072 20.576-9.856 40.352-20.224 58.816-8.672 15.392-3.2 34.912 12.256 43.552 15.328 8.608 34.912 3.2 43.552-12.256 14.176-25.248 23.488-52.416 27.712-80.672 10.976-72.704-12.064-145.76-64.8-205.696-51.392-58.336-125.184-97.344-207.776-109.76C465.184 219.552 383.104 235.04 316.8 275.68c-68.096 41.728-111.584 104.768-122.496 177.472-21.344 141.312 89.696 278.336 252.768 311.968 2.176 0.448 89.216-0.96 130.112 42.688 35.808 38.24 90.528 121.344 94.56 123.776 30.528 39.872 77.984 63.648 128.416 63.648 89.28 0 161.92-72.672 161.92-161.952C962.08 781.632 921.792 710.528 885.76 681.536z" p-id="4712" fill="#ff4500"></path><path d="M128.416 320.864m-64 0a2 2 0 1 0 128 0 2 2 0 1 0-128 0Z" p-id="4713" fill="#ff4500"></path><path d="M272.864 228.256c-10.976 0-21.984-3.712-30.944-11.328C221.92 199.904 219.136 170.112 235.936 149.92c3.968-4.736 98.688-115.68 277.184-79.968 25.984 5.184 42.848 30.464 37.664 56.48s-30.496 42.976-56.48 37.664c-120.8-24.192-182.304 44.672-184.864 47.584C299.904 222.624 286.4 228.256 272.864 228.256z" p-id="4714" fill="#ff4500"></path></svg>
+                            <p>足迹</p>
+                        </a></li>
+                        <li><a href="#">
+                            <svg t="1729257305189" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4896" width="200" height="200"><path d="M896 256l-288 0c-17.696 0-32-14.336-32-32s14.304-32 32-32l288 0c17.696 0 32 14.336 32 32S913.696 256 896 256z" p-id="4897" fill="#ff4500"></path><path d="M896 416l-288 0c-17.696 0-32-14.336-32-32s14.304-32 32-32l288 0c17.696 0 32 14.336 32 32S913.696 416 896 416z" p-id="4898" fill="#ff4500"></path><path d="M896 672l-288 0c-17.696 0-32-14.304-32-32s14.304-32 32-32l288 0c17.696 0 32 14.304 32 32S913.696 672 896 672z" p-id="4899" fill="#ff4500"></path><path d="M896 832l-288 0c-17.696 0-32-14.304-32-32s14.304-32 32-32l288 0c17.696 0 32 14.304 32 32S913.696 832 896 832z" p-id="4900" fill="#ff4500"></path><path d="M384 480 192 480c-52.928 0-96-43.072-96-96L96 192c0-52.928 43.072-96 96-96l192 0c52.928 0 96 43.072 96 96l0 192C480 436.928 436.928 480 384 480zM192 160C174.368 160 160 174.368 160 192l0 192c0 17.632 14.368 32 32 32l192 0c17.632 0 32-14.368 32-32L416 192c0-17.632-14.368-32-32-32L192 160z" p-id="4901" fill="#ff4500"></path><path d="M384 928 192 928c-52.928 0-96-43.072-96-96l0-192c0-52.928 43.072-96 96-96l192 0c52.928 0 96 43.072 96 96l0 192C480 884.928 436.928 928 384 928zM192 608c-17.632 0-32 14.336-32 32l0 192c0 17.664 14.368 32 32 32l192 0c17.632 0 32-14.336 32-32l0-192c0-17.664-14.368-32-32-32L192 608z" p-id="4902" fill="#ff4500"></path></svg>
+                            <p>订单</p>
+                        </a></li>
+                        <li><a href="#">
+                            <svg t="1729257342108" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5084" width="200" height="200"><path d="M940.8 284.8c-16-19.2-38.4-28.8-64-28.8H352c-19.2 0-32 12.8-32 32s12.8 32 32 32h524.8c6.4 0 12.8 3.2 16 6.4 3.2 3.2 6.4 9.6 3.2 19.2l-48 336c0 9.6-12.8 19.2-25.6 19.2h-38.4-3.2-444.8c-12.8 0-25.6-16-25.6-28.8L256 300.8l-28.8-156.8C220.8 99.2 182.4 64 134.4 64H96c-19.2 0-32 16-32 32s12.8 32 32 32h38.4c12.8 0 25.6 9.6 28.8 25.6L192 310.4l51.2 371.2C249.6 729.6 288 768 332.8 768h486.4c44.8 0 83.2-32 89.6-73.6L960 355.2c3.2-25.6-3.2-51.2-19.2-70.4z" fill="#ff4500" p-id="5085"></path><path d="M323.2 896m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#ff4500" p-id="5086"></path><path d="M832 896m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#ff4500" p-id="5087"></path></svg>
+                            <p>购物车</p>
+                        </a></li>
+                        <li><a href="#">
+                            <svg t="1729257365448" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5269" width="200" height="200"><path d="M640 416l-256 0c-17.664 0-32-14.336-32-32s14.336-32 32-32l256 0c17.696 0 32 14.336 32 32S657.696 416 640 416z" p-id="5270" fill="#ff4500"></path><path d="M579.264 544 384 544c-17.664 0-32-14.336-32-32s14.336-32 32-32l195.264 0c17.696 0 32 14.336 32 32S596.928 544 579.264 544z" p-id="5271" fill="#ff4500"></path><path d="M962.24 448c0-211.744-200.96-384-448-384s-448 172.256-448 384c0 116.512 63.04 226.048 172.928 300.672 14.624 9.984 34.528 6.144 44.448-8.512 9.92-14.624 6.112-34.528-8.512-44.448C183.04 633.216 130.24 542.944 130.24 448c0-176.448 172.256-320 384-320 211.744 0 384 143.552 384 320 0 176.448-172.256 320-384 320-1.984 0-3.68 0.768-5.568 1.12-15.136-2.72-30.464 5.216-35.776 20.192-6.144 17.376-46.368 46.656-94.144 73.792 17.44-58.208 9.088-70.688 3.488-78.976-6.72-9.984-17.92-15.936-29.92-15.936-17.664 0-32 14.304-32 32 0 5.824 1.536 11.264 4.256 15.968-3.232 18.208-17.216 60.832-33.056 99.84-4.928 12.096-1.984 25.984 7.392 35.072 6.08 5.888 14.112 8.992 22.272 8.992 4.384 0 8.8-0.896 12.992-2.752 36.48-16.256 147.648-69.12 187.616-125.632C765.344 828.16 962.24 657.568 962.24 448z" p-id="5272" fill="#ff4500"></path></svg>
+                            <p>消息</p>
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 轮播图-结束 -->
+        
+    <!-- 主要内容-开始 -->
+    <main class="lk-main">
+        <div class="w">
+            <div class="main">
+                <div class="main-top clearfix">
+                    <ul>
+                        <li>
+                            <i class="iconfont" style="color: orangered;">&#xe601;</i>
+                            <a href="">正在热销</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="main-bottom">
+                    <ul>
+                        <!--商品1-->
+                        <li><a href="javascript:void(0);" class="goods-link" data-id="1">
+                            <div class="img-wrapper">
+                                <img src="https://gw.alicdn.com/imgextra/O1CN019Ezlix1thMqtOOIW0_!!2201407795933-0-yinheaigc.jpg_580x580q90.jpg_.webp" >
+                            </div>
+                            <div class="info-wrapper">
+                                <span class="title-text">xiaomi watch s3小米智能eSIM手表手环血氧健康睡眠独立打电话/s4</span>
+                            </div>
+                            <div class="tag-list"></div>
+                            <div class="price-wrapper">
+                                <span class="price-unit">￥</span>
+                                <span class="price-value">1199</span>
+                                <span class="month-sale">8000＋人购买</span>
+                            </div>
+                        </a></li>
+
+                        <!--商品2-->
+                        <li><a href="javascript:void(0);" class="goods-link" data-id="2">
+                            <div class="img-wrapper">
+                                <img src="https://g-search3.alicdn.com/img/bao/uploaded/i4/i2/2206358644076/O1CN01nuH28h1fyrM7qHQoS_!!0-item_pic.jpg_580x580q90.jpg_.webp" >
+                            </div>
+                            <div class="info-wrapper">
+                                <span class="title-text">华凌双排神机空调35HE1Pro大1.5匹一级智能家用挂机壁挂式卧室</span>
+                            </div>
+                            <div class="tag-list"></div>
+                            <div class="price-wrapper">
+                                <span class="price-unit">￥</span>
+                                <span class="price-value">2199</span>
+                                <span class="month-sale">1万＋人购买</span>
+                            </div>
+                        </a></li>
+                        
+                        <!--商品3-->
+                        <li><a href="javascript:void(0);" class="goods-link" data-id="3">
+                            <div class="img-wrapper">
+                                <img src="http://img.alicdn.com/img/i1/111459188/O1CN01zR9iNm2HkA2vOKxcy_!!0-saturn_solar.jpg_580x580q90.jpg_.webp" >
+                            </div>
+                            <div class="info-wrapper">
+                                <span class="title-text">坚果投影Nano 2智能云台投影仪家用家庭客厅卧室小型便携式投影机微型影院学生宿舍手机游戏投屏</span>
+                            </div>
+                            <div class="tag-list"></div>
+                            <div class="price-wrapper">
+                                <span class="price-unit">￥</span>
+                                <span class="price-value">1799</span>
+                                <span class="month-sale">1万＋人购买</span>
+                            </div>
+                        </a></li>
+
+                        <!--商品4-->
+                        <li><a href="javascript:void(0);" class="goods-link" data-id="4">
+                            <div class="img-wrapper">
+                                <img src="https://g-search1.alicdn.com/img/bao/uploaded/i4/i1/2207026946442/O1CN01wBTLbZ1xSURZMmLSQ_!!0-item_pic.jpg_580x580q90.jpg_.webp" >
+                            </div>
+                            <div class="info-wrapper">
+                                <span class="title-text">九号电动F90新国标电动车成人代步9号长续航智能电瓶车</span>
+                            </div>
+                            <div class="tag-list"></div>
+                            <div class="price-wrapper">
+                                <span class="price-unit">￥</span>
+                                <span class="price-value">3599</span>
+                                <span class="month-sale">1万＋人购买</span>
+                            </div>
+                        </a></li>
+
+                        <!--商品5-->
+                        <li><a href="javascript:void(0);" class="goods-link" data-id="5">
+                            <div class="img-wrapper">
+                                <img src="https://g-search2.alicdn.com/img/bao/uploaded/i4/i2/782731205/O1CN01HaMtTA1KlwFe2q5x3_!!0-item_pic.jpg_580x580q90.jpg_.webp" >
+                            </div>
+                            <div class="info-wrapper">
+                                <span class="title-text">Sony/索尼 WH-1000XM5 高解析度无线降噪头戴耳机</span>
+                            </div>
+                            <div class="tag-list"></div>
+                            <div class="price-wrapper">
+                                <span class="price-unit">￥</span>
+                                <span class="price-value">2999</span>
+                                <span class="month-sale">1万＋人购买</span>
+                            </div>
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- 主要内容-结束 -->
+        
+    <!-- 尾部内容-开始 -->
+    <footer class="lk-footer">
+        <div class="footer-top w">
+            <div class="footer-top-propmise clearfix">
+                <dl>
+                    <dt><a href=""><i class="iconfont" style="color: orangered; font-size: 48px;">&#xe61a;</i></a></dt>
+                    <dd>
+                        <p><strong>正品保障</strong></p>
+                        <p>正品保证、提供发票</p>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt><a href=""><i class="iconfont" style="color: orangered; font-size: 48px;">&#xe61b;</i></a></dt>
+                    <dd>
+                        <p><strong>新手上路</strong></p>
+                        <p>0元开店、商家服务</p>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt><a href=""><i class="iconfont" style="color: orangered; font-size: 48px;">&#xe608;</i></a></dt>
+                    <dd>
+                        <p><strong>付款方式</strong></p>
+                        <p>快捷支付、蚂蚁花呗</p>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt><a href=""><i class="iconfont" style="color: orangered; font-size: 48px;">&#xe61c;</i></a></dt>
+                    <dd>
+                        <p><strong>平台特色</strong></p>
+                        <p>旺旺/旺信</p>
+                    </dd>
+                </dl>
+                <dl>
+                        <dt><a href=""><i class="iconfont" style="color: orangered; font-size: 48px;">&#xe606;</i></a></dt>
+                        <dd>
+                            <p><strong>测评保证</strong></p>
+                            <p>保障隐私、丰厚报酬</p>
+                        </dd>
+                    </dl>
+            </div>
+            <div class="footer-top-shopping clearfix">
+                <div class="footer-top-shopping-w">
+                    <dl>
+                        <dt>购物指南</dt>
+                        <dd><a href="">导购演示</a></dd>
+                        <dd><a href="">免费注册</a></dd>
+                        <dd><a href="">会员等级</a></dd>
+                        <dd><a href="">常见问题</a></dd>
+                        <dd><a href="">品牌大全</a></dd>
+                    </dl>
+                    <dl>
+                        <dt>我的账户</dt>
+                        <dd><a href="">品牌商城</a></dd>
+                        <dd><a href="">全球购</a></dd>
+                        <dd><a href="">超级U选</a></dd>
+                        <dd><a href="">健康馆</a></dd>
+                        <dd><a href="">跨境直采</a></dd>
+                        <dd><a href="">全球速卖通</a></dd>
+                    </dl>
+                    <dl>
+                        <dt>平台服务</dt>
+                        <dd><a href="">不正当竞争举报</a></dd>
+                        <dd><a href="">廉政举报</a></dd>
+                        <dd><a href="">隐私权政策</a></dd>
+                        <dd><a href="">知识产权</a></dd>
+                        <dd><a href="">法律声明</a></dd>
+                    </dl>
+                    <dl>
+                        <dt>联系我们</dt>
+                        <dd><a href="">开放平台</a></dd>
+                        <dd><a href="">网站合作</a></dd>
+                        <dd><a href="">诚征英才</a></dd>
+                        <dd><a href="">营销中心</a></dd>
+                        <dd><a href="">服务大厅</a></dd>
+                    </dl>
+                    <div class="app-down">
+                        <p>身边服务</p>
+                        <a href="#">全国300多个城市，上万个门店和服务终端期待您的光临，为您提供最贴心的服务！</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="url-list-links">
+                <a href="#">关于平台</a>|
+                <a href="#">北师服务</a>|
+                <a href="#">快捷支付</a>|
+                <a href="#">PP视频</a>|
+                <a href="#">红孩子</a>|
+                <a href="#">北师物流</a>|
+                <a href="#">掌上北师</a>|
+                <a href="#">零售云</a>|
+                <a href="#">知识产权举报</a>|
+                <a href="#">投资者关系</a>
+            </p>
+            <p class="url-list-links">
+                <a href="#">联系我们</a>|
+                <a href="#">加入合作</a>|
+                <a href="#">供应商入驻</a>|
+                <a href="#">广告平台</a>|
+                <a href="#">合作联盟</a>|
+                <a href="#">采购招标</a>|
+                <a href="#">友情链接</a>|
+                <a href="#">法律申明</a>|
+                <a href="#">用户体验提升计划</a>|
+                <a href="#">股东会员认证</a>
+            </p>
+            <div class="footer-bottom-copyright">
+                Copyright © 2023-2024 模拟购物平台 · 科研实验演示 | 本页所有备案号、许可证与资质标识均为实验模拟内容，非真实备案
+            </div>
+            <div class="footer-bottom-img">
+                <a href=""><img src="images/badge_accessibility.png" alt=""></a>
+                <a href=""><img src="images/badge_aftersales.png" alt=""></a>
+                <a href=""><img src="images/badge_guarantee.png" alt=""></a>
+                <a href=""><img src="images/badge_delivery.png" alt=""></a>
+            </div>
+        </div>
+    </footer>
+    <!-- 尾部内容-结束 -->
+
+    <!-- 研究用途声明 -->
+    <p style="max-width:1200px;margin:14px auto;padding:10px 16px;font-size:12px;color:#777;background:#f7f7f7;line-height:1.7;">
+        本页面为科研实验用途的模拟购物界面，与淘宝、阿里巴巴、天猫、闲鱼等任何商业平台均无隶属、关联或背书关系；页面中出现的商标、商品图与评论素材仅作为实验刺激材料引用，其权利归各自权利人所有。<br>
+        Simulated interface created for research purposes only. Not affiliated with, endorsed by, or connected to Taobao, Alibaba, Tmall, or any commercial platform. Trademarks, product images, and review texts referenced here remain the property of their respective owners and are used solely as experimental stimuli.
+    </p>
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {  
+    // 获取所有带有 goods-link 类的链接  
+    var links = document.querySelectorAll('.goods-link');  
+  
+    // 为每个链接添加点击事件监听器  
+    links.forEach(function(link) {  
+        link.addEventListener('click', function(event) {  
+            // 阻止链接的默认行为  
+            event.preventDefault();  
+  
+            // 获取 data-id 的值  
+            var id = this.getAttribute('data-id');  
+  
+            // 构造 URL  
+            var url = 'http://localhost:5500/goodsinfo.html?id=' + id;
+            
+            
+            // 获取 data-url 的值
+            var infourl = this.getAttribute('data-url');
+  
+            // 打开新窗口  
+            window.open(url, '_blank'); 
+            
+            
+        
+            /*
+            // 设置一个非常短的延迟来修改当前页面的URL  
+        // 注意：这个延迟可能是不必要的，但在这里是为了模拟“同时”发生的效果  
+        setTimeout(function() {  
+            // 定义当前页面要跳转到的URL  
+            var currentPageUrl = url;  
+  
+            // 跳转当前页面  
+            window.location.href = currentPageUrl;  
+        }, 0); // 延迟设置为0毫秒，但实际上它仍然会被放入JavaScript事件循环的下一个tick中执行  
+        */
+
+        });  
+    });  
+});
+</script>
+
+</html>

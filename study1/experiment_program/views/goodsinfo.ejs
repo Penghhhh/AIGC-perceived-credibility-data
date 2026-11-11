@@ -1,0 +1,395 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="../css/goodsinfo.css" >
+    <title><%= product.name %> - 商品信息</title>  
+</head>  
+<body> 
+    
+    <!--
+    测试提示
+    <section class="test-instruction">
+        <div class="instruction-content">
+            <div class="test-banner">商品优质评论选择测试</div>
+            <div class="instruction-block">
+                <div class="instruction">
+                    欢迎参与<div class="productname"><%= product.name %></div>的优质评论选择测试！
+                    页面展示了真实的网购商品信息面板，您可以浏览任意时长。了解好商品的基本信息后下滑即可进入该商品的评论区开始测评任务。
+                    此次测评用于筛选优质评论，为保护评论用户的隐私信息，不会呈现其真实头像、昵称或评论图片，<div class="instruction-emphasize">仅呈现了评论文本。</div><br><br>
+                    <div class="instruction-emphasize">测评任务要求：</div>
+                    评论区内呈现了该商品的有效评论，与此同时平台内的人工智能检测工具标记了部分“疑似AI生成”的评论（即在评论右上角附上标签），您需要仔细阅读每一条评论，<div class="instruction-emphasize">依据自己的判断</div>在评论下方的虚线框内完成对该评论内容的评判。<br><br>
+                    您所提供的回答将作为人工测评的结果帮助平台筛选优质评论，这些优质评论将大大提高消费者对产品了解和选择的效率，优化用户体验，请认真作答。
+                </div>
+            </div>
+            <div class="agreement-part">
+                <input type="checkbox" id="agreeCheckbox" required>  
+                <label for="agreeCheckbox">我已仔细阅读以上内容并且同意</label> 
+            </div>
+        </div>
+    </section>
+    -->
+
+    <!-- 上方搜索栏 -->
+    <section class="top-banner">
+        <div class="HeadContent">  
+            <a href="#" class="WebLogo">  
+                <img src="logo.png" alt="网站Logo">  
+            </a>  
+            <div class="SearchWindow">  
+                <form action="/search" method="get">  
+                    <input type="text" name="query" placeholder="搜索商品...">  
+                    <button type="submit">搜索</button>  
+                </form>  
+            </div>  
+        </div>
+    </section> 
+    
+    <!--商品信息-->
+    <section class="basic-content">
+        <div class="info-wrap">
+            <!--左侧轮播图-->
+            <div class="pic-gallery">
+                <ul class="thumbnails">
+                    <li class="thumbnail-pic" data-img=<%= product.imageUrls[0] %>><img src=<%= product.imageUrls[0] %>></li>
+                    <li class="thumbnail-pic" data-img=<%= product.imageUrls[1] %>><img src=<%= product.imageUrls[1] %>></li>
+                    <li class="thumbnail-pic" data-img=<%= product.imageUrls[2] %>><img src=<%= product.imageUrls[2] %>></li>
+                    <li class="thumbnail-pic" data-img=<%= product.imageUrls[3] %>><img src=<%= product.imageUrls[3] %>></li>
+                    <li class="thumbnail-pic" data-img=<%= product.imageUrls[4] %>><img src=<%= product.imageUrls[4] %>></li>
+                    <li class="thumbnail-pic" data-img=<%= product.imageUrls[5] %>><img src=<%= product.imageUrls[5] %>></li>
+                </ul>
+                <div class="mainPicWrap"><img src="<%= product.imageUrls[0] %>"></div>
+            </div>
+            <!--右侧信息-->
+            <div class="info-block">
+                <div class="item-title">
+                    <h1 class="main-item-title"><%= product.name %></h1>
+                    <div class="sub-item-title">已售 <%= product.sales %>+</div>
+                </div>
+                <div class="item-price">
+                    <span class="price-symbol">￥</span>
+                    <span class="price-text"><%= product.price %></span>
+                </div>
+                <div class="supplement-block">
+                    <div class="delivery">
+                        <div class="delivery-label">
+                            <span class="label-text">配送</span>
+                            <span>:</span>
+                        </div>
+                        <div class="delivery-content">
+                            <div class="delivery-address">
+                                <span class="delivery-from"><%= product.deliveryfrom %></span>
+                                <span class="delivery-connect">至</span>
+                                <span class="delivery-to">北京市 海淀区</span>
+                                <svg t="1725714875351" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3097" width="200" height="200"><path d="M524.48 615.56l315.3-315.3c28.96-28.96 75.92-28.96 104.89 0 9.02 9.02 9.02 23.66 0 32.68L541.29 736.32c-16.06 16.06-42.11 16.06-58.17 0L79.74 332.94c-9.02-9.02-9.02-23.66 0-32.68 28.96-28.96 75.92-28.96 104.89 0l315.3 315.3c6.78 6.78 17.77 6.78 24.55 0z" fill="#323333" p-id="3098"></path></svg>
+                            </div>
+                            <div class="delivery-info">
+                                <span>快递：免运费 承诺48小时内发出 晚必赔</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guarantee-info">
+                        <div class="guarantee-label">
+                            <span class="label-text">保障</span>
+                            <span>:</span>
+                        </div>
+                        <div class="guarantee-content">
+                            <span>退运费险 30天包退 急速退款</span>
+                            <svg t="1725714875351" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3097" width="200" height="200"><path d="M524.48 615.56l315.3-315.3c28.96-28.96 75.92-28.96 104.89 0 9.02 9.02 9.02 23.66 0 32.68L541.29 736.32c-16.06 16.06-42.11 16.06-58.17 0L79.74 332.94c-9.02-9.02-9.02-23.66 0-32.68 28.96-28.96 75.92-28.96 104.89 0l315.3 315.3c6.78 6.78 17.77 6.78 24.55 0z" fill="#323333" p-id="3098"></path></svg>
+                        </div>
+                    </div>
+                    <div class="operation-block">
+                        <div class="operation-label">
+                            <span class="label-text">数量</span>
+                            <span>:</span>
+                        </div>
+                        <div class="count-block">
+                            <div class="quantity-btn" style="border-radius: 4px 0 0 4px;">
+                                <span class="btn-text">-</span>
+                            </div>
+                            <div class="count-value">
+                                <input class="quantity-value" value="1">
+                            </div>
+                            <div class="quantity-btn" style="border-radius: 0 4px 4px 0;">
+                                <span class="btn-text">+</span>
+                            </div>
+                            <div class="quantity-tip">有货</div>
+                        </div>
+                    </div>
+                    <div class="service-block">
+                        <div class="service-label">
+                            <span class="label-text">保障服务</span>
+                            <span>:</span>
+                        </div>
+                        <div class="service-item">选购更多服务</div>
+                        <svg t="1725714875351" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3097" width="200" height="200"><path d="M524.48 615.56l315.3-315.3c28.96-28.96 75.92-28.96 104.89 0 9.02 9.02 9.02 23.66 0 32.68L541.29 736.32c-16.06 16.06-42.11 16.06-58.17 0L79.74 332.94c-9.02-9.02-9.02-23.66 0-32.68 28.96-28.96 75.92-28.96 104.89 0l315.3 315.3c6.78 6.78 17.77 6.78 24.55 0z" fill="#323333" p-id="3098"></path></svg>
+                    </div>
+                    <div class="footwrap">
+                        <div class="left-btn">
+                            <span class="btn-inner-text">立即购买</span>
+                        </div>
+                        <div class="right-btn">
+                            <span class="btn-inner-text">加入购物车</span>
+                        </div>
+                        <div class="collect-btn">
+                            <svg t="1725782372692" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4268" width="200" height="200"><path d="M512 720.416l232.096 171.904a19.2 19.2 0 0 0 16.864 2.88c9.536-2.88 14.592-12.224 11.84-20.864l-88.96-281.6 237.344-176.96a16.48 16.48 0 0 0 6.816-13.152c0-9.152-7.904-16.928-18.112-16.96l-292-0.448-88.48-277.12a17.568 17.568 0 0 0-11.776-11.264c-9.856-2.976-20.16 2.304-23.04 11.264l-88.48 277.12-292 0.48a18.624 18.624 0 0 0-14.624 6.944 16.096 16.096 0 0 0 3.328 23.136l237.376 176.96-88.992 281.6a15.904 15.904 0 0 0 2.72 14.688c6.048 7.744 17.856 9.312 25.984 3.296L512 720.416z m-194.016 223.36a83.008 83.008 0 0 1-114.56-15.424 79.904 79.904 0 0 1-13.28-73.28l75.296-238.24-200.864-149.76a80.096 80.096 0 0 1-15.424-113.92 82.624 82.624 0 0 1 64.864-31.456l245.312-0.384 74.304-232.672c13.6-42.56 59.52-66.112 102.56-53.024A81.536 81.536 0 0 1 590.4 88.64l74.304 232.64 245.312 0.416c45.184 0.064 82.08 36.16 82.016 81.024a80.48 80.48 0 0 1-32.576 64.352l-200.864 149.76 75.296 238.24c13.568 42.976-11.072 88.352-54.496 101.408a83.2 83.2 0 0 1-73.344-12.736L512 800.064l-194.016 143.68z" fill="#000000" p-id="4269"></path></svg>
+                            <span style="font-size: 16px; font-weight: 600;">收藏</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!--评论区-->
+    <section class="comment-container">
+        <div class="comment-title">
+            <div class="title-text">商品评论</div>
+        </div>
+        <div class="comment-block">
+            <form action="/submit-survey" method="post" id="commentForm">
+                <!--渲染评论-->
+                <% for(let i = 0; i < product.descriptions.length; i++) { 
+                    let comment = product.descriptions[i] %>
+                    <div class="comment">
+                        <img src="avatar.png" alt="用户头像" class="avatar">  
+                        <div class="comment-content">   
+                            <div class="comment-tag">  
+                                <div class="user-tag">  
+                                    <h4 class="username"><%= comment.username %></h4>  
+                                    <div class="comment-date"><%= comment.commentDate %></div>  
+                                </div>  
+                                <% if(comment.isAI == 1){ %>
+                                    <a class="ai-tag" href="https://www.tc260.org.cn/upload/2023-08-25/1692961404507050376.pdf" target="_blank">     
+                                        <svg t="1727189063051" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4405" width="200" height="200"><path d="M512 32C246.912 32 32 246.912 32 512c0 265.088 214.912 480 480 480 265.088 0 480-214.912 480-480 0-265.088-214.912-480-480-480z m0 896C282.24 928 96 741.76 96 512S282.24 96 512 96s416 186.24 416 416-186.24 416-416 416z" p-id="4406" fill="#ffffff"></path><path d="M512 384a32 32 0 0 0-32 32v352a32 32 0 0 0 64 0V416a32 32 0 0 0-32-32z" p-id="4407" fill="#ffffff"></path><path d="M512 272m-48 0a48 48 0 1 0 96 0 48 48 0 1 0-96 0Z" p-id="4408" fill="#ffffff"></path></svg>
+                                        <span class="tag-text">内容疑似AI生成</span> 
+                                        <span class="tip-text">该标签仅供提示，请谨慎甄别此类评论内容</span> 
+                                    </a> 
+                                <% } %>
+                            </div>  
+                            <p class="comment-text" style="white-space: pre-wrap;"><%= comment.text %></p>    
+                        </div>  
+                    </div> 
+                    
+                    <!--量表-->  
+                    <div class="actions">
+                        <div class="question">  
+                            <p>题目1: 您认为此则评论体现出该商品“功能性”的程度为：</p>  
+                            <div class="scale">  
+                                <input type="radio" id="c<%= comment.cnum %>-q1-1" name="c<%= comment.cnum %>-q1" value="1" required>
+                                <label for="c<%= comment.cnum %>-q1-1">极低</label>  
+                                <input type="radio" id="c<%= comment.cnum %>-q1-2" name="c<%= comment.cnum %>-q1" value="2"> 
+                                <label for="c<%= comment.cnum %>-q1-2">低</label>
+                                <input type="radio" id="c<%= comment.cnum %>-q1-3" name="c<%= comment.cnum %>-q1" value="3">  
+                                <label for="c<%= comment.cnum %>-q1-3">稍低</label> 
+                                <input type="radio" id="c<%= comment.cnum %>-q1-4" name="c<%= comment.cnum %>-q1" value="4"> 
+                                <label for="c<%= comment.cnum %>-q1-4">中等</label>
+                                <input type="radio" id="c<%= comment.cnum %>-q1-5" name="c<%= comment.cnum %>-q1" value="5">  
+                                <label for="c<%= comment.cnum %>-q1-5">稍高</label>
+                                <input type="radio" id="c<%= comment.cnum %>-q1-6" name="c<%= comment.cnum %>-q1" value="6"> 
+                                <label for="c<%= comment.cnum %>-q1-6">高</label>
+                                <input type="radio" id="c<%= comment.cnum %>-q1-7" name="c<%= comment.cnum %>-q1" value="7">  
+                                <label for="c<%= comment.cnum %>-q1-7">极高</label>
+                            </div>  
+                        </div>
+                        <div class="question">  
+                            <p>题目2: 您认为此则评论体现出该商品“体验性”的程度为：</p>  
+                            <div class="scale">  
+                                <input type="radio" id="c<%= comment.cnum %>-q2-1" name="c<%= comment.cnum %>-q2" value="1" required>
+                                <label for="c<%= comment.cnum %>-q2-1">极低</label>  
+                                <input type="radio" id="c<%= comment.cnum %>-q2-2" name="c<%= comment.cnum %>-q2" value="2"> 
+                                <label for="c<%= comment.cnum %>-q2-2">低</label>
+                                <input type="radio" id="c<%= comment.cnum %>-q2-3" name="c<%= comment.cnum %>-q2" value="3">  
+                                <label for="c<%= comment.cnum %>-q2-3">稍低</label> 
+                                <input type="radio" id="c<%= comment.cnum %>-q2-4" name="c<%= comment.cnum %>-q2" value="4"> 
+                                <label for="c<%= comment.cnum %>-q2-4">中等</label>
+                                <input type="radio" id="c<%= comment.cnum %>-q2-5" name="c<%= comment.cnum %>-q2" value="5">  
+                                <label for="c<%= comment.cnum %>-q2-5">稍高</label>
+                                <input type="radio" id="c<%= comment.cnum %>-q2-6" name="c<%= comment.cnum %>-q2" value="6"> 
+                                <label for="c<%= comment.cnum %>-q2-6">高</label>
+                                <input type="radio" id="c<%= comment.cnum %>-q2-7" name="c<%= comment.cnum %>-q2" value="7">  
+                                <label for="c<%= comment.cnum %>-q2-7">极高</label>
+                            </div>  
+                        </div>
+
+                        <!--筛选题1：第2个商品第4条评论，值应当为5-->
+                        <% if(product.id == 2 && i == 3){ %>
+                            <div class="question">  
+                                <p>题目：此题请选择“低”这一选项：</p>  
+                                <div class="scale">  
+                                    <input type="radio" id="c<%= comment.cnum %>-q0-1" name="c<%= comment.cnum %>-q0" value="1" required>
+                                    <label for="c<%= comment.cnum %>-q0-1">极低</label>  
+                                    <input type="radio" id="c<%= comment.cnum %>-q0-2" name="c<%= comment.cnum %>-q0" value="2"> 
+                                    <label for="c<%= comment.cnum %>-q0-2">低</label>
+                                    <input type="radio" id="c<%= comment.cnum %>-q0-3" name="c<%= comment.cnum %>-q0" value="3">  
+                                    <label for="c<%= comment.cnum %>-q0-3">稍低</label> 
+                                    <input type="radio" id="c<%= comment.cnum %>-q0-4" name="c<%= comment.cnum %>-q0" value="4"> 
+                                    <label for="c<%= comment.cnum %>-q0-4">中等</label>
+                                    <input type="radio" id="c<%= comment.cnum %>-q0-5" name="c<%= comment.cnum %>-q0" value="5">  
+                                    <label for="c<%= comment.cnum %>-q0-5">稍高</label>
+                                    <input type="radio" id="c<%= comment.cnum %>-q0-6" name="c<%= comment.cnum %>-q0" value="6"> 
+                                    <label for="c<%= comment.cnum %>-q0-6">高</label>
+                                    <input type="radio" id="c<%= comment.cnum %>-q0-7" name="c<%= comment.cnum %>-q0" value="7">  
+                                    <label for="c<%= comment.cnum %>-q0-7">极高</label>
+                                </div>  
+                            </div>
+                        <% } %>
+
+                        <div class="question">  
+                            <p>题目3: 您认为此则评论对商品的情感倾向如何：</p>  
+                            <div class="scale">  
+                                <input type="radio" id="c<%= comment.cnum %>-q3-1" name="c<%= comment.cnum %>-q3" value="1" required>
+                                <label for="c<%= comment.cnum %>-q3-1">非常负向</label>  
+                                <input type="radio" id="c<%= comment.cnum %>-q3-2" name="c<%= comment.cnum %>-q3" value="2"> 
+                                <label for="c<%= comment.cnum %>-q3-2">负向</label>
+                                <input type="radio" id="c<%= comment.cnum %>-q3-3" name="c<%= comment.cnum %>-q3" value="3">  
+                                <label for="c<%= comment.cnum %>-q3-3">比较负向</label> 
+                                <input type="radio" id="c<%= comment.cnum %>-q3-4" name="c<%= comment.cnum %>-q3" value="4"> 
+                                <label for="c<%= comment.cnum %>-q3-4">中立</label>
+                                <input type="radio" id="c<%= comment.cnum %>-q3-5" name="c<%= comment.cnum %>-q3" value="5">  
+                                <label for="c<%= comment.cnum %>-q3-5">比较正向</label>
+                                <input type="radio" id="c<%= comment.cnum %>-q3-6" name="c<%= comment.cnum %>-q3" value="6"> 
+                                <label for="c<%= comment.cnum %>-q3-6">正向</label>
+                                <input type="radio" id="c<%= comment.cnum %>-q3-7" name="c<%= comment.cnum %>-q3" value="7">  
+                                <label for="c<%= comment.cnum %>-q3-7">非常正向</label>
+                            </div>  
+                        </div>
+
+                        <div class="question">  
+                            <p>题目4: 您认为此评论作者的真实身份是AI的可能程度为：</p>  
+                            <div class="scale">  
+                                <input type="radio" id="c<%= comment.cnum %>-q4-1" name="c<%= comment.cnum %>-q4" value="1" required>
+                                <label for="c<%= comment.cnum %>-q4-1">一定是真人</label>  
+                                <input type="radio" id="c<%= comment.cnum %>-q4-2" name="c<%= comment.cnum %>-q4" value="2"> 
+                                <label for="c<%= comment.cnum %>-q4-2">很可能是真人</label>
+                                <input type="radio" id="c<%= comment.cnum %>-q4-3" name="c<%= comment.cnum %>-q4" value="3">  
+                                <label for="c<%= comment.cnum %>-q4-3">有可能是真人</label> 
+                                <input type="radio" id="c<%= comment.cnum %>-q4-4" name="c<%= comment.cnum %>-q4" value="4"> 
+                                <label for="c<%= comment.cnum %>-q4-4">不太确定</label>
+                                <input type="radio" id="c<%= comment.cnum %>-q4-5" name="c<%= comment.cnum %>-q4" value="5">  
+                                <label for="c<%= comment.cnum %>-q4-5">有可能是AI</label>
+                                <input type="radio" id="c<%= comment.cnum %>-q4-6" name="c<%= comment.cnum %>-q4" value="6"> 
+                                <label for="c<%= comment.cnum %>-q4-6">很可能是AI</label>
+                                <input type="radio" id="c<%= comment.cnum %>-q4-7" name="c<%= comment.cnum %>-q4" value="7">  
+                                <label for="c<%= comment.cnum %>-q4-7">一定是AI</label>
+                            </div>  
+                        </div>
+
+                        <!--筛选题2：第5个商品第4条评论，值应当为7-->
+                        <% if(product.id == 5 && i == 3){ %>
+                            <div class="question">  
+                                <p>题目：此题请选择“一定是AI”这一选项：</p>  
+                                <div class="scale">  
+                                    <input type="radio" id="c<%= comment.cnum %>-q0-1" name="c<%= comment.cnum %>-q0" value="1" required>
+                                    <label for="c<%= comment.cnum %>-q0-1">一定是真人</label>  
+                                    <input type="radio" id="c<%= comment.cnum %>-q0-2" name="c<%= comment.cnum %>-q0" value="2"> 
+                                    <label for="c<%= comment.cnum %>-q0-2">很可能是真人</label>
+                                    <input type="radio" id="c<%= comment.cnum %>-q0-3" name="c<%= comment.cnum %>-q0" value="3">  
+                                    <label for="c<%= comment.cnum %>-q0-3">有可能是真人</label> 
+                                    <input type="radio" id="c<%= comment.cnum %>-q0-4" name="c<%= comment.cnum %>-q0" value="4"> 
+                                    <label for="c<%= comment.cnum %>-q0-4">中立</label>
+                                    <input type="radio" id="c<%= comment.cnum %>-q0-5" name="c<%= comment.cnum %>-q0" value="5">  
+                                    <label for="c<%= comment.cnum %>-q0-5">有可能是AI</label>
+                                    <input type="radio" id="c<%= comment.cnum %>-q0-6" name="c<%= comment.cnum %>-q0" value="6"> 
+                                    <label for="c<%= comment.cnum %>-q0-6">很可能是AI</label>
+                                    <input type="radio" id="c<%= comment.cnum %>-q0-7" name="c<%= comment.cnum %>-q0" value="7">  
+                                    <label for="c<%= comment.cnum %>-q0-7">一定是AI</label>
+                                </div>  
+                            </div>
+                        <% } %>
+
+                        <div class="question">  
+                            <p>题目5: 您认为此则评论内容的可信度是：</p>  
+                            <div class="scale">  
+                                <input type="radio" id="c<%= comment.cnum %>-q5-1" name="c<%= comment.cnum %>-q5" value="1" required>
+                                <label for="c<%= comment.cnum %>-q5-1">非常不可信</label>  
+                                <input type="radio" id="c<%= comment.cnum %>-q5-2" name="c<%= comment.cnum %>-q5" value="2"> 
+                                <label for="c<%= comment.cnum %>-q5-2">不可信</label>
+                                <input type="radio" id="c<%= comment.cnum %>-q5-3" name="c<%= comment.cnum %>-q5" value="3">  
+                                <label for="c<%= comment.cnum %>-q5-3">比较不可信</label> 
+                                <input type="radio" id="c<%= comment.cnum %>-q5-4" name="c<%= comment.cnum %>-q5" value="4"> 
+                                <label for="c<%= comment.cnum %>-q5-4">不太确定</label>
+                                <input type="radio" id="c<%= comment.cnum %>-q5-5" name="c<%= comment.cnum %>-q5" value="5">  
+                                <label for="c<%= comment.cnum %>-q5-5">比较可信</label>
+                                <input type="radio" id="c<%= comment.cnum %>-q5-6" name="c<%= comment.cnum %>-q5" value="6"> 
+                                <label for="c<%= comment.cnum %>-q5-6">可信</label>
+                                <input type="radio" id="c<%= comment.cnum %>-q5-7" name="c<%= comment.cnum %>-q5" value="7">  
+                                <label for="c<%= comment.cnum %>-q5-7">非常可信</label>
+                            </div>  
+                        </div>  
+
+                        <% if(comment.isAI == 1){ %>
+                            <div class="question">  
+                                <p>题目6: 您认为此则评论“疑似AI"标签的准确程度是：</p>  
+                                <div class="scale">  
+                                    <input type="radio" id="c<%= comment.cnum %>-q6-1" name="c<%= comment.cnum %>-q6" value="1" required>
+                                    <label for="c<%= comment.cnum %>-q6-1">非常不准确</label>  
+                                    <input type="radio" id="c<%= comment.cnum %>-q6-2" name="c<%= comment.cnum %>-q6" value="2"> 
+                                    <label for="c<%= comment.cnum %>-q6-2">不准确</label>
+                                    <input type="radio" id="c<%= comment.cnum %>-q6-3" name="c<%= comment.cnum %>-q6" value="3">  
+                                    <label for="c<%= comment.cnum %>-q6-3">比较不准确</label> 
+                                    <input type="radio" id="c<%= comment.cnum %>-q6-4" name="c<%= comment.cnum %>-q6" value="4"> 
+                                    <label for="c<%= comment.cnum %>-q6-4">不太确定</label>
+                                    <input type="radio" id="c<%= comment.cnum %>-q6-5" name="c<%= comment.cnum %>-q6" value="5">  
+                                    <label for="c<%= comment.cnum %>-q6-5">比较准确</label>
+                                    <input type="radio" id="c<%= comment.cnum %>-q6-6" name="c<%= comment.cnum %>-q6" value="6"> 
+                                    <label for="c<%= comment.cnum %>-q6-6">准确</label>
+                                    <input type="radio" id="c<%= comment.cnum %>-q6-7" name="c<%= comment.cnum %>-q6" value="7">  
+                                    <label for="c<%= comment.cnum %>-q6-7">非常准确</label>
+                                </div>  
+                            </div>
+                        <% } %>
+                    </div>
+                    
+                <% }; %>  
+
+                <div class="detection-trust">
+                    <div class="question">
+                        <p>您认为本平台AI生成内容检测工具的准确程度是：</p>
+                        <div class="scale">  
+                            <input type="radio" id="i<%= product.id %>-1" name="overview" value="1" required>
+                            <label for="i<%= product.id %>-1">非常不准确</label>  
+                            <input type="radio" id="i<%= product.id %>-2" name="overview" value="2">
+                            <label for="i<%= product.id %>-2">不准确</label>
+                            <input type="radio" id="i<%= product.id %>-3" name="overview" value="3">
+                            <label for="i<%= product.id %>-3">比较不准确</label>
+                            <input type="radio" id="i<%= product.id %>-4" name="overview" value="4">
+                            <label for="i<%= product.id %>-4">不太确定</label>
+                            <input type="radio" id="i<%= product.id %>-5" name="overview" value="5">
+                            <label for="i<%= product.id %>-5">比较准确</label>
+                            <input type="radio" id="i<%= product.id %>-6" name="overview" value="6">
+                            <label for="i<%= product.id %>-6">准确</label> 
+                            <input type="radio" id="i<%= product.id %>-7" name="overview" value="7">
+                            <label for="i<%= product.id %>-7">非常准确</label> 
+                        </div>  
+                    </div>
+                </div>
+
+
+                <!--提交-->
+                <section class="submit-container">
+                    <button class="submit-button" type="button" onclick="submitSurvey()">提交</button>
+                </section>
+            </form>
+        </div>
+    </section>
+
+    <button id="downloadData">Download Data</button>
+
+<!-- 引用JavaScript文件 -->  
+<!--正式实验-->
+<script src="/../js/comments.js"></script>
+
+<script src="/../js/picgallery.js"></script>
+
+
+    <!-- 研究用途声明 -->
+    <p style="max-width:1200px;margin:14px auto;padding:10px 16px;font-size:12px;color:#777;background:#f7f7f7;line-height:1.7;">
+        本页面为科研实验用途的模拟购物界面，与淘宝、阿里巴巴、天猫、闲鱼等任何商业平台均无隶属、关联或背书关系；页面中出现的商标、商品图与评论素材仅作为实验刺激材料引用，其权利归各自权利人所有。<br>
+        Simulated interface created for research purposes only. Not affiliated with, endorsed by, or connected to Taobao, Alibaba, Tmall, or any commercial platform. Trademarks, product images, and review texts referenced here remain the property of their respective owners and are used solely as experimental stimuli.
+    </p>
+</body>  
+</html>

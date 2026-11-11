@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" href="css/registration.css">
+</head>
+<body>
+    <h2>测评模式-信息登记</h2>
+
+    <form action="/submit-your-form" method="post" id="registrationForm"> 
+        <div class="registration-info"> 
+            <!-- 姓名字段 -->  
+            <label for="name">姓名:</label>  
+            <input type="text" id="name" name="name" required> 
+            
+            <!-- 学号字段 -->  
+            <label for="age">学号:</label>
+            <input type="number" id="student_id" name="student_id">
+        
+            <!-- 性别字段，通过单选按钮实现 -->  
+            <label>性别:</label>  
+            <div class="gender-scale-container">  
+                <label class="gender-scale-label" for="male">  
+                    <span>男</span>  
+                    <input type="radio" id="male" name="gender" value="male" required>  
+                </label>  
+                <label class="gender-scale-label" for="female">  
+                    <span>女</span>  
+                    <input type="radio" id="female" name="gender" value="female">  
+                </label>
+            </div>
+        
+            <!-- 年龄字段 -->  
+            <label for="age">年龄:</label>
+            <input type="number" id="age" name="age" min="0" max="99">
+            <span>岁</span><br>
+
+            <div id="majorInput">  
+                <label for="major">专业:</label>
+                <input type="text" id="major" name="major">  
+            </div>
+
+            <!--文化程度
+            <label for="education">学历（包括在读）:</label>
+            <select id="education" name="education" onchange="toggleMajorInput()">
+                <option value="primary">小学</option>
+                <option value="junior">初中</option>
+                <option value="high">高中或中专</option>
+                <option value="undergraduate">本科或专科</option>
+                <option value="master">硕士</option>
+                <option value="doctor">博士</option>
+            </select>
+            专业输入框，默认隐藏  
+            <div id="majorInput" style="display:none;">  
+                <label for="major">专业:</label>
+                <input type="text" id="major" name="major">  
+            </div>
+
+            工作
+            <label for="job">工作:</label>
+            <input type="text" id="job" name="job">
+            -->
+
+            <!--平台可信度-->
+            <label>您对本平台首页页面设计的满意程度:</label> 
+            <div class="scale-container">  
+                <label class="scale-label" for="trust1-one-point">  
+                    <span>非常不满意</span>  
+                    <input type="radio" id="trust1-one-point" name="platformtrust_1" value="1" required>  
+                </label>  
+                <label class="scale-label" for="trust1-two-point">  
+                    <span>不满意</span>  
+                    <input type="radio" id="trust1-two-point" name="platformtrust_1" value="2">  
+                </label>
+                <label class="scale-label" for="trust1-three-point">
+                    <span>比较不满意</span>
+                    <input type="radio" id="trust1-three-point" name="platformtrust_1" value="3">
+                </label>
+                <label class="scale-label" for="trust1-four-point">  
+                    <span>不太确定</span>  
+                    <input type="radio" id="trust1-four-point" name="platformtrust_1" value="4">  
+                </label>  
+                <label class="scale-label" for="trust1-five-point">  
+                    <span>比较满意</span>  
+                    <input type="radio" id="trust1-five-point" name="platformtrust_1" value="5">  
+                </label>
+                <label class="scale-label" for="trust1-six-point">  
+                    <span>满意</span>  
+                    <input type="radio" id="trust1-six-point" name="platformtrust_1" value="6">  
+                </label>  
+                <label class="scale-label" for="trust1-seven-point">  
+                    <span>非常满意</span>  
+                    <input type="radio" id="trust1-seven-point" name="platformtrust_1" value="7">  
+                </label>
+            </div>
+
+            <label>您是否愿意在本平台进行网络购物:</label> 
+            <div class="scale-container">  
+                <label class="scale-label" for="trust2-one-point">  
+                    <span>非常不愿意</span>  
+                    <input type="radio" id="trust2-one-point" name="platformtrust_2" value="1" required>  
+                </label>  
+                <label class="scale-label" for="trust2-two-point">  
+                    <span>不愿意</span>  
+                    <input type="radio" id="trust2-two-point" name="platformtrust_2" value="2">  
+                </label>
+                <label class="scale-label" for="trust2-three-point">
+                    <span>比较不愿意</span>
+                    <input type="radio" id="trust2-three-point" name="platformtrust_2" value="3">
+                </label>
+                <label class="scale-label" for="trust2-four-point">  
+                    <span>不太确定</span>  
+                    <input type="radio" id="trust2-four-point" name="platformtrust_2" value="4">  
+                </label>  
+                <label class="scale-label" for="trust2-five-point">  
+                    <span>比较愿意</span>  
+                    <input type="radio" id="trust2-five-point" name="platformtrust_2" value="5">  
+                </label>
+                <label class="scale-label" for="trust2-six-point">  
+                    <span>愿意</span>  
+                    <input type="radio" id="trust2-six-point" name="platformtrust_2" value="6">  
+                </label>  
+                <label class="scale-label" for="trust2-seven-point">  
+                    <span>非常愿意</span>  
+                    <input type="radio" id="trust2-seven-point" name="platformtrust_2" value="7">  
+                </label>
+            </div>
+
+            <label>您觉得本平台网络购物可靠程度是:</label> 
+            <div class="scale-container">  
+                <label class="scale-label" for="trust3-one-point">  
+                    <span>非常不可靠</span>  
+                    <input type="radio" id="trust3-one-point" name="platformtrust_3" value="1" required>  
+                </label>  
+                <label class="scale-label" for="trust3-two-point">  
+                    <span>不可靠</span>  
+                    <input type="radio" id="trust3-two-point" name="platformtrust_3" value="2">  
+                </label>
+                <label class="scale-label" for="trust3-three-point">
+                    <span>比较不可靠</span>
+                    <input type="radio" id="trust3-three-point" name="platformtrust_3" value="3">
+                </label>
+                <label class="scale-label" for="trust3-four-point">  
+                    <span>不太确定</span>  
+                    <input type="radio" id="trust3-four-point" name="platformtrust_3" value="4">  
+                </label>  
+                <label class="scale-label" for="trust3-five-point">  
+                    <span>比较可靠</span>  
+                    <input type="radio" id="trust3-five-point" name="platformtrust_3" value="5">  
+                </label>
+                <label class="scale-label" for="trust3-six-point">  
+                    <span>可靠</span>  
+                    <input type="radio" id="trust3-six-point" name="platformtrust_3" value="6">  
+                </label>  
+                <label class="scale-label" for="trust3-seven-point">  
+                    <span>非常可靠</span>  
+                    <input type="radio" id="trust3-seven-point" name="platformtrust_3" value="7">  
+                </label>
+            </div>
+
+            <label>您觉得本平台评论区内AI生成内容检测工具的准确程度是：</label> 
+            <div class="scale-container">  
+                <label class="scale-label" for="trust4-one-point">  
+                    <span>非常不准确</span>  
+                    <input type="radio" id="trust4-one-point" name="platformtrust_4" value="1" required>  
+                </label>  
+                <label class="scale-label" for="trust4-two-point">  
+                    <span>不准确</span>  
+                    <input type="radio" id="trust4-two-point" name="platformtrust_4" value="2">  
+                </label>
+                <label class="scale-label" for="trust4-three-point">
+                    <span>比较不准确</span>
+                    <input type="radio" id="trust4-three-point" name="platformtrust_4" value="3">
+                </label>
+                <label class="scale-label" for="trust4-four-point">  
+                    <span>不太确定</span>  
+                    <input type="radio" id="trust4-four-point" name="platformtrust_4" value="4">  
+                </label>  
+                <label class="scale-label" for="trust4-five-point">  
+                    <span>比较准确</span>  
+                    <input type="radio" id="trust4-five-point" name="platformtrust_4" value="5">  
+                </label>
+                <label class="scale-label" for="trust4-six-point">  
+                    <span>准确</span>  
+                    <input type="radio" id="trust4-six-point" name="platformtrust_4" value="6">  
+                </label>  
+                <label class="scale-label" for="trust4-seven-point">  
+                    <span>非常准确</span>  
+                    <input type="radio" id="trust4-seven-point" name="platformtrust_4" value="7">  
+                </label>
+            </div>
+            
+        </div> 
+        
+
+        <!-- 提交按钮 -->
+         <div class="submit-container">
+            <button class="submit-button">提交</button>
+         </div>
+    </form>
+    
+    
+    <!-- 下载所有数据的CSV文件 -->
+    <button id="downloadCsv">Download CSV</button> 
+     
+
+    <!-- 引用JavaScript文件 -->  
+    <script src="./js/registration.js"></script> 
+
+    <!-- 研究用途声明 -->
+    <p style="font-size:12px;color:#888;text-align:center;margin-top:16px;">本页面为科研实验用途的模拟购物界面，与淘宝、阿里巴巴、天猫、闲鱼等任何商业平台均无隶属、关联或背书关系；页面中出现的商标、商品图与评论素材仅作为实验刺激材料引用，其权利归各自权利人所有。<br>Simulated interface created for research purposes only. Not affiliated with, endorsed by, or connected to Taobao, Alibaba, Tmall, or any commercial platform. Trademarks, product images, and review texts referenced here remain the property of their respective owners and are used solely as experimental stimuli.</p>
+</body>
+</html>

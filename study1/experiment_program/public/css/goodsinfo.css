@@ -1,0 +1,702 @@
+/* 通用样式 */  
+body {  
+    font-family: Arial, sans-serif;  
+    line-height: 1.6;  
+    color: #333;  
+    background-color: #f3f6f8;  
+    margin: 0;     
+    align-items: center;  
+}  
+.icon{
+    height: 12px;
+    width: auto;
+}
+
+/*搜索栏*/
+.top-banner{  
+    height: 72px;  
+    display: flex;  
+    justify-content: center; /* 水平居中内容区域 */  
+    align-items: center; /* 垂直居中（但在这个案例中，我们可能不需要它，因为内容区域高度固定） */  
+    background-color: #f3f6f8; /* 背景色 */    
+    position: relative; /* 为了后续可能的定位需要 */
+}
+
+.top-banner .HeadContent{
+    width: 1296px;  
+    height: 40px; /* 与Logo和搜索框高度一致 */ 
+    display: flex;  
+    align-items: center; /* 垂直居中 */  
+    justify-content: space-between; /* 两端对齐 */   
+    background-color: #f3f6f8; /* 浅灰色背景 */   
+}
+
+
+.top-banner .WebLogo img{
+    height: 42px;
+    width: auto;
+}
+
+.SearchWindow form {  
+    display: flex;  
+    align-items: center;  
+}  
+  
+.SearchWindow input[type="text"] {  
+    padding: 8px;  
+    font-size: 16px;  
+    border: 1px solid #ffffff;  
+    border-radius: 8px 0 0 8px; /* 左侧圆角 */  
+    outline: none; /* 去除焦点时的蓝色边框 */  
+    width: 200px; /* 搜索框宽度 */  
+    background-color: #ffffff;
+}  
+  
+.SearchWindow button {  
+    padding: 8px 16px;  
+    font-size: 16px;  
+    background-color: orangered; /* 背景 */  
+    color: white;  
+    border: none;  
+    border-radius: 0 8px 8px 0; /* 右侧圆角 */  
+    cursor: pointer;  
+}  
+  
+.SearchWindow button:hover {  
+    background-color: orangered; /* 鼠标悬停时的颜色 */  
+}
+
+
+/*测试提示*/
+.test-instruction{ 
+    height: auto;  
+    display: flex;  
+    justify-content: center; /* 水平居中内容区域 */  
+    align-items: center; /* 垂直居中（但在这个案例中，我们可能不需要它，因为内容区域高度固定） */  
+    background-color:#f3f6f8; /* 背景色 */    
+    position: relative; /* 为了后续可能的定位需要 */
+}
+
+.instruction-content{
+    width: 1296px;  
+    height: auto; 
+    display: flex;     
+    flex-direction: column;
+    align-items: center;  
+    background-color: #ffffff;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+.test-banner {  
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 24px; /* 标题字体大小 */  
+    font-weight: bold; /* 加粗 */  
+    color: #000000; /* 蓝色标题 */  
+    margin-bottom: 15px; /* 下边距 */  
+    text-align: center; /* 文本居中 */  
+}  
+
+.instruction-block {  
+    display: flex;  
+    align-items: flex-start;   
+    width: 100%;  
+    justify-content: center;
+}  
+
+.instruction {  
+    flex: 1;
+    font-size: 16px; /* 指令字体大小 */  
+    padding-left: 50px;
+    margin-right: 20px;
+    margin-bottom: 20px; /* 下边距 */ 
+    word-wrap: break-word; /* 允许长单词或URL地址换行到下一行 */ 
+}  
+
+.instruction-emphasize{
+    display: inline-block;
+    font-weight: 800;
+    position: relative;
+    color: #000000;
+}
+
+.productname{
+    display: inline-block;  /*不换行*/
+    color: orangered;
+    position: relative;
+}
+
+/*下划线*/
+.productname::after{
+    content: "";/* 必需的，即使我们不插入任何文本 */
+    position: absolute;
+    left: 0;  
+    bottom: 0; /* 相对于元素的底部 */ 
+    width: 100%;  /* 与元素同宽 */  
+    height: 1.5px; /* 下划线的厚度 */  
+    background-color: orangered; /* 下划线的颜色 */
+
+}
+.agreement-part {  
+    margin: 30px 0;  
+    position: relative; /* 为伪元素定位 */  
+    display: inline-block; /* 使得伪元素可以正确显示 */  
+    cursor: pointer; /* 将光标设置为指针，提升用户体验 */  
+}  
+  
+.agreement-part input[type="checkbox"] {  
+    display: none; /* 隐藏原生的复选框 */  
+}  
+  
+.agreement-part label {  
+    position: relative;  
+    padding-left: 30px; /* 为自定义复选框留出空间 */  
+    cursor: pointer;  
+    display: inline-block;
+    line-height: 20px;
+}  
+  
+/* 自定义复选框样式 */  
+.agreement-part label:before {  
+    content: "";  
+    display: inline-block;  
+    width: 18px;  
+    height: 18px;  
+    border: 1px solid #ccc; /* 边框颜色 */  
+    background-color: #fff; /* 背景颜色 */  
+    position: absolute;  
+    left: 0;  
+    top: 0;  
+}  
+  
+/* 勾选后的样式 */  
+.agreement-part input[type="checkbox"]:checked + label:before {  
+    background-color: orangered; /* 勾选后的背景颜色 */  
+    border-color: orangered; /* 勾选后的边框颜色 */  
+    /* 可以添加其他样式，如添加勾选图标 */  
+    content: "\2714"; /* 勾选图标，使用Unicode字符 */  
+    color: #fff; /* 勾选图标的颜色 */  
+    text-align: center;  
+    line-height: 20px; /* 垂直居中 */  
+}
+
+
+/*商品信息*/
+.basic-content{  
+    height: 560px;  
+    display: flex;  
+    justify-content: center; /* 水平居中内容区域 */  
+    align-items: center; /* 垂直居中（但在这个案例中，我们可能不需要它，因为内容区域高度固定） */  
+    background-color: #f3f6f8; /* 背景色 */    
+    position: relative; /* 为了后续可能的定位需要 */
+}
+
+.info-wrap{
+    width: 1296px;  
+    height: 560px; 
+    display: flex;       
+    background-color: #ffffff;
+    border-radius: 12px 12px 0 0;
+    justify-content: space-between;
+}
+.pic-gallery{
+    display: flex;
+    flex-direction: row;
+    margin-left: 16px;
+    margin-top: 10px;
+}
+
+.thumbnails{
+    display: flex;  
+    flex-direction: column; /* 纵向排列小图片 */  
+    align-items: center;  
+    list-style: none; /* 移除列表样式 */  
+    padding: 0; /* 移除默认的内边距 */
+    margin-top: 0;
+    margin-right: 16px;
+}
+
+.thumbnail-pic{
+    display: flex;
+    width: 76px;  
+    height: 76px;  
+    margin-bottom: 12px; /* 添加一些底部边距 */ 
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, .02);
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(0, 0, 0, .02);
+}
+
+.thumbnail-pic img{
+    max-height: 76px;
+    max-width: 76px;
+    border-radius: 8px;
+
+}
+
+.thumbnails .thumbnail-pic:hover,
+.thumbnails .thumbnail-pic.active{
+    border-color: #ff5000;
+}
+
+
+.mainPicWrap{
+    display: flex;
+    width: 535.2px;
+    height: 535.2px;
+    background-color: rgba(0, 0, 0, .02);
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+}
+
+.mainPicWrap img{
+    max-height: 535.2px;
+    max-width: 535.2px;
+    border-radius: 12px;
+}
+
+/*商品信息面板*/
+.info-block{
+    height: 550px;
+    width: 608px;
+}
+
+.main-item-title{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    line-height: 30px;
+    font-size: 20px;
+    font-weight: 600;
+}
+.sub-item-title{
+    color: #7c889c;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.item-price{
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.price-symbol{
+    font-size: 16px;
+    vertical-align: baseline;
+    color: rgb(255, 79, 0);
+}
+.price-text{
+    font-size: 28px;
+    color: rgb(255, 79, 0);
+}
+
+.supplement-block{
+    font-size: 14px;
+    color: #11192d;
+}
+
+.delivery{
+    display: flex;
+    flex-direction: row;
+}
+
+.delivery-label{
+    font-weight: 400;
+    color: #7c889c;
+}
+
+.label-text{
+    width: 56px;
+    display: inline-block;
+    text-align: justify;
+    text-align-last: justify;
+    color: #7c889c;
+}
+
+.delivery-content{
+    margin-left: 8px;
+}
+
+.delivery-connect{
+    padding: 0 12px;
+}
+
+.delivery-info{
+    margin-top: 10px;
+}
+
+.guarantee-info{
+    display: flex;
+    flex-direction: row;
+    margin-top: 24px;
+}
+.guarantee-label{
+    color: #7c889c;
+}
+.guarantee-content{
+    margin-left: 8px;
+}
+
+/*数量*/
+.operation-block{
+    display: flex;
+    margin-top: 24px;
+    flex-direction: row;
+    align-items: center;
+}
+.operation-label{
+    color: #7c889c;
+}
+.count-block{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 8px;
+}
+.quantity-btn{
+    align-items: center;
+    border: 1px solid #dadde0;
+    display: flex;
+    height: 32px;
+    justify-content: center;
+    width: 32px;
+}
+.count-value{
+    border-bottom: 1px solid #dadde0;
+    border-top: 1px solid #dadde0;
+    height: 32px;
+    min-width: 40px;
+}
+.quantity-value{
+    background-color: transparent;
+    border: none;
+    height: 100%;
+    outline: none;
+    text-align: center;
+    width: 40px;
+}
+.quantity-tip{
+    margin-left: 8px;
+    color: #8d9ba8;
+}
+.service-block{
+    margin-top: 24px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.service-label{
+    color: #7c889c;
+}
+.service-item{
+    margin-left: 8px;
+    margin-right: 3px;
+}
+.footwrap{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    margin-left: -13px;
+    border: 1px solid transparent;
+    padding: 12px;
+}
+.left-btn{
+    display: flex;
+    width: 180px;
+    height: 48px;
+    background: linear-gradient(90deg, rgb(255, 100, 34), rgb(255, 0, 64));
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px 0 0 8px;
+}
+.right-btn{
+    display: flex;
+    width: 180px;
+    height: 48px;
+    background: linear-gradient(90deg, rgb(255, 203, 0), rgb(255, 148, 2));
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 8px 8px 0;
+}
+.btn-inner-text{
+    display: inline;
+    font-size: 16px;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+}
+.collect-btn{
+    display: flex;
+    flex-direction: row;
+    margin-left: 12px;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border: 1px solid #d6d6d6;
+    border-radius: 8px;
+    padding: 0 16px 0 14px;
+}
+.collect-btn .icon{
+    height: 18px;
+    width: auto;
+    margin-right: 4px;
+}
+
+/* 评论区样式 */
+.comment-container {  
+    display: flex;  
+    flex-direction: column;    
+    align-items: center;
+    background-color: #f3f6f8;
+}  
+
+.comment-title{
+    display: flex;
+    width: 1296px;
+    background-color: #ffffff;
+    font-size: 24px; /* 标题字体大小 */  
+    font-weight: bold; /* 加粗 */  
+    color: orangered; /* 蓝色标题 */
+    border-bottom: 1px solid #f0f3f5;
+}
+.title-text{
+    margin-left: 50px;
+    margin-top: 50px;
+    border-bottom: 2px solid orangered;
+}
+
+.comment-block{
+    width: 1296px;
+    background-color: #ffffff;
+}
+  
+.comment {  
+    display: flex;  
+    align-items: start; /* 头像和内容的垂直对齐 */  
+    gap: 10px; /* 头像和内容之间的间距 */  
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;     
+    background-color: #ffffff;  
+    padding: 20px;
+    margin: 50px 50px 0 50px;
+    height: auto;
+}  
+  
+.avatar {  
+    width: 50px;  
+    height: 50px;  
+    border-radius: 50px;  
+}  
+
+.comment-tag{
+    display: flex;
+    justify-content: space-between;
+}
+
+.ai-tag{
+    display: flex;
+    border: 2px solid #ff4500;
+    border-radius: 4px;
+    align-items: center;
+    width: auto;
+    padding: 6px 20px 6px 18px;
+    height: 20px;
+    gap: 8px;
+    background-color: orangered;
+    position: relative;
+    margin-right: 100px;
+    text-decoration: none;
+}
+
+.ai-tag .tag-text{
+    font-size: 15px;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.ai-tag .icon{
+    height: 20px;
+    width: auto;
+}
+.ai-tag .tip-text{
+    visibility: hidden;
+    width: 300px;
+    background-color: #fff;
+    color: black;
+    text-align: center;
+    padding: 5px 0;
+    border: 2px solid black;
+    border-radius: 6px;
+    display: inline-block;
+ 
+    /* 定位 */
+    position: absolute;
+    z-index: 1;
+
+    opacity: 0;
+    transition: opacity 1s;
+}
+.ai-tag:hover .tip-text{
+    visibility: visible;
+    width: 320px;
+    bottom: 100%;
+    left: 50%; 
+    margin-left: -218px; /*调整箭头位置*/
+
+    opacity: 1;
+}
+.ai-tag .tip-text::after{
+    content: " ";
+    position: absolute;
+    top: 100%; /* 提示工具底部 */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}
+
+.comment-date{
+    color: #50607a;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    line-height: 20px;
+}
+  
+.comment-content {  
+    flex-grow: 1; /* 内容部分占据剩余空间 */  
+    margin-left: 10px;
+}  
+  
+.username {  
+    margin: 0 0 8px 0;  
+    font-weight: bold;  
+}
+
+ 
+.comment-text {  
+    margin: 20px 0 20px 0;  
+}  
+
+/* 量表 */
+.actions {  
+    display: flex;
+    flex-direction: column;  
+    padding: 10px;
+    border-style: dashed;  
+        border-color: #e3e3e3;  
+        border-width: 2px;  
+        border-radius: 5px; 
+        margin: 20px 0 20px 0;
+    margin: 2px 130px 0 130px;
+}  
+
+.actions .question{
+    margin-bottom: 10px;
+}
+
+.actions .question p {  
+    margin: 0 0 5px 0;  
+    font-weight: bold;  
+    font-style: italic;
+    font-size: 12px;
+}  
+.actions .scale{
+    display: flex;
+    align-items: center;
+}
+
+.actions .scale label {  
+    display: inline-block;  
+    margin-right: 40px;  
+    font-style: italic;
+    font-size: 12px;
+    width: 80px;
+    cursor: pointer;
+} 
+
+.actions .scale input[type="radio"] {  
+    margin-right: 10px;  
+    cursor: pointer;
+}
+
+.actions .scale input[type="radio"]:checked + label {  
+    font-weight: bold;
+}
+
+.detection-trust{
+    display: flex;
+    flex-direction: column;  
+    padding: 10px;
+    border-style: dashed;  
+        border-color: orangered;  
+        border-width: 2px;  
+        border-radius: 5px; 
+        margin: 20px 0 20px 0;
+    margin: 20px 130px 0 130px;
+}
+.detection-trust .question p{
+    margin: 0 0 5px 0;  
+    font-weight: bold;  
+    font-style: italic;
+    font-size: 12px;
+}
+.detection-trust .scale{
+    display: flex;
+    align-items: center;
+}
+.detection-trust .scale label{
+    display: inline-block;  
+    margin-right: 40px;  
+    font-style: italic;
+    font-size: 12px;
+    width: 80px;
+    cursor: pointer;
+}
+.detection-trust .scale input[type="radio"]{
+    margin-right: 10px;  
+    cursor: pointer;
+}
+.detection-trust .scale input[type="radio"]:checked + label{
+    font-weight: bold;
+}
+
+
+/* 提交按钮容器的样式，用于居中提交按钮 */  
+.submit-container {  
+    text-align: center; /* 使容器内的内容水平居中 */  
+    margin-top: 40px; /* 与上方元素保持间距（可选） */  
+    margin-bottom: 20px;
+}  
+  
+/* 提交按钮的样式 */  
+.submit-button {  
+    display: inline-block; /* 让链接表现得像块级元素，以便设置宽度和高度 */
+    padding: 10px 20px; /* 设置内边距，让文字不会紧贴边框 */
+    width: 500px; /* 增加宽度 */  
+    /* 其他样式，如背景色、边框等（可选） */  
+    background-color: orangered;  
+    color: white;  
+    border: 1px solid orangered; /* 设置边框，这里边框颜色和背景颜色相同 */  
+    border-radius: 5px; /* 设置边框圆角 */   
+    padding: 10px 20px;  
+    text-decoration: none;
+    text-align: center;  
+    cursor: pointer;  
+}  
+
+.submit-button:hover {  
+    background-color: orange; /* 鼠标悬停时颜色变深 */  
+}
+  
+/* 响应式设计，确保在小屏幕上也能良好显示 */  
+@media (max-width: 600px) {  
+    h1 {  
+        font-size: 2em;  
+    }  
+  
+    p {  
+        font-size: 0.9em;  
+    }  
+}

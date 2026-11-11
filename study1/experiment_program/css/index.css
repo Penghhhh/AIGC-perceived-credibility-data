@@ -1,0 +1,645 @@
+/*********** 通用样式-start ***********/
+
+/* 版心 */
+.w{
+    width: 119rem;
+    margin: 0 auto;
+}
+
+/*********** 通用样式-end ***********/
+
+/*********** 广告-start ***********/
+.lk-top-banner{
+    position: relative;
+    background-color: #164FA6;
+}
+.lk-top-banner .top-banner-center{
+    height: 10rem;
+}
+.lk-top-banner .top-banner-center img{
+    width: 100%;
+}
+.lk-top-banner .banner-close{
+    position: absolute;
+    top: 0.3rem;
+    right: 9rem;
+    width: 1.9rem;
+    height: 1.9rem;
+    background: url("./../images/close-banner.png") 0 0;
+}
+.lk-top-banner .banner-close:hover{
+    background-position: 0 -1.9rem;
+}
+/*********** 广告-end ***********/
+
+/*********** 顶部通栏-start ***********/
+.lk-toolbar{
+    background-color: #f5f5f5;
+    height: 3.5rem;
+    border-bottom: 1px solid #eeeeee;
+    /*background-color: red; /*Which can be deleted when completing.*/
+}
+.lk-toolbar>div{
+    height: 100%;
+    /*background-color: pink; /*Which can be deleted when completing.*/
+}
+.lk-toolbar>div li{
+    float: left;
+}
+
+.lk-toolbar>div li{
+    float: left;
+    line-height: 3.5rem;
+    position: relative;
+    padding: 0 2.5rem 0 1rem;
+}
+.lk-toolbar>div li.down i{
+    position: absolute;
+    right: 1rem;
+    top: 1.7rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    /*超出隐藏*/
+    overflow: hidden;
+}
+.lk-toolbar>div li.down i s{
+    position: absolute;
+    left: 0;
+    top: -1.8rem;
+    font-size: 2.2rem;
+    color: #999999;
+}
+.lk-toolbar>div li{
+    float: left;
+    line-height: 3.5rem;
+    position: relative;
+    padding: 0 2.5rem 0 0.1rem;  
+}
+
+.entrance{
+    display: flex;
+    align-items: center;
+    border: 1.5px solid orangered;
+    padding: 0 7px 0 7px;
+    border-radius: 8px;
+}
+.entrance>.icon{
+    margin-right: 10px;
+}
+.entrance-text{
+    font-size: 14px;
+    color: orangered;
+    font-weight: 800;
+}
+
+/*********** 顶部通栏-end ***********/
+
+/*********** 顶部搜索-start ***********/
+.lk-top-search{
+    background-color: #ffffff;
+    height: 144px;
+}
+/*左边*/
+.logo-set{
+    margin-right: auto;
+}
+.logo-set .main-logo{
+    width: 240px;
+    height: 144px;
+    background: url(../public/logo.png) no-repeat center;
+    float: left;
+    background-size: contain;
+}
+/* 搜索框 */
+.lk-top-search .search-input{
+    width: 73.8rem;
+    height: 3.6rem;
+    float: left;
+    padding-top: 4rem;
+    padding-left: 3rem;
+}
+.lk-top-search .search-more-link{
+    float: left;
+    width: 73.8rem;
+    height: 3rem;
+    padding-left: 3rem;
+}
+.lk-top-search .search-more-link li{
+    float: left;
+    margin: 0.7rem 0.5rem 0 0;
+}
+.lk-top-search .search-more-link li+li{
+    border-left: 0.1rem solid #ffffff;
+    padding-left: 2rem;
+}
+.lk-top-search .search-input input:first-child{
+    width: 65rem;
+    height: 3.6rem;
+    border: 0.2rem solid orangered;
+    box-sizing: border-box;
+    padding-left: 0.8rem;
+    font-size: 1.2rem;
+    float: left;
+    border-radius: 15px 0 0 15px;
+}
+.lk-top-search .search-input input:last-child{
+    width: 8rem;
+    height: 3.6rem;
+    background-color: orangered;
+    color: #fff;
+    font-size: 1.5rem;
+    float: left;
+    border-radius: 0 15px 15px 0;
+}
+/*********** 顶部搜索-end ***********/
+
+/*********** 中部导航-start ***********/
+.lk-nav{
+    width: 100%;
+    height: 3.8rem;
+    background-color: #ffffff;
+}
+.lk-nav>div{
+    display: flex;
+}
+.lk-nav>div .lk-nav-menu{
+    width: 21rem;
+    height: 3.8rem;
+    background-color: #eeeeee;
+    border-radius: 8px 8px 0 0;
+    display: flex; /* 启用flexbox布局 */  
+    align-items: center; /* 子元素在交叉轴上的对齐方式（这里是垂直居中） */  
+    flex-direction: row;
+    border-bottom: 1px dashed #d0d0d0;
+
+}
+.lk-nav-menu-all {  
+    display: flex; /* 使该容器也使用flexbox，以便可以控制子元素的对齐 */  
+    align-items: center; /* 确保子元素在垂直方向上居中对齐 */  
+    justify-content: space-between; /* 不是必需的，但可以用来控制子元素之间的空间分布 */  
+    width: 100%; /* 确保这个容器占据其父容器的全部宽度 */  
+    height: 100%; /* 使其高度与其父容器相同 */  
+    padding-left: 1rem; /* 保持原有的内边距 */  
+    box-sizing: border-box; /* 保持原有的盒模型设置 */  
+}  
+
+.lk-nav>div .lk-nav-menu a{
+    font-size: 1.6rem;
+    font-weight: bolder;
+    color: #000000;
+    width: 100%;
+    display: block;
+    line-height: 3.8rem;
+    padding-left: 1rem;
+    box-sizing: border-box;
+    position: relative;
+}
+
+/*右边*/
+.lk-nav>div .lk-nav-items{
+    background-color: #eeeeee;
+    flex: 1;
+    margin-left: 20px;
+    border-radius: 8px;
+}
+
+.lk-nav>div .lk-nav-items ul li{
+    float: left;
+    line-height: 3.8rem;
+    padding: 0 4.3rem;
+    font-weight: bolder;
+}
+.lk-nav>div .lk-nav-items ul li a{
+    display: flex;
+    align-items: center; /* 垂直居中 */  
+    justify-content: center; /* 水平居中，但这里我们可能需要使用 space-between 或 flex-start，因为文本和图片需要分开对齐 */  
+    flex-direction: row; /* 默认就是行方向，但明确指定以防万一 */  
+    font-size: 1.7rem;
+}
+.lk-nav>div .lk-nav-items ul li a:hover {
+    color: #F8B62B
+}
+.lk-nav>div .lk-nav-items img{
+    height: 16px;
+    margin-right: 2px;
+}
+/*********** 中部导航-end ***********/
+
+/*********** 轮播图-start ***********/
+.lk-casual{
+    width: 100%;
+    height: 46rem;
+    background-color: #ffffff;
+}
+/* 左边 */
+.lk-casual .casual-left{
+    width: 21rem;
+    height: 44rem;
+    background-color: #eeeeee;
+    float: left;
+    margin-left: -100%;
+    border-radius: 0 0 8px 8px;
+}
+.lk-casual .casual-left .index-list{
+    width: 21rem;
+    height: 44rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    cursor: pointer;
+}
+.lk-casual .casual-left .index-list li{
+    height: 2rem;
+    padding-left: 0.8rem;
+}
+.lk-casual .casual-left .index-list li a{
+    color: #1f1f1f;
+}
+.lk-casual .casual-left .index-list li em{
+    color: #c0c0c0;
+    margin: 0 0.2rem;
+}
+.lk-casual .casual-left .index-list li a:hover{
+    color: orangered;
+}
+
+/* 右边 */
+.lk-casual .casual-right{
+    width: 17rem;
+    height: 44rem;
+    background-color: #fff;
+    float: left;
+    margin-left: -17rem;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+/*右边上部分*/
+.lk-casual .casual-right .user-info{
+    width: 17rem;
+    height: 15.5rem;
+    padding: 1rem 0 0.2rem;
+    border-bottom: 0.1rem solid #f2f2f2;
+    box-sizing: border-box;
+}
+.lk-casual .casual-right .user-info .user-img{
+    text-align: center;
+}
+.lk-casual .casual-right .user-info .user-img a img{
+    display: inline-block;
+    width: 3.7rem;
+    height: 3.8rem;
+    border-radius: 50%;
+}
+.lk-casual .casual-right .user-info .info{
+    text-align: center;
+    margin-bottom: 10px;
+}
+.lk-casual .casual-right .user-info .btn{
+    display: flex;
+    justify-content: space-around;
+}
+.lk-casual .casual-right .user-info .btn a.register{
+    width: 6.8rem;
+    height: 2rem;
+    border: 1px solid orangered;
+    color: orangered;
+    line-height: 2rem;
+    text-align: center;
+}
+.lk-casual .casual-right .user-info .btn a.superhy{
+    display: inline-block;
+    width: 7rem;
+    height: 2.2rem;
+    background: url(../images/index.png) -29.5rem -25.1rem;
+}
+.lk-casual .casual-right .user-info .enter{
+    text-align: center;
+    margin: 1rem 0;
+    font-size: 0.8rem;
+}
+.lk-casual .casual-right .user-info .enter a{
+    margin: 0 0.5rem;
+}
+.lk-casual .casual-right .user-info .enter a em{
+    display: inline-block;
+    width: 1.6rem;
+    height: 1.4rem;
+    vertical-align: middle;
+    margin-right: 0.5rem;
+}
+.lk-casual .casual-right .user-info .enter a:first-child em{
+    background: url(../images/index.png) -11.1rem 0;
+}
+.lk-casual .casual-right .user-info .enter a:last-child em{
+    background: url(../images/index.png) -8.8rem 0;
+}
+/*右边中部分*/
+.lk-casual .casual-right .toutiao{
+    width: 17rem;
+    height: 10rem;
+    padding: 2px;
+    line-height: 2rem;
+    font-size: 1.3rem;
+}
+.lk-casual .casual-right .toutiao li{
+    height: 4.8rem;
+}
+.lk-casual .casual-right .toutiao li i{ 
+    color: orangered;
+    margin-left: 0.5rem;
+}
+/* 右边的下部分 */
+.lk-casual .casual-right .kuaijie{
+    width: 17rem;
+    height: 16.2rem;
+    overflow: hidden;
+    border-top: 0.1rem solid #f2f2f2;
+}
+.lk-casual .casual-right .kuaijie p{
+    color: #000000;
+}
+.lk-casual .casual-right .kuaijie ul li{
+    width: 5.6rem;
+    height: 8.1rem;
+    float: left;
+    
+    border-width: 0 0.1rem 0.1rem 0;
+    border-style: solid;
+    border-color: #F2F2F2;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.lk-casual .casual-right .kuaijie ul li:nth-child(3), .lk-casual .casual-right .kuaijie ul li:nth-child(6){
+    border-right: 0;
+}
+.lk-casual .casual-right .kuaijie ul li svg{
+    font-size: 3rem;
+    height: 3rem;
+    width: 3rem;
+}
+/* 中间 */
+.lk-casual .casual-center{
+    width: 100%;
+    height: 44rem;
+    float: left;
+}
+.lk-casual .casual-center .casual-center-w{
+    margin: 10px 180px 50px 230px;
+    height: 44rem;
+    position: relative;
+}
+
+.carousel {  
+    position: relative;  
+    max-width: 100%; /* 或你想要的宽度 */  
+    margin: auto;  
+    overflow: hidden;  
+}  
+  
+.carousel-slides img {  
+    width: 100%;  
+    display: none;  
+    border-radius: 8px;
+}  
+  
+.carousel-slides img:first-child {  
+    display: block;  
+}  
+  
+.prev, .next {  
+    cursor: pointer;  
+    position: absolute;  
+    top: 50%;  
+    width: auto;  
+    margin-top: -22px;  
+    padding: 16px;  
+    color: white;  
+    font-weight: bold;  
+    font-size: 18px;  
+    transition: 0.6s ease;  
+    border-radius: 0 3px 3px 0;  
+    user-select: none;  
+}  
+  
+.next {  
+    right: 0;  
+    border-radius: 3px 0 0 3px;  
+}  
+  
+.prev:hover, .next:hover {  
+    background-color: rgba(0,0,0,0.8);  
+}
+
+/*导航点*/
+.carousel-indicators {  
+    position: absolute;  
+    bottom: 10px; /* 距离轮播图底部的距离 */  
+    left: 50%;  
+    transform: translateX(-50%); /* 居中显示 */  
+    display: flex;  
+    justify-content: center;  
+    padding: 0;  
+    margin: 0;  
+    list-style: none;  
+}  
+  
+.carousel-indicators span {  
+    width: 10px; /* 指示器的宽度 */  
+    height: 10px; /* 指示器的高度 */  
+    border-radius: 50%; /* 圆形 */  
+    background-color: #bbb; /* 背景颜色 */  
+    display: inline-block;  
+    margin: 0 5px; /* 指示器之间的间距 */  
+    cursor: pointer; /* 鼠标悬停时显示指针 */  
+    transition: background-color 0.3s ease; /* 平滑过渡效果 */  
+}  
+  
+.carousel-indicators .active {  
+    background-color: orangered; /* 当前激活的指示器颜色 */  
+}
+
+/*********** 轮播图-end ***********/
+
+/*********** 主要内容-start ***********/
+.lk-main{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.lk-main .main .main-top{
+    display: flex;
+    height: 5rem;
+    align-items: center;
+    text-align: center;
+    background-color: #ffffff;
+    margin-bottom: 10px;
+
+}
+.lk-main .main .main-top ul{
+    border-bottom: 5px solid orangered;
+}
+
+.lk-main .main .main-top i{
+    font-size: 30px;
+}
+.lk-main .main .main-top a{
+    color: rgb(0, 0, 0);
+    font-size: 30px;
+    font-weight: bolder;
+    margin-left: 10px;
+}
+.lk-main .main .main-bottom{
+    
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin-bottom: 40px;
+}
+.lk-main .main .main-bottom ul{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 2rem;
+}
+.lk-main .main .main-bottom ul li{
+    display: flex;
+    justify-content: center;
+    height: 350px;
+    width: 230px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: 2px solid #ffffff;
+}
+.img-wrapper{
+    display: flex;
+    padding: 2px;
+    height: 226px;
+    width: 226px;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #eeeeee;
+    border-radius: 8px;
+}
+.info-wrapper{
+    height: 65px;
+    margin-top: 5px;
+    width: 214px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+.tag-list{
+    height: 14px;
+    margin-top: 8px;
+}
+.title-text{
+    color: #11192d;
+    font-size: 15px;
+    font-family: Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, "PingFang SC", "Microsoft YaHei";
+}
+
+.price-unit{
+    padding-left: 5px;
+}
+
+.price-value{
+    width: 50px;
+}
+
+.price-unit, .price-value{
+    font-size: 19px;
+    color: #ff5000;
+    font-family: Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, "PingFang SC", "Microsoft YaHei";
+}
+.month-sale {  
+    font-size: 14px; /* 字体大小 */  
+    color: #666; /* 字体颜色 */  
+    margin-left: 15px;
+    font-family: Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, "PingFang SC", "Microsoft YaHei";
+} 
+
+.lk-main .main ul li img{
+    max-width: 226px !important;
+    max-height: 226px !important;
+    border-radius: 8px;
+}
+.lk-main .main .main-bottom ul li:hover{
+    border-color: #ff5000;
+}
+
+/*********** 主要内容-end ***********/
+
+/*********** 尾部内容-start ***********/
+.lk-footer{
+    background: #f5f5f5;
+    border-top: 0.1rem solid #e7e7e7;
+    padding: 2rem 0;
+}
+.lk-footer .footer-top .footer-top-propmise{
+    width: 100%;
+}
+.lk-footer .footer-top .footer-top-propmise dl{
+    float: left;
+    width: 20%;
+}
+.lk-footer .footer-top .footer-top-propmise dl dt{
+    float: left;
+    margin-right: 0.8rem;
+    width: 4.8rem;
+    height: 4.8rem;
+}
+.lk-footer .footer-top .footer-top-propmise dl dd p{
+    line-height: 2.4rem;
+}
+
+.lk-footer .footer-top .footer-top-shopping{
+    padding: 6rem 0 2rem 0;
+} 
+
+.footer-top-shopping-w{
+    width: 119rem;
+    margin: 0 auto;
+    height: 18rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.lk-footer .footer-top .footer-top-shopping dl{
+    float: left;
+    width: 20rem;
+} 
+.lk-footer .footer-top .footer-top-shopping dl dt{
+    font: bolder 1.8rem/4rem "microsoft yahei";
+    color: #545454;
+}
+.lk-footer .footer-top .footer-top-shopping .app-down{
+    width: 12rem;
+    height: 18rem;
+    float: left;
+}
+.lk-footer .footer-top .footer-top-shopping .app-down p{
+    font: bolder 1.8rem/4rem "microsoft yahei";
+    color: #545454;
+    height: 4rem;
+}
+.lk-footer .footer-bottom{
+    background-color: #fff;
+    text-align: center;
+    padding: 3rem 0;
+}
+.lk-footer .footer-bottom .url-list-links{
+    line-height: 2.5rem;
+    height: 2.5rem;
+}
+.lk-footer .footer-bottom .url-list-links a{
+    margin: 0 0.8rem;
+}
+.lk-footer .footer-bottom .footer-bottom-copyright{
+    padding: 1rem 0;
+    line-height: 2.5rem;
+}
+.lk-footer .footer-bottom-img a{
+    margin: 0 0.5rem;
+}
+/*********** 尾部内容-end ***********/

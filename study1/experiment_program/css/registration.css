@@ -1,0 +1,154 @@
+/* 基本样式重置 */  
+body {  
+    font-family: Arial, sans-serif;  
+    margin: 0;  
+    padding: 20px;  
+    background-color: #eeeeee;  
+    color: #333;  
+}  
+  
+h2 {  
+    color: orangered;  
+    text-align: center;
+    font-size: 50px;
+}  
+  
+/* 表单样式 */  
+form {  
+    background-color: #fff;  
+    padding: 20px;  
+    border-radius: 8px;  
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);  
+    max-width: 800px;  
+    margin: 0 auto;  
+}
+
+.registration-info{
+    padding: 20px;
+}
+  
+/* 标签和输入框样式 */  
+label {  
+    display: block;  
+    margin-bottom: 10px;  
+    font-weight: bold;  
+}  
+
+input{
+    background-color: #eeeeee;
+}
+  
+input[type="text"]{  
+    width: 100%;  
+    padding: 8px;  
+    margin-bottom: 30px;  
+    box-sizing: border-box; /* 包括padding和border在width内 */  
+    border: 1px solid #ccc;  
+    border-radius: 4px;  
+}  
+
+
+input[type="radio"] {  
+    width: auto; /* 恢复到默认宽度 */  
+    margin-right: 5px; /* 与标签之间留点空间 */  
+    margin-top: 10px;
+    cursor: pointer;
+} 
+
+.gender-scale-container{
+    display: flex;  
+    align-items: center; /* 垂直居中对齐 */  
+    margin-bottom: 30px; /* 与下方元素保持间距 */  
+}
+
+.gender-scale-label{
+    display: flex; /* 使label内部的内容也使用Flexbox布局 */  
+    flex-direction: column; /* 子元素垂直排列 */  
+    align-items: flex-start; /* 子元素在交叉轴上的起点对齐 */   
+    margin-right: 80px;
+}
+
+.scale-container {  
+    display: flex;  
+    align-items: center; /* 垂直居中对齐 */  
+    margin-bottom: 30px; /* 与下方元素保持间距 */ 
+    justify-content: space-between;
+}  
+  
+.scale-label {  
+    display: flex; /* 使label内部的内容也使用Flexbox布局 */  
+    flex-direction: column; /* 子元素垂直排列 */  
+    align-items: center; /* 子元素在交叉轴上的起点对齐 */   
+    width: 100px;
+} 
+
+.scale-label:hover{
+    cursor: pointer;
+}
+
+
+
+/*选项字体设置*/
+span{
+    font-weight: 500;
+}
+
+
+
+
+/*年龄输入*/
+/* 针对 Chrome, Edge, Safari 等基于 WebKit 的浏览器 */  
+input[type="number"]::-webkit-outer-spin-button,  
+input[type="number"]::-webkit-inner-spin-button {  
+    -webkit-appearance: none;  
+    margin: 0;  
+}  
+
+input[type="number"]{  
+    width: 30%;  
+    padding: 8px;  
+    margin-bottom: 30px;  
+    box-sizing: border-box; /* 包括padding和border在width内 */  
+    border: 1px solid #ccc;  
+    border-radius: 4px;  
+}  
+
+/*学历选择*/
+/* 为select元素添加样式 */  
+select {  
+    width: 200px; /* 设置宽度 */  
+    height: 35px; /* 设置高度 */  
+    padding: 5px; /* 设置内边距 */    
+    margin-bottom: 20px;
+    border: 1px solid #ccc; /* 设置边框 */  
+    border-radius: 5px; /* 设置边框圆角 */  
+    font-size: 16px; /* 设置字体大小 */  
+    cursor: pointer; /* 鼠标悬停时显示指针 */  
+    /* 如果需要改善下拉箭头的样式，可以考虑使用背景图片或伪元素来覆盖默认样式，但这通常较复杂 */  
+}
+
+/* 提交按钮的样式 */  
+.submit-button {  
+    display: inline-block; /* 让链接表现得像块级元素，以便设置宽度和高度 */
+    padding: 10px 20px; /* 设置内边距，让文字不会紧贴边框 */
+    width: 500px; /* 增加宽度 */  
+    /* 其他样式，如背景色、边框等（可选） */  
+    background-color: orangered;  
+    color: white;  
+    border: 1px solid orangered; /* 设置边框，这里边框颜色和背景颜色相同 */  
+    border-radius: 5px; /* 设置边框圆角 */   
+    padding: 10px 20px;  
+    text-decoration: none;
+    text-align: center;  
+    cursor: pointer;  
+}  
+
+/* 提交按钮容器的样式，用于居中提交按钮 */  
+.submit-container {  
+    text-align: center; /* 使容器内的内容水平居中 */  
+    margin-top: 20px; /* 与上方元素保持间距（可选） */  
+}  
+  
+.submit-button:hover {  
+    background-color: orangered; /* 鼠标悬停时颜色变深 */  
+}

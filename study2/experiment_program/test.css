@@ -1,0 +1,688 @@
+body{
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    overflow-x: hidden;
+}
+a{
+    display: flex;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+/* 已完成帖子的样式 */
+.completed-post {
+    opacity: 0.5; /* 使帖子颜色变深 */
+    background-color: rgba(0, 0, 0, 0.1); /* 添加背景色 */
+    cursor: not-allowed; /* 改变鼠标指针 */
+}
+
+
+/*交互弹窗*/
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    height: 618px; /* 增加弹窗高度 */
+    max-height: 90%; /* 限制最大高度 */
+    border-radius: 10px;
+    width: 520px; /* 初始宽度设为左面板宽度+padding */
+    min-width: 520px; /* 添加最小宽度 */
+    max-width: 1040px; /* 最大宽度为两倍 */
+    transition: all 0.3s ease-out;
+}
+
+.modal.active {
+    opacity: 1; /* 完全显示 */
+    transform: translate(-50%, -50%) scale(1); /* 放大到正常大小 */
+}
+.modal.right-active {
+    width: 1040px; /* 展开后的总宽度 */
+}
+
+/* 弹窗内容布局 */
+.modal-content {
+    display: flex;
+    gap: 20px; /* 左右部分之间的间距 */
+    height: 600px;
+    position: relative; /* 添加相对定位 */
+}
+/* 关闭按钮容器 */
+.close-button-container {
+    position: absolute;
+    top: -40px; /* 向上移动，超出弹窗 */
+    right: -40px; /* 向右移动，超出弹窗 */
+    z-index: 1001; /* 确保按钮在弹窗之上 */
+}
+
+/* 关闭按钮样式 */
+.close-button {
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.close-button:hover {
+    background-color: #f0f0f0;
+    color: #000;
+}
+
+.read-complete-container {
+    margin-top: auto;
+    padding: 10px 0; /* 添加一些内边距 */
+    position: sticky; /* 可选：如果需要按钮始终可见 */
+    bottom: 0;
+    background-color: white; /* 防止文字透过 */
+    z-index: 2; /* 确保在内容之上 */
+    display: flex;
+    justify-content: center;
+}
+  
+.read-complete-btn {
+    padding: 10px 20px;
+    background-color: white;
+    color: #000;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    border-color: rgba(0, 0, 0, 0.5);
+
+}
+.read-complete-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.read-complete-btn.completed {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.65);
+    cursor: default;
+}
+
+.left-panel {
+    width: 500px; /* 固定宽度 */
+    padding: 10px;
+    overflow: hidden;
+    overflow-y: auto;
+    padding-right: 10px;
+    transition: transform 0.3s ease-out; /* 添加过渡效果 */
+    position: relative; /* 添加相对定位 */
+    z-index: 1; /* 确保在右侧面板之上 */
+    flex-shrink: 0; /* 防止flex容器中缩小 */
+    display: flex; /* 新增 */
+    flex-direction: column; /* 新增 */
+}
+.right-panel{
+    width: 650px; /* 固定宽度 */
+    padding: 10px;
+    overflow: hidden;
+    overflow-y: auto;
+    padding-right: 10px;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    display: none; /* 初始隐藏 */
+    right: 0;
+    top: 0;
+    height: 100%;
+    flex-direction: column; /* 确保内容垂直排列 */
+}
+.right-panel h2 {
+    margin-bottom: 0; /* 增加标题和内容之间的间距 */
+}
+#questionnaire-content {
+    flex: 1; /* 让问卷内容填满剩余空间 */
+    overflow-y: auto; /* 如果内容很多，允许滚动 */
+    opacity: 0; /* 初始透明 */
+    transition: opacity 1s ease-out; /* 添加淡入效果 */
+}
+.right-panel.active #questionnaire-content {
+    opacity: 1; /* 激活时完全不透明 */
+}
+.right-panel.active {
+    opacity: 1;
+    transform: translateX(0);
+    display: flex;
+}
+/* 当右侧面板显示时，调整左侧面板宽度 */
+.modal-content.right-active .left-panel {
+    transform: translateX(-350px); /* 向左移动 */
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.instruction-modal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 618px;
+    overflow: hidden;
+    overflow-y: auto;  /* 启用垂直滚动条 */
+}
+.instruction-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .instruction-text {
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .instruction-text ol {
+    padding-left: 20px;
+  }
+  
+  .instruction-text li {
+    margin-bottom: 15px;
+  }
+  
+  .instruction-text strong {
+    color: #000;
+  }
+  
+  .instruction-text ul {
+    list-style-type: disc;
+    padding-left: 40px;
+    margin-top: 10px;
+  }
+  
+  .note-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 20px;
+  }
+  
+  .note-list {
+    list-style-type: disc;
+    padding-left: 40px;
+    margin-top: 10px;
+  }
+/*html布局*/
+.global-layout{
+    width: 100%;
+    background-color: white;
+}
+.header-container{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 72px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    align-items: center;
+}
+.mask-paper{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    width: 100vw;
+    z-index: 10;
+    padding: 0 32px;
+    box-sizing: border-box;
+}
+.header-logo{
+    width: auto;
+    height: 32px;
+}
+.input-box{
+    height: 40px;
+    width: 453.33px;
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%);
+}
+.search-input{
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+    line-height: 120%;
+    border-radius: 999px;
+    background-color: rgba(0, 0, 0, 0.03);
+    appearance: none;
+    outline: none;
+    border: none;
+}
+::placeholder{
+    color: rgba(0, 0, 0, .27);
+    padding: 0 0 0 16px;
+}
+.input-button{
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.search-icon{
+    width: 40px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.iconfont.icon-search{
+    color: rgba(51, 51, 51, 0.8);
+    font-size: 20px;
+}
+.right{
+    display: flex;
+    box-sizing: border-box;
+    width: 192px;
+    height: 40px;
+}
+.menu{
+    display: flex;
+    box-sizing: border-box;
+    width: 192px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+}
+.menu_1{
+    display: flex;
+    width: 96px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    color: rgba(51, 51, 51, 0.8);
+    cursor: pointer;
+    border-radius: 50px;
+}
+.menu_1:hover{
+    background-color: rgba(0, 0, 0, 0.08);
+    border-radius: 50px;
+
+}
+
+.menu_2{
+    position: relative; /* 确保子元素的定位基准 */
+    display: flex; /* 确保宽度由内容决定 */
+    width: 96px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    color: rgba(51, 51, 51, 0.8);
+    cursor: pointer;
+    border-radius: 50px;
+}
+.menu_2:hover{
+    background-color: rgba(0, 0, 0, 0.08);
+    border-radius: 50px;
+}
+.menu_2 .contact-text {
+    visibility: hidden; /* 默认隐藏 */
+    opacity: 0; /* 默认透明 */
+    background-color: red;
+    color: white;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 30px;
+    display: inline-block;
+    width: 320px; /* 悬浮窗宽度 */
+    
+    /* 定位 */
+    position: absolute;
+    bottom: -100%; 
+    left: -50%; /* 水平居中 */
+    transform: translateX(-50%); /* 水平居中 */
+    z-index: 1;
+  
+    /* 过渡效果 */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+  
+.menu_2:hover .contact-text {
+    visibility: visible; /* 显示悬浮窗 */
+    opacity: 1; /* 完全不透明 */
+    box-shadow: 5px 3px 2px rgba(0, 0, 0, 0.08);
+}
+.main-container{
+    display: flex;
+}
+.side-bar{
+    width: 226.66px;
+    padding: 16px 0 0 0;
+    margin: 72px 0 0 16px;
+    height: calc(100vh - 72px);
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: fixed;
+    overflow: visible;
+}
+.side-bar ul{
+    padding: 0;
+    margin: 0;
+}
+.channel-list li{
+    padding-left: 16px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 8px;
+}
+.channel-list li:hover{
+    border-radius: 999px;
+    background-color: rgba(0, 0, 0, 0.08);
+}
+.wrapper{
+    display: flex;
+    width: 100%;
+    height: 48px;
+    align-items: center;
+}
+.wrapper span{
+    font-size: 24px;
+}
+.wrapper span.channel-text{
+    font-size: 16px;
+    font-weight: 600;
+    margin-left: 12px;
+}
+.information-container{
+    width: 210.65px;
+    padding-left: 16px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 38px;
+    position: absolute;
+    bottom: 0;
+}
+.information-container:hover{
+    border-radius: 999px;
+    background-color: rgba(0, 0, 0, 0.08);
+}
+.main-content{
+    margin-left: 250.667px;
+    margin-top: 72px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-radius: 10px;
+}
+.feeds-page{
+    margin: 10px 234px 0 234px;
+    background-color: white;
+    border-radius: 15px;
+}
+.scroll-channel-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
+    margin-bottom: 4px;
+}
+.scroll-channel{
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    height: 40px;
+    padding-left: 20px;
+}
+.channel{
+    height: 100%;
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    padding: 0 16px;
+    cursor: pointer;
+    color: rgba(51, 51, 51, 0.8);
+}
+.channel:hover{
+    border-radius: 999px; 
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.feeds-container{
+    width: 762.138px;
+    visibility: visible;
+    position: relative;
+    padding: 0 20px 0 20px;
+}
+.item-container{
+    margin-bottom: 15px;
+    cursor: pointer;
+    border: 2px solid white;
+    border-top: 2px solid rgba(0, 0, 0, 0.08);
+}
+.item-container:hover{
+    border: 2px solid rgba(0, 0, 0, .27);
+    border-radius: 12px;
+}
+.item{
+    padding: 0 16px 0 16px;
+}
+.item-title{
+    font-size: 18px;
+    margin: 9px 0 9px 0;
+}
+.content-text{
+    height: auto;
+}
+.actions-container{
+    display: flex;
+    align-items: center;
+    height: 30px;
+}
+.actions-button{
+    margin-right: 24px;
+}
+.actions-button span{
+    color: #8491a5;
+    font-weight: 500;
+}
+
+/*弹窗设计*/
+.title-container{
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.title-text{
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.label-container-0 {
+    position: relative;
+    width: 150px;
+    height: 22.8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    color: rgba(51, 51, 51, 0.8);
+    background-color: white;
+    padding: 0 8px 0 5px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    box-shadow: 5px 3px 2px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.label-container-1{
+    position: relative;
+    width: 240px;
+    height: 22.8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    color: white;
+    background: linear-gradient(90deg, #FF0000, #CC0000); /* 红 → 深红 */
+    padding: 0 8px 0 5px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    box-shadow: 5px 3px 2px rgba(0, 0, 0, 0.08);
+}
+
+.label{
+    font-size: 12px;
+}
+.label-container-1 .why-label {
+    visibility: hidden; /* 默认隐藏 */
+    position: absolute; /* 绝对定位 */
+    width: 264px;
+    top: 100%; /* 显示在容器下方 */
+    left: 0;
+    margin-top: 8px; /* 与容器的间距 */
+    padding: 8px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 12px;
+    color: #666;
+    white-space: normal; /* 防止文字换行 */
+    z-index: 10; /* 确保在最上层 */
+}
+  
+.label-container-1:hover .why-label {
+    visibility: visible; /* 鼠标悬停时显示 */
+}
+.label-container-2 .why-label {
+    visibility: hidden; /* 默认隐藏 */
+    position: absolute; /* 绝对定位 */
+    width: 264px;
+    top: 100%; /* 显示在容器下方 */
+    left: 0;
+    margin-top: 8px; /* 与容器的间距 */
+    padding: 8px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 12px;
+    color: #666;
+    white-space: normal; /* 防止文字换行 */
+    z-index: 10; /* 确保在最上层 */
+  }
+.label-container-2:hover .why-label {
+    visibility: visible; /* 鼠标悬停时显示 */
+}
+.info-container{
+    display: flex;
+    flex-direction: column;
+
+}
+.author-info{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.label-container-2{
+    position: relative;
+    width: 168px;
+    height: 22.8px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: white;
+    background: linear-gradient(90deg, #FF0000, #FF4D4F); /* 红 → 浅红 */
+    padding: 0 8px 0 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 5px 3px 2px rgba(0, 0, 0, 0.08);
+}
+.author-info img{
+    height: 24.4px;
+}
+.author-name{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.date{
+    color: rgba(51, 51, 51, 0.8);
+    font-size: 12px;
+}
+.description-container{
+    flex-grow: 1;
+    margin-top: 20px;
+}
+.description-text{
+    white-space: pre-wrap;
+}
+
+/* menu弹窗样式 */
+#modal-menu {
+    width: 1000px; /* 调整宽度 */
+    height: auto; /* 调整高度 */
+} 
+.modal-menu .modal-content {
+    height: 100%; /* 确保内容高度填充 */
+}
+
+footer {
+    width: 100%;
+    background-color: #f5f5f5;
+    font-size: 12px; /* 缩小字体 */
+    min-height: 40px; /* 设置更小的最小高度 */
+}
+
+footer > div {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 10px; /* 减少左右内边距 */
+}
+
+footer > div > div {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 0; /* 移除底部间距 */
+}
+
+footer > div > div > div {
+    margin-bottom: 0; /* 移除底部间距 */
+}
+
+footer > div > div:last-child {
+    text-align: center;
+    margin-top: 5px; /* 进一步减少顶部间距 */
+    padding-top: 5px; /* 进一步减少顶部内边距 */
+    border-top: 1px solid #ddd;
+    font-size: 10px; /* 缩小版权信息的字体 */
+}

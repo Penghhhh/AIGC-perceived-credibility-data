@@ -1,6 +1,6 @@
-# AIGC Perceived Credibility — Data and Analysis Code
+# AIGC Perceived Credibility — Data, Analysis Code, and Experiment Programs
 
-Data, analysis scripts, and figures for the manuscript:
+Data, analysis code, figures, and the experiment programs (the interfaces participants saw) for the manuscript:
 
 > **How detection and disclosure labels influence the perceived credibility of online information: perceived AI authorship and psychological discomfort pathways**
 
@@ -25,31 +25,43 @@ Analysis: repeated-measures MANOVA / rmANOVA as design-based descriptive tests, 
 ## Repository structure
 
 ```
-data/
-├── study1/
-│   ├── original_data/
-│   │   └── data_study1.xlsx          # original raw export (Study 1)
-│   ├── analysis/
-│   │   ├── exp1_data.dat             # analysis-ready data (no header; see codebook below)
-│   │   ├── analysis_revised.R        # main analysis script (Study 1)
-│   │   ├── analysis_results_revised.txt  # saved output of the main analysis
-│   │   └── Monte Carlo/
-│   │       └── power_analysis_study1.R   # a-priori & post-hoc power (Monte Carlo)
-│   └── figures/
-│       ├── procedure_v3.png / .svg           # experimental procedure
-│       └── study_1_simple_slopes_v2.png / .svg  # simple slopes of the moderated first stage
-└── study2/
-    ├── original_data/
-    │   └── data_study2.xlsx          # original raw export (Study 2)
-    ├── analysis/
-    │   ├── exp2_data_with_post.dat   # analysis-ready data (see codebook below)
-    │   ├── analysis_bootstrap.R      # main analysis script (Study 2)
-    │   ├── analysis_bootstrap_output.txt  # saved output of the main analysis
-    │   └── Monte Carlo/
-    │       └── power_analysis_study2.R    # a-priori & post-hoc power (Monte Carlo)
-    └── figure/
-        ├── procedure_v5.svg / Study2_procedure_figure.png  # experimental procedure
-        └── study2_manova_3panel_v2.png / .svg              # MANOVA three-panel figure
+study1/
+├── original_data/
+│   └── data_study1.xlsx              # original raw export (Study 1)
+├── analysis/
+│   ├── exp1_data.dat                 # analysis-ready data (no header; see codebook below)
+│   ├── analysis_revised.R            # main analysis script (Study 1)
+│   ├── analysis_results_revised.txt  # saved output of the main analysis
+│   └── Monte Carlo/
+│       └── power_analysis_study1.R   # a-priori & post-hoc power (Monte Carlo)
+├── figures/
+│   ├── procedure_v3.png / .svg            # experimental procedure
+│   └── study_1_simple_slopes_v2.png / .svg  # simple slopes of the moderated first stage
+└── experiment_program/               # Study 1 experiment program (HTML + Node.js/Express)
+    ├── registration.html             # participant registration & pre-measures
+    ├── portal.html                   # experiment homepage with five product entries
+    ├── experiment1_data.js           # server: products, reviews, randomization, port 5500
+    ├── views/goodsinfo.ejs           # product-page template (reviews + rating scales)
+    ├── public/                       # server-side assets (styles, scripts, parameter charts)
+    ├── css/ js/ images/ source/      # assets for the registration page and homepage
+    └── package.json
+study2/
+├── original_data/
+│   └── data_study2.xlsx              # original raw export (Study 2)
+├── analysis/
+│   ├── exp2_data_with_post.dat       # analysis-ready data (see codebook below)
+│   ├── analysis_bootstrap.R          # main analysis script (Study 2)
+│   ├── analysis_bootstrap_output.txt  # saved output of the main analysis
+│   └── Monte Carlo/
+│       └── power_analysis_study2.R   # a-priori & post-hoc power (Monte Carlo)
+├── figure/
+│   ├── procedure_v5.svg / Study2_procedure_figure.png  # experimental procedure
+│   └── study2_manova_3panel_v2.png / .svg              # MANOVA three-panel figure
+└── experiment_program/               # Study 2 experiment program (jsPsych 7.3.4)
+    ├── index.html                    # interface: homepage of four posts + reading popup
+    ├── test.js                       # trial flow, rating scales, random label assignment
+    ├── test.css
+    └── avatar.png                    # placeholder for a dead avatar link (see notes)
 ```
 
 ## Codebook
@@ -87,11 +99,49 @@ data/
 3. Run the script; it prints all reported statistics to the console. The archived console outputs (`analysis_results_revised.txt`, `analysis_bootstrap_output.txt`) are provided so that every number in the manuscript can be checked without re-running (the bootstrap, B = 5,000, is computationally intensive).
 4. Monte Carlo power analyses are in each study's `Monte Carlo/` subfolder.
 
+## Experiment programs
+
+Both studies were run as web pages; the programs under `study1/experiment_program/` and `study2/experiment_program/` are the interfaces participants saw. They contain no participant data.
+
+### Study 1 — `study1/experiment_program/`
+
+Flow: `registration.html` (demographics and pre-measures) → `portal.html` (homepage with five product entries) → a product page opened at `http://localhost:5500/goodsinfo.html?id=1` … `id=5`.
+
+1. Install [Node.js](https://nodejs.org/) (v16 or later).
+2. Run `npm install` in `study1/experiment_program/` (only `express` and `ejs`).
+3. Run `npm start`; the server listens on port 5500.
+4. Open `registration.html` in a browser and follow the flow, or open the product-page URLs above directly.
+
+Notes:
+
+* The product page is the server-rendered template `views/goodsinfo.ejs`, not a static HTML file, which is why the folder contains no product `.html`. `experiment1_data.js` holds the five products, their four reviews each, and the randomization of review order and of the detection label (re-drawn at every server start).
+* There is no server-side database: answers are written to the browser's `localStorage`, and the raw data were collected with the CSV export buttons on the registration page ("Download CSV") and on the product page ("Download Data").
+* `portal.html` hard-codes `http://localhost:5500/...`; update it if you serve the program on another port.
+
+### Study 2 — `study2/experiment_program/`
+
+Open `index.html` in a browser (internet required: jsPsych 7.3.4, the `survey-likert` and `html-keyboard-response` plugins, and the icon font are loaded from CDNs). Four posts appear in any order; clicking one opens the reading popup, "完成阅读" ("Done reading") reveals the ratings, and submitting marks the post as completed. The four posts receive the four detection × disclosure label combinations in randomized order.
+
+Notes:
+
+* This local build does not transmit data; the data in `study2/original_data/` were collected through a deployed build on the Naodao platform (not included here). The IRB number in the page footer is a placeholder in this version.
+* The original avatar image link is dead, so a locally generated placeholder (`avatar.png`) is used; every other external link (product images, logos, icons) is the original link used during data collection and was checked as reachable.
+
 ## Notes
 
 - The `original_data/` xlsx files are the raw exports; the `.dat` files are the cleaned, analysis-ready versions actually used by the scripts.
 - All experimental stimuli were presented in simulated interfaces; participants gave informed consent, and the studies were conducted in accordance with the relevant ethical guidelines. Ethics approval details are stated in the manuscript.
 - The manuscript is currently in preparation/submission; cite the paper (or this repository) when using these materials.
+
+## Third-party materials and disclaimers
+
+The interfaces in `experiment_program/` simulate commercial platforms for research purposes. **They are not affiliated with, endorsed by, or connected to any commercial platform.**
+
+* **Look and feel**: layout, colors, and navigation labels are neutralized mock content, and no platform logo is used anywhere in the repository; any platform name that still appears in the pages occurs only inside the bilingual disclaimer printed on them.
+* **Product photos and review texts**: the product gallery images are loaded at runtime from the public CDN links used during data collection and are *not* redistributed by this repository; the review texts are the experimental stimuli described in the manuscript.
+* **Self-made assets**: the site logos, avatars, homepage banner, footer badges, sprite icons, and the Study 2 placeholder avatar were generated for this project from plain shapes and text.
+* **Parameter charts** (`study1/experiment_program/public/goods/goodsN_parameters.png`) are factual specification tables used as experimental stimuli.
+* Every page (registration, homepage, product page, Study 2 index) carries a bilingual disclaimer stating that the interface is a research simulation and that trademarks, images, and texts remain the property of their respective owners.
 
 ## License
 

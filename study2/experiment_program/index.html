@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jsPsych</title>
+  <script src="https://unpkg.com/jspsych@7.3.4"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-survey-likert@1.1.3"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.3"></script>
+  <link href="https://unpkg.com/jspsych@7.3.4/css/jspsych.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="test.css">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_4858396_wrvtxrdb39h.css">
+</head>
+<body>
+  <div class="global-layout" id="global-layout">
+
+    <div class="header-container">
+      <div class="mask-paper">
+        <a>
+          <img class="header-logo" src="logo.png">
+        </a>
+        <div class="input-box">
+          <input class="search-input" placeholder="欢迎来到测评模式！">
+          <div class="input-button">
+            <div class="search-icon">
+              <span class="iconfont icon-search"></span>
+            </div>
+          </div>
+        </div>
+        <div class="right">
+          <div class="menu">
+            <div class="menu_1">
+              <span class="menu_text"><strong>指导语</strong></span>
+            </div>
+            <div class="menu_2">
+              <span class="menu_text">联系我们</span>
+              <span class="contact-text">邮箱：202211061073@mail.bnu.edu.cn</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-container">
+      <div class="side-bar">
+        <ul class="channel-list">
+          <li  style="border-radius: 999px; background-color: rgba(0, 0, 0, 0.10);">
+            <a class="wrapper">
+              <span class="iconfont icon-footprint"></span>
+              <span class="channel-text">发现</span>
+            </a>
+          </li>
+          <li>
+            <a class="wrapper">
+              <span class="iconfont icon-roundadd"></span>
+              <span class="channel-text">发布</span>
+            </a>
+          </li>
+          <li>
+            <a class="wrapper">
+              <span class="iconfont icon-mail"></span>
+              <span class="channel-text">通知</span>
+            </a>
+          </li>
+          <li>
+            <a class="wrapper">
+              <span class="iconfont icon-profile"></span>
+              <span class="channel-text">我</span>
+            </a>
+          </li>
+        </ul>
+        <div class="information-container">
+          <a class="wrapper">
+            <span class="iconfont icon-list"></span>
+            <span class="channel-text">更多</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="main-content">
+        <div class="feeds-page">
+          <div class="scroll-channel-container">
+            <div class="scroll-channel">
+              <div class="channel" style="border-radius: 999px; background-color: rgba(0, 0, 0, 0.03);font-weight: 600; color: #333">测评内容</div>
+              <div class="channel">推荐</div>
+              <div class="channel">新闻</div>
+              <div class="channel">饮食</div>
+              <div class="channel">产品体验</div>
+              <div class="channel">健康</div>
+            </div>
+          </div>
+          <div class="feeds-container">
+            <div class="item-container" data-id="1">
+              <div class="item">
+                <h2 class="item-title">山东一蜜雪冰城门店开启 24 小时营业，隔夜柠檬变「熬夜柠檬」，这能解决饮品安全问题吗？</h2>
+                <div class="item-content">
+                  <div class="content-text">3月16日，有网友拍到#山东一蜜雪冰城门店开启24小时营业#，隔夜柠檬变“熬夜柠檬”。此前，“3•15特别报道”曝光蜜雪冰城宜昌某门店使用隔夜柠檬和橙子切片，许多网友纷纷为其开脱，“不是柠壞隔夜了。而是我去晚了”。3月17日，有媒体评道：#平价不是蜜雪冰城的万能挡箭牌#。但部分网友表示，“论隔夜建议查查我奶的冰箱一额饭能热三天”。</div>
+                  <div class="actions-container">
+                    <div class="actions-button">
+                      <span class="iconfont icon-appreciate"></span>
+                      <span class="button-text">点赞</span>
+                    </div>
+                    <div class="actions-button">
+                      <span class="iconfont icon-like"></span>
+                      <span class="button-text">喜欢</span>
+                    </div>
+                    <div class="actions-button">
+                      <span class="iconfont icon-comment"></span>
+                      <span class="button-text">评论</span>
+                    </div>
+                    <div class="actions-button">
+                      <span class="iconfont icon-favor"></span>
+                      <span class="button-text">收藏</span>
+                    </div>
+                    <div class="actions-button">
+                      <span class="iconfont icon-forward"></span>
+                      <span class="button-text">分享</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="item-container" data-id="2">
+              <div class="item">
+                <h2 class="item-title">最近听说吃橄榄油特别好，有没有科学依据呢?</h2>
+                <div class="item-content">
+                  <div class="content-text">属木本植物油，是由新鲜的油橄榄果实直接冷榨而成的，不经加热和化学处理，保留了天然营养成分。橄榄油和橄榄果渣油在地中海沿岸国家有几千年的历史，是世界上以自然状态的形式供人类食用的木本植物油之一。</div>
+                  <div class="actions-container">
+                    <div class="actions-button">
+                      <span class="iconfont icon-appreciate"></span>
+                      <span class="button-text">点赞</span>
+                    </div>
+                    <div class="actions-button">
+                      <span class="iconfont icon-like"></span>
+                      <span class="button-text">喜欢</span>
+                    </div>
+                    <div class="actions-button">
+                      <span class="iconfont icon-comment"></span>
+                      <span class="button-text">评论</span>
+                    </div>
+                    <div class="actions-button">
+                      <span class="iconfont icon-favor"></span>
+                      <span class="button-text">收藏</span>
+                    </div>
+                    <div class="actions-button">
+                      <span class="iconfont icon-forward"></span>
+                      <span class="button-text">分享</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="item-container" data-id="3">
+              <div class="item">
+                <h2 class="item-title">华为mate 70 使用体验如何？是否值得入手？</h2>
+                <div class="item-content">
+                  <div class="content-text">华为 Mate 70 系列自发布以来，凭借其先进的技术和创新的设计，吸引了众多消费者的目光。作为该系列的基础款，华为 Mate 70 在继承品牌优势的同时，也展现出了自身独特的魅力。</div>
+                  <div class="actions-container">
+                    <div class="actions-button">
+                      <span class="iconfont icon-appreciate"></span>
+                      <span class="button-text">点赞</span>
+                    </div>
+                    <div class="actions-button">
+                      <span class="iconfont icon-like"></span>
+                      <span class="button-text">喜欢</span>
+                    </div>
+                    <div class="actions-button">
+                      <span class="iconfont icon-comment"></span>
+                      <span class="button-text">评论</span>
+                    </div>
+                    <div class="actions-button">
+                      <span class="iconfont icon-favor"></span>
+                      <span class="button-text">收藏</span>
+                    </div>
+                    <div class="actions-button">
+                      <span class="iconfont icon-forward"></span>
+                      <span class="button-text">分享</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="item-container" data-id="4">
+              <div class="item">
+                <h2 class="item-title">什么是隐形肥胖？警惕！这种 “藏起来” 的胖，正悄悄危害你的健康</h2>
+                <div class="item-content">
+                  <div class="content-text">隐形肥胖，是肥胖的一种，主要是指看上去身材匀称，但肝、胰、胃、肠道等内脏周围和内部已经堆积了不少脂肪组织。专家表示，体重正常但隐性肥胖暗藏危机，会导致雌激素和炎性因子异常增高，从而诱发心脑血管疾病、糖尿病、男性前列腺癌、女性乳腺癌、子宫内膜癌等慢性疾病。中山大学公共卫生学院、广东省营养学会、汤臣倍健2012年12月13日在京联合发布了2012国民健康报告，体重正常的人群中，隐形肥胖检出率为39.44%。</div>
+                  <div class="actions-container">
+                    <div class="actions-button">
+                      <span class="iconfont icon-appreciate"></span>
+                      <span class="button-text">点赞</span>
+                    </div>
+                    <div class="actions-button">
+                      <span class="iconfont icon-like"></span>
+                      <span class="button-text">喜欢</span>
+                    </div>
+                    <div class="actions-button">
+                      <span class="iconfont icon-comment"></span>
+                      <span class="button-text">评论</span>
+                    </div>
+                    <div class="actions-button">
+                      <span class="iconfont icon-favor"></span>
+                      <span class="button-text">收藏</span>
+                    </div>
+                    <div class="actions-button">
+                      <span class="iconfont icon-forward"></span>
+                      <span class="button-text">分享</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <footer style="width: 100%; background-color: #f5f5f5;">
+          <div style="max-width: 1200px; margin: 0 auto; padding: 0 80px 0 20px;">
+              <div style="text-align: center; margin-top: 20px; border-top: 1px solid #ddd; padding-top: 15px;">
+                  <p>© 2024-2025 北京师范大学心理学部 WIL幸福交互实验室 版权所有</p>
+                  <p>实验研究用途 | 仅用于学术研究 | 本研究已通过北京师范大学心理学研究伦理委员会审查（批准号：XXXXXXXXXXXXXXXX）</p>
+                  <p>联系方式：202211061073@mail.bnu.edu.cn</p>
+                  <p>本页面为科研实验用途的模拟社交媒体界面，与小红书等任何商业平台均无隶属、关联或背书关系；第三方商标与图片的权利归各自权利人所有。</p>
+                  <p>Simulated social-media interface for research purposes only. Not affiliated with, endorsed by, or connected to Xiaohongshu (RED) or any commercial platform.</p>
+              </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <!--弹窗-->
+  <div id="overlay" class="overlay"></div>
+    <div id="modal" class="modal">
+      <!-- 关闭按钮 -->
+    <div class="close-button-container">
+      <button id="close-modal" class="close-button">×</button>
+    </div>
+      <div class="modal-content">
+        <div class="left-panel">
+          <div class="label-container-0" id="label_0">
+            <div class="label" id="label_0_text">该帖子无标签</div>
+          </div>
+          <div class="label-container-1" id="label_1">
+            <span class="iconfont icon-info"></span>
+            <div class="label" id="label_1_text">平台声明：内容疑似AI生成，请谨慎甄别</div>
+            <div class="why-label">平台检测工具识别出该文字信息疑似经过人工智能技术（AIGC）合成。</div>
+          </div>
+          <div class="title-container">
+            <div class="title-text" id="title-text">title</div>
+          </div>
+          <div class="info-container">
+            <div class="author-info">
+              <img id="portrait" src="avatar.png">
+              <div class="author-name" id="source" style="font-weight: 600;">用户</div>
+              <div class="date">编辑于2025-03-28</div>
+            </div>
+            <div class="label-container-2" id="label_2">
+              <span class="iconfont icon-info"></span>
+              <div class="label" id="label_2_text">作者声明：内容使用AI创作</div>
+              <div class="why-label">此提示语为“作者自主添加”，作者提示“该内容由人工智能生成技术（AIGC）创作”。</div>
+            </div>
+          </div>
+          <div class="description-container">
+            <div id="description-text" class="description-text">description</div>
+          </div>
+          <!-- 添加完成阅读按钮 -->
+          <div class="read-complete-container">
+            <button id="read-complete-btn" class="read-complete-btn">完成阅读</button>
+          </div>
+        </div>
+        <div class="right-panel" style="display: none;">
+          <h2>Questions</h2>
+          <div id="questionnaire-content"></div>
+        </div>
+      </div>
+    </div>
+
+  <div id="overlay-menu" class="overlay"></div>
+  <div id="modal-menu" class="modal">
+    <div class="close-button-container">
+      <button id="close-modal-menu" class="close-button">×</button>
+    </div>
+
+    <div class="instruction-modal">
+      <p class="instruction-title"><strong>指导语</strong></p>
+      <div class="instruction-text">
+        <p>欢迎参与本次测评，目的是了解您对平台帖子内容信息的评判，以优化平台体验。</p>
+        <h3>流程步骤</h3>
+        <ul>
+        <li>浏览帖子：首页有 4 个帖子，可自由浏览、点击熟悉页面。点击帖子弹出详细内容弹窗，顺序自选。弹窗可随时关闭，但关闭后需重新作答提交。</li>
+        <li>阅读内容：弹窗内有帖子详细信息及平台、作者声明标签。
+          <ul>
+            <li>
+              <div style="display: flex; align-items: center; flex-wrap: wrap;">
+                <span style="font-weight: 700;">平台声明</span>指平台对于内容的声明。
+                <div class="label-container-1" style="margin: 0;">
+                  <span class="iconfont icon-info"></span>
+                  <div class="label">平台声明：内容疑似AI生成，请谨慎甄别</div>
+                  <div class="why-label">平台检测工具识别出该文字信息疑似经过人工智能技术（AIGC）合成。</div>
+                </div>
+              </div>
+              <div style="width: 100%; margin-top: 10px;">
+                如果平台检测工具识别文字信息疑似经过人工智能技术（AIGC）合成，则显示该标签；如果平台检测工具未识别出AI合成的痕迹，则不显示该标签。
+              </div>
+            </li>
+            <li>
+              <div style="display: flex; align-items: center; flex-wrap: wrap;">
+                <span style="font-weight: 700;">作者声明</span>指作者自己对内容的声明。
+                <div class="label-container-2">
+                  <span class="iconfont icon-info"></span>
+                  <div class="label">作者声明：内容使用AI创作</div>
+                  <div class="why-label">此提示语为“作者自主添加”，作者提示“该内容由人工智能生成技术（AIGC）创作”。</div>
+                </div>
+              </div>
+              <div style="width: 100%; margin-top: 10px;">
+                作者主动表明内容包含AI生成部分，则显示此标签；若不显示此标签，则表示作者声明该内容全部由自己创作。
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li>回答问题：读完信息，点击“完成阅读”答题，按真实感受选最符合观点的选项。</li>
+        <li>提交答案：点击“提交”完成测评，每个帖子仅能提交一次，提交后不可修改。完成一个帖子测评后，继续其余帖子，直至全部完成。</li>
+        </ul>
+        <h3>注意事项</h3>
+        <ul>
+        <li>可随时点击页面右上角查看测评指导语。</li>
+        <li>测评时长预计 8 分钟左右，请勿停留超过20分钟，认真作答，勿进行页面外操作。</li>
+        <li>为保护隐私，仅呈现帖子文本。</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+    <script src="test.js"></script>
+</body>
+</html>
